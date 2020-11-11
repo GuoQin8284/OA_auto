@@ -1,0 +1,13 @@
+{
+  "path":"/fwgl/frmfwcld.jsp",
+  "order": [1,2,3,4,5,6,7],
+  "action_list": {
+    "1": ["input",["By.ID","wjbt"]],
+    "2": ["double",["By.ID","zsdw"]],
+    "3": ["serchName"],
+    "4": ["double",["By.ID","csdw"]],
+    "5": ["serchName"],
+    "6": ["ReadOpinion",["By.XPATH","//img[@title='阅文意见']"]],
+    "7": ["Send"]
+}
+}
