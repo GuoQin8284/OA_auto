@@ -1,4 +1,6 @@
 import time
+
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
@@ -26,10 +28,24 @@ class SelectPerson():
         self.confirm = "By.XPATH","//a[@class='btlink']/img"
 
     # 切换iframe到选择框
+    @allure.step(title="切换iframe到选择框")
     def Switch_frame(self,ele):
         self.action.driver.switch_to.frame(self.action.find_element(ele))
 
+    # 点击顶部的公司名称，是所有部门或这人员都展示在选择框内供选择
+    @allure.step(title="点击顶部的公司名称，是所有部门或这人员都展示在选择框内供选择")
+    def Click_company(self):
+        self.action.find_element(self.company).click()
+        allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)
+
+    # 选择要发送的部门或者人
+    @allure.step(title="选择要发送的部门或者人")
+    def Select_department_person(self):
+        self.action.double_click(self.select_ele)
+        allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)
+
     # 搜索部门或者人名，name可以传列表
+    @allure.step(title="搜索部门或者人名")
     def SearchName(self,name):
         self.Switch_frame(self.select_person)
         self.Click_company()
@@ -55,17 +71,11 @@ class SelectPerson():
                 self.action.find_element(self.searchBtn).click()
                 time.sleep(0.5)
                 self.Select_department_person()
+        allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)
         time.sleep(0.5)
         self.action.driver.switch_to.parent_frame()
         self.action.find_element(self.confirm).click()
+        allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)
 
-
-    # 点击顶部的公司名称，是所有部门或这人员都展示在选择框内供选择
-    def Click_company(self):
-        self.action.find_element(self.company).click()
-
-    # 选择要发送的部分或者人
-    def Select_department_person(self):
-        self.action.double_click(self.select_ele)
 
 

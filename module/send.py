@@ -1,5 +1,7 @@
 import time
 
+import allure
+
 from module.document_handle import DocumentHandle
 
 
@@ -15,17 +17,26 @@ class Send():
         self.wjbt = "By.ID","wjbt"
 
     # 获取提示消息
+    @allure.step(title="获取提示消息")
     def get_message(self):
         message =  self.action.find_element(self.message).text
+        allure.attach(self.action.screen_shot(),"截图", allure.attachment_type.PNG)
         print("message:",message)
         return message
-
+    # 点击发送按钮
+    @allure.step(title="点击发送按钮")
     def click_send_btn(self):
         self.action.find_element(self.send).click()
+        allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)
 
+    # 获取正文标题
+    @allure.step(title="获取正文标题")
     def get_wjbt(self):
-        return self.action.find_element(self.wjbt).text
+        text = self.action.find_element(self.wjbt).text
+        allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)
 
+    # 发文流程
+    @allure.step(title="发文流程")
     def send_text_flow(self,name):
         wjbt = self.get_wjbt()
         time.sleep(0.5)
@@ -35,9 +46,10 @@ class Send():
         time.sleep(0.5)
         if name in self.get_message():
             self.action.find_element(self.confrim_btn).click()
+            allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)
         else:
             self.action.find_element(self.cancel_btn).click()
-
+            allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)
         if (wjbt in self.documentHandle.get_document_titles()[0]) and (name in self.documentHandle.get_current_person()[0]):
             print("创建成功")
             return True

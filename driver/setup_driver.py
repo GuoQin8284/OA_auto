@@ -13,8 +13,6 @@ class Driver():
             cls._driver = webdriver.Chrome()
             cls._driver.maximize_window()
             cls._driver.switch_to.parent_frame()
-            cls._driver.current_window_handle
-
         return cls._driver
 
     @classmethod
