@@ -1,5 +1,6 @@
 import json
 from driver.action import Action
+from module.fujian import Fujian
 from module.read_opinion import ReadOpinion
 from module.select_person import SelectPerson
 from module.send import Send
@@ -40,7 +41,7 @@ def analysis_action_func(driver,fileName,data_list):
             except Exception:
                 args = None
 
-            print('args:',args)
+            # print('args:',args)
             # 从动作列表中解析出即将动作的元素
             action = action_list[i]
             # 从动作元素中解析出动作id
@@ -54,7 +55,7 @@ def analysis_action_func(driver,fileName,data_list):
             tmp = open_func(driver=driver,action_id=action_id,action_ele=action_ele,args=args)
             # 如果tmp值为真，且当前循环是处于流程中最后一个步骤，则将函数的返回值返回
             if tmp and i == str(order[-1]):
-                print("tmp:",tmp)
+                # print("tmp:",tmp)
                 return tmp
 
     # 执行函数，根据action_id中指定的动作，执行相关的动作；action_ele为要操作的元素；args为参数，默认为None
@@ -65,6 +66,7 @@ def open_func(driver,action_id,action_ele,args):
     serchName = SelectPerson(action)
     readOpinion = ReadOpinion(action)
     send = Send(action)
+    fujian = Fujian(action)
 
     # 输入动作
     if action_id == "input":
@@ -91,7 +93,9 @@ def open_func(driver,action_id,action_ele,args):
     # 发送流程
     elif action_id == "Send":
         return send.send_text_flow(args)
-
+    # 添加附件
+    elif action_id == "Fujian":
+        return fujian.fileUpload_folw(args)
     # 获取host
 def get_host_port():
     with open(file="./config.json", mode="r", encoding="utf-8") as f:

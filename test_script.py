@@ -14,6 +14,20 @@ def data(file):
 
 class Test_demo01(TestCase):
 
+
+
+    # pytest方式启动
+    # @classmethod
+    # def setup_class(cls):
+    #     cls.driver = Driver
+    #     cls.driver.set_auto_quit(1)
+    #     cls.get_driver = cls.driver.get_driver()
+    #
+    # @classmethod
+    # def teardown_class(cls):
+    #     cls.driver.quit_driver()
+
+    # unittest方式启动
     @classmethod
     def setUpClass(cls):
         cls.driver = Driver
@@ -21,7 +35,7 @@ class Test_demo01(TestCase):
         cls.get_driver = cls.driver.get_driver()
 
     @classmethod
-    def tearDownClass(cls):
+    def tearDown_class(cls):
         cls.driver.quit_driver()
 
     # 登录流程测试用例

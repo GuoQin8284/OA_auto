@@ -1,0 +1,21 @@
+[ {
+  "uid" : "facc986c4afc5a7c",
+  "name" : "test01_login_0",
+  "time" : {
+    "start" : 1605580665093,
+    "stop" : 1605580686497,
+    "duration" : 21404
+  },
+  "status" : "broken",
+  "severity" : "normal"
+}, {
+  "uid" : "4d729d9badb8d758",
+  "name" : "test02_sendText_0",
+  "time" : {
+    "start" : 1605580686563,
+    "stop" : 1605580713498,
+    "duration" : 26935
+  },
+  "status" : "broken",
+  "severity" : "normal"
+} ]

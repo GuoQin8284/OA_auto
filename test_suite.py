@@ -1,7 +1,7 @@
 import unittest
 
 from HTMLTestRunner import HTMLTestRunner
-from script import Test_demo01
+from test_script import Test_demo01
 
 suites = unittest.TestSuite()
 suites.addTest(unittest.makeSuite(Test_demo01))

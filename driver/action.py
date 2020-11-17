@@ -1,4 +1,6 @@
 import time
+
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -15,8 +17,8 @@ class Action ():
     # 输入文字
     def input_text(self,element,text):
         if text and element:
-            print("element:",element)
-            print("text:",text)
+            # print("element:",element)
+            # print("text:",text)
             self.find_element(element).send_keys(text)
         else:
             return False
@@ -24,62 +26,67 @@ class Action ():
     # 查找单个元素
     def find_element(self,location):
         def ananysis_element(ele):
-            print("method_func:",ele)
-            if ele == "By.ID":
+            if ele in ("By.ID","ID") :
                 return By.ID
-            elif ele == "By.CLASS_NAME":
+            elif ele in ("By.CLASS_NAME","CLASS_NAME"):
                 return By.CLASS_NAME
-            elif ele == "By.CSS_SELECTOR":
+            elif ele in ("By.CSS_SELECTOR","CSS"):
                 return By.CSS_SELECTOR
-            elif ele == "By.LINK_TEXT":
+            elif ele in ("By.LINK_TEXT","LINK_TEXT"):
                 return By.LINK_TEXT
-            elif ele == "By.NAME":
+            elif ele in ("By.NAME","NAME"):
                 return By.NAME
-            elif ele == "By.TAG_NAME":
+            elif ele in ("By.TAG_NAME","TAG_NAME"):
                 return By.TAG_NAME
-            elif ele == "By.XPATH":
+            elif ele in ("By.XPATH","XPATH"):
                 return By.XPATH
-            elif ele == "By.PARTIAL_LINK_TEXT":
+            elif ele in ("By.PARTIAL_LINK_TEXT","PARTIAL"):
                 return By.PARTIAL_LINK_TEXT
             else:
-                raise "未解析的元素调用方法"
+                raise print("未解析的元素调用方法")
 
 
         if location:
-            print("location[1]:",location)
-            self.ele = WebDriverWait(self.driver,20,0.3).until(lambda x: x.find_element(ananysis_element(location[0]),location[1]))
-            return self.ele
+            # print("location[1]:",location)
+            try:
+                self.ele = WebDriverWait(self.driver,20,0.3).until(lambda x: x.find_element(ananysis_element(location[0]),location[1]))
+                return self.ele
+            except TimeoutException as f :
+                raise print(r"未找到{}元素".format(location[1]))
+
         else:
             return False
 
     # 查找一组元素
     def find_elements(self,location):
         def ananysis_element(ele):
-            print("method_func:",ele)
-            if ele == "By.ID":
+            if ele in ("By.ID","ID") :
                 return By.ID
-            elif ele == "By.CLASS_NAME":
+            elif ele in ("By.CLASS_NAME","CLASS_NAME"):
                 return By.CLASS_NAME
-            elif ele == "By.CSS_SELECTOR":
+            elif ele in ("By.CSS_SELECTOR","CSS"):
                 return By.CSS_SELECTOR
-            elif ele == "By.LINK_TEXT":
+            elif ele in ("By.LINK_TEXT","LINK_TEXT"):
                 return By.LINK_TEXT
-            elif ele == "By.NAME":
+            elif ele in ("By.NAME","NAME"):
                 return By.NAME
-            elif ele == "By.TAG_NAME":
+            elif ele in ("By.TAG_NAME","TAG_NAME"):
                 return By.TAG_NAME
-            elif ele == "By.XPATH":
+            elif ele in ("By.XPATH","XPATH"):
                 return By.XPATH
-            elif ele == "By.PARTIAL_LINK_TEXT":
+            elif ele in ("By.PARTIAL_LINK_TEXT","PARTIAL"):
                 return By.PARTIAL_LINK_TEXT
             else:
-                raise "未解析的元素调用方法"
+                raise print("未解析的元素调用方法")
 
 
         if location:
-            print("location[1]:",location)
-            self.eles = WebDriverWait(self.driver,20,0.3).until(lambda x: x.find_elements(ananysis_element(location[0]),location[1]))
-            return self.eles
+            # print("location[1]:", location)
+            try:
+                self.ele = WebDriverWait(self.driver,20,0.3).until(lambda x: x.find_elements(ananysis_element(location[0]),location[1]))
+                return self.ele
+            except TimeoutException as f :
+                raise print(r"未找到{}元素".format(location[1]))
         else:
             return False
 
