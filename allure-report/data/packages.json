@@ -4,26 +4,74 @@
   "children" : [ {
     "name" : "test_script",
     "children" : [ {
-      "name" : "test01_login_0",
-      "uid" : "facc986c4afc5a7c",
+      "name" : "test01_login",
+      "uid" : "ca616a4de3b557a6",
       "parentUid" : "a46e31754ff53a5e855599d5a13af9fa",
       "status" : "broken",
       "time" : {
-        "start" : 1605580665093,
-        "stop" : 1605580686497,
-        "duration" : 21404
+        "start" : 1606560455966,
+        "stop" : 1606560455966,
+        "duration" : 0
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test01_login_0",
+      "uid" : "e3c53ca8360fa02c",
+      "parentUid" : "a46e31754ff53a5e855599d5a13af9fa",
+      "status" : "passed",
+      "time" : {
+        "start" : 1606560456145,
+        "stop" : 1606560458567,
+        "duration" : 2422
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test02_sendText",
+      "uid" : "dff6de61c4ba5e44",
+      "parentUid" : "a46e31754ff53a5e855599d5a13af9fa",
+      "status" : "broken",
+      "time" : {
+        "start" : 1606560458571,
+        "stop" : 1606560458571,
+        "duration" : 0
       },
       "flaky" : false,
       "parameters" : [ ]
     }, {
       "name" : "test02_sendText_0",
-      "uid" : "4d729d9badb8d758",
+      "uid" : "6e475ea66ac29f83",
       "parentUid" : "a46e31754ff53a5e855599d5a13af9fa",
       "status" : "broken",
       "time" : {
-        "start" : 1605580686563,
-        "stop" : 1605580713498,
-        "duration" : 26935
+        "start" : 1606560458689,
+        "stop" : 1606560481252,
+        "duration" : 22563
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test03_sendText_save",
+      "uid" : "55fa9ed7b647ee1f",
+      "parentUid" : "a46e31754ff53a5e855599d5a13af9fa",
+      "status" : "broken",
+      "time" : {
+        "start" : 1606560481305,
+        "stop" : 1606560481305,
+        "duration" : 0
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test03_sendText_save_0",
+      "uid" : "ff0db07850c597de",
+      "parentUid" : "a46e31754ff53a5e855599d5a13af9fa",
+      "status" : "broken",
+      "time" : {
+        "start" : 1606560481403,
+        "stop" : 1606560482542,
+        "duration" : 1139
       },
       "flaky" : false,
       "parameters" : [ ]

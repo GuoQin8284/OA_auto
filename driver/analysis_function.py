@@ -6,6 +6,18 @@ from module.select_person import SelectPerson
 from module.send import Send
 
 # 这是程序运行的入口，根据测试用例指定的测试数据，调用解析函数，dirver为浏览器驱动对象，fileName为测试数据路径
+from module.verify_code import Verify_code
+
+    # 获取host
+from result.result import contains_text
+
+
+def get_host_port():
+    with open(file="./config.json", mode="r", encoding="utf-8") as f:
+        data = json.load(f)
+        host = data["host"]
+        return host
+
 def analysis_data_func(driver,fileName):
     # with open(file="../test_data/{}".format(fileName), mode="r", encoding="utf-8") as f:
     #     data = json.load(f)
@@ -67,6 +79,7 @@ def open_func(driver,action_id,action_ele,args):
     readOpinion = ReadOpinion(action)
     send = Send(action)
     fujian = Fujian(action)
+    verifyCode = Verify_code(action)
 
     # 输入动作
     if action_id == "input":
@@ -96,11 +109,9 @@ def open_func(driver,action_id,action_ele,args):
     # 添加附件
     elif action_id == "Fujian":
         return fujian.fileUpload_folw(args)
-    # 获取host
-def get_host_port():
-    with open(file="./config.json", mode="r", encoding="utf-8") as f:
-        data = json.load(f)
-        host = data["host"]
-        return host
+    # 判断是否需要输入验证码，如果需要输入则输入验证码
+    elif action_id == "Verify_code":
+        return verifyCode.verify_code_flow()
 
-
+    elif action_id == "rText":
+        return contains_text(args)

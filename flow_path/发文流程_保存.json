@@ -1,0 +1,9 @@
+{
+  "path":"/fwgl/frmfwcld.jsp",
+  "order": [1,2,3],
+  "action_list": {
+    "1": ["input",["By.ID","wjbt"]],
+    "2": ["click",["XPATH","//img[@title='保存']"]],
+    "3": ["rText",["XPATH"]]
+}
+}

@@ -1,0 +1,533 @@
+{
+  "uid" : "6e475ea66ac29f83",
+  "name" : "test02_sendText_0",
+  "fullName" : "test_script.Test_demo01#test02_sendText_0",
+  "historyId" : "06064d78674a7d18f25988edee59ee67",
+  "time" : {
+    "start" : 1606560458689,
+    "stop" : 1606560481252,
+    "duration" : 22563
+  },
+  "status" : "broken",
+  "statusMessage" : "selenium.common.exceptions.WebDriverException: Message: unknown error: path is not absolute: ./1allure报告_讲义.pdf\n  (Session info: chrome=85.0.4183.121)",
+  "statusTrace" : "a = (<test_script.Test_demo01 testMethod=test02_sendText_0>,)\n\n    @wraps(func)\n    def standalone_func(*a):\n>       return func(*(a + p.args), **p.kwargs)\n\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\parameterized\\parameterized.py:530: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntest_script.py:67: in test02_sendText\n    result = analysis_data_func(self.get_driver,sendData)\ndriver\\analysis_function.py:27: in analysis_data_func\n    tmp = analysis_action_func(driver,fileName=file,data_list=data_list)\ndriver\\analysis_function.py:67: in analysis_action_func\n    tmp = open_func(driver=driver,action_id=action_id,action_ele=action_ele,args=args)\ndriver\\analysis_function.py:111: in open_func\n    return fujian.fileUpload_folw(args)\nmodule\\fujian.py:87: in fileUpload_folw\n    self.add_file(fileName)\nmodule\\fujian.py:34: in add_file\n    self.action.find_element(self.select_file).send_keys(fileName)\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webelement.py:477: in send_keys\n    self._execute(Command.SEND_KEYS_TO_ELEMENT,\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webelement.py:633: in _execute\n    return self._parent.execute(command, params)\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py:321: in execute\n    self.error_handler.check_response(response)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x00000227185E3D00>\nresponse = {'status': 500, 'value': '{\"value\":{\"error\":\"unknown error\",\"message\":\"unknown error: path is not absolute: ./1allure报...\\n\\\\tRtlGetAppContainerNamedObjectPath [0x77064A77+311]\\\\n\\\\tRtlGetAppContainerNamedObjectPath [0x77064A47+263]\\\\n\"}}'}\n\n    def check_response(self, response):\n        \"\"\"\n        Checks that a JSON response from the WebDriver does not have an error.\n    \n        :Args:\n         - response - The JSON response from the WebDriver server as a dictionary\n           object.\n    \n        :Raises: If the response contains an error message.\n        \"\"\"\n        status = response.get('status', None)\n        if status is None or status == ErrorCode.SUCCESS:\n            return\n        value = None\n        message = response.get(\"message\", \"\")\n        screen = response.get(\"screen\", \"\")\n        stacktrace = None\n        if isinstance(status, int):\n            value_json = response.get('value', None)\n            if value_json and isinstance(value_json, basestring):\n                import json\n                try:\n                    value = json.loads(value_json)\n                    if len(value.keys()) == 1:\n                        value = value['value']\n                    status = value.get('error', None)\n                    if status is None:\n                        status = value[\"status\"]\n                        message = value[\"value\"]\n                        if not isinstance(message, basestring):\n                            value = message\n                            message = message.get('message')\n                    else:\n                        message = value.get('message', None)\n                except ValueError:\n                    pass\n    \n        exception_class = ErrorInResponseException\n        if status in ErrorCode.NO_SUCH_ELEMENT:\n            exception_class = NoSuchElementException\n        elif status in ErrorCode.NO_SUCH_FRAME:\n            exception_class = NoSuchFrameException\n        elif status in ErrorCode.NO_SUCH_WINDOW:\n            exception_class = NoSuchWindowException\n        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:\n            exception_class = StaleElementReferenceException\n        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:\n            exception_class = ElementNotVisibleException\n        elif status in ErrorCode.INVALID_ELEMENT_STATE:\n            exception_class = InvalidElementStateException\n        elif status in ErrorCode.INVALID_SELECTOR \\\n                or status in ErrorCode.INVALID_XPATH_SELECTOR \\\n                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:\n            exception_class = InvalidSelectorException\n        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:\n            exception_class = ElementNotSelectableException\n        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:\n            exception_class = ElementNotInteractableException\n        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:\n            exception_class = InvalidCookieDomainException\n        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:\n            exception_class = UnableToSetCookieException\n        elif status in ErrorCode.TIMEOUT:\n            exception_class = TimeoutException\n        elif status in ErrorCode.SCRIPT_TIMEOUT:\n            exception_class = TimeoutException\n        elif status in ErrorCode.UNKNOWN_ERROR:\n            exception_class = WebDriverException\n        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:\n            exception_class = UnexpectedAlertPresentException\n        elif status in ErrorCode.NO_ALERT_OPEN:\n            exception_class = NoAlertPresentException\n        elif status in ErrorCode.IME_NOT_AVAILABLE:\n            exception_class = ImeNotAvailableException\n        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:\n            exception_class = ImeActivationFailedException\n        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:\n            exception_class = MoveTargetOutOfBoundsException\n        elif status in ErrorCode.JAVASCRIPT_ERROR:\n            exception_class = JavascriptException\n        elif status in ErrorCode.SESSION_NOT_CREATED:\n            exception_class = SessionNotCreatedException\n        elif status in ErrorCode.INVALID_ARGUMENT:\n            exception_class = InvalidArgumentException\n        elif status in ErrorCode.NO_SUCH_COOKIE:\n            exception_class = NoSuchCookieException\n        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:\n            exception_class = ScreenshotException\n        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:\n            exception_class = ElementClickInterceptedException\n        elif status in ErrorCode.INSECURE_CERTIFICATE:\n            exception_class = InsecureCertificateException\n        elif status in ErrorCode.INVALID_COORDINATES:\n            exception_class = InvalidCoordinatesException\n        elif status in ErrorCode.INVALID_SESSION_ID:\n            exception_class = InvalidSessionIdException\n        elif status in ErrorCode.UNKNOWN_METHOD:\n            exception_class = UnknownMethodException\n        else:\n            exception_class = WebDriverException\n        if value == '' or value is None:\n            value = response['value']\n        if isinstance(value, basestring):\n            if exception_class == ErrorInResponseException:\n                raise exception_class(response, value)\n            raise exception_class(value)\n        if message == \"\" and 'message' in value:\n            message = value['message']\n    \n        screen = None\n        if 'screen' in value:\n            screen = value['screen']\n    \n        stacktrace = None\n        if 'stackTrace' in value and value['stackTrace']:\n            stacktrace = []\n            try:\n                for frame in value['stackTrace']:\n                    line = self._value_or_default(frame, 'lineNumber', '')\n                    file = self._value_or_default(frame, 'fileName', '<anonymous>')\n                    if line:\n                        file = \"%s:%s\" % (file, line)\n                    meth = self._value_or_default(frame, 'methodName', '<anonymous>')\n                    if 'className' in frame:\n                        meth = \"%s.%s\" % (frame['className'], meth)\n                    msg = \"    at %s (%s)\"\n                    msg = msg % (meth, file)\n                    stacktrace.append(msg)\n            except TypeError:\n                pass\n        if exception_class == ErrorInResponseException:\n            raise exception_class(response, message)\n        elif exception_class == UnexpectedAlertPresentException:\n            alert_text = None\n            if 'data' in value:\n                alert_text = value['data'].get('text')\n            elif 'alert' in value:\n                alert_text = value['alert'].get('text')\n            raise exception_class(message, screen, stacktrace, alert_text)\n>       raise exception_class(message, screen, stacktrace)\nE       selenium.common.exceptions.WebDriverException: Message: unknown error: path is not absolute: ./1allure报告_讲义.pdf\nE         (Session info: chrome=85.0.4183.121)\n\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py:242: WebDriverException",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "_UnitTestCase__pytest_class_setup",
+    "time" : {
+      "start" : 1606560455964,
+      "stop" : 1606560455964,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "_Class__pytest_setup_class",
+    "time" : {
+      "start" : 1606560451814,
+      "stop" : 1606560455964,
+      "duration" : 4150
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "status" : "broken",
+    "statusMessage" : "selenium.common.exceptions.WebDriverException: Message: unknown error: path is not absolute: ./1allure报告_讲义.pdf\n  (Session info: chrome=85.0.4183.121)",
+    "statusTrace" : "a = (<test_script.Test_demo01 testMethod=test02_sendText_0>,)\n\n    @wraps(func)\n    def standalone_func(*a):\n>       return func(*(a + p.args), **p.kwargs)\n\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\parameterized\\parameterized.py:530: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntest_script.py:67: in test02_sendText\n    result = analysis_data_func(self.get_driver,sendData)\ndriver\\analysis_function.py:27: in analysis_data_func\n    tmp = analysis_action_func(driver,fileName=file,data_list=data_list)\ndriver\\analysis_function.py:67: in analysis_action_func\n    tmp = open_func(driver=driver,action_id=action_id,action_ele=action_ele,args=args)\ndriver\\analysis_function.py:111: in open_func\n    return fujian.fileUpload_folw(args)\nmodule\\fujian.py:87: in fileUpload_folw\n    self.add_file(fileName)\nmodule\\fujian.py:34: in add_file\n    self.action.find_element(self.select_file).send_keys(fileName)\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webelement.py:477: in send_keys\n    self._execute(Command.SEND_KEYS_TO_ELEMENT,\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webelement.py:633: in _execute\n    return self._parent.execute(command, params)\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py:321: in execute\n    self.error_handler.check_response(response)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x00000227185E3D00>\nresponse = {'status': 500, 'value': '{\"value\":{\"error\":\"unknown error\",\"message\":\"unknown error: path is not absolute: ./1allure报...\\n\\\\tRtlGetAppContainerNamedObjectPath [0x77064A77+311]\\\\n\\\\tRtlGetAppContainerNamedObjectPath [0x77064A47+263]\\\\n\"}}'}\n\n    def check_response(self, response):\n        \"\"\"\n        Checks that a JSON response from the WebDriver does not have an error.\n    \n        :Args:\n         - response - The JSON response from the WebDriver server as a dictionary\n           object.\n    \n        :Raises: If the response contains an error message.\n        \"\"\"\n        status = response.get('status', None)\n        if status is None or status == ErrorCode.SUCCESS:\n            return\n        value = None\n        message = response.get(\"message\", \"\")\n        screen = response.get(\"screen\", \"\")\n        stacktrace = None\n        if isinstance(status, int):\n            value_json = response.get('value', None)\n            if value_json and isinstance(value_json, basestring):\n                import json\n                try:\n                    value = json.loads(value_json)\n                    if len(value.keys()) == 1:\n                        value = value['value']\n                    status = value.get('error', None)\n                    if status is None:\n                        status = value[\"status\"]\n                        message = value[\"value\"]\n                        if not isinstance(message, basestring):\n                            value = message\n                            message = message.get('message')\n                    else:\n                        message = value.get('message', None)\n                except ValueError:\n                    pass\n    \n        exception_class = ErrorInResponseException\n        if status in ErrorCode.NO_SUCH_ELEMENT:\n            exception_class = NoSuchElementException\n        elif status in ErrorCode.NO_SUCH_FRAME:\n            exception_class = NoSuchFrameException\n        elif status in ErrorCode.NO_SUCH_WINDOW:\n            exception_class = NoSuchWindowException\n        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:\n            exception_class = StaleElementReferenceException\n        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:\n            exception_class = ElementNotVisibleException\n        elif status in ErrorCode.INVALID_ELEMENT_STATE:\n            exception_class = InvalidElementStateException\n        elif status in ErrorCode.INVALID_SELECTOR \\\n                or status in ErrorCode.INVALID_XPATH_SELECTOR \\\n                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:\n            exception_class = InvalidSelectorException\n        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:\n            exception_class = ElementNotSelectableException\n        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:\n            exception_class = ElementNotInteractableException\n        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:\n            exception_class = InvalidCookieDomainException\n        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:\n            exception_class = UnableToSetCookieException\n        elif status in ErrorCode.TIMEOUT:\n            exception_class = TimeoutException\n        elif status in ErrorCode.SCRIPT_TIMEOUT:\n            exception_class = TimeoutException\n        elif status in ErrorCode.UNKNOWN_ERROR:\n            exception_class = WebDriverException\n        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:\n            exception_class = UnexpectedAlertPresentException\n        elif status in ErrorCode.NO_ALERT_OPEN:\n            exception_class = NoAlertPresentException\n        elif status in ErrorCode.IME_NOT_AVAILABLE:\n            exception_class = ImeNotAvailableException\n        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:\n            exception_class = ImeActivationFailedException\n        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:\n            exception_class = MoveTargetOutOfBoundsException\n        elif status in ErrorCode.JAVASCRIPT_ERROR:\n            exception_class = JavascriptException\n        elif status in ErrorCode.SESSION_NOT_CREATED:\n            exception_class = SessionNotCreatedException\n        elif status in ErrorCode.INVALID_ARGUMENT:\n            exception_class = InvalidArgumentException\n        elif status in ErrorCode.NO_SUCH_COOKIE:\n            exception_class = NoSuchCookieException\n        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:\n            exception_class = ScreenshotException\n        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:\n            exception_class = ElementClickInterceptedException\n        elif status in ErrorCode.INSECURE_CERTIFICATE:\n            exception_class = InsecureCertificateException\n        elif status in ErrorCode.INVALID_COORDINATES:\n            exception_class = InvalidCoordinatesException\n        elif status in ErrorCode.INVALID_SESSION_ID:\n            exception_class = InvalidSessionIdException\n        elif status in ErrorCode.UNKNOWN_METHOD:\n            exception_class = UnknownMethodException\n        else:\n            exception_class = WebDriverException\n        if value == '' or value is None:\n            value = response['value']\n        if isinstance(value, basestring):\n            if exception_class == ErrorInResponseException:\n                raise exception_class(response, value)\n            raise exception_class(value)\n        if message == \"\" and 'message' in value:\n            message = value['message']\n    \n        screen = None\n        if 'screen' in value:\n            screen = value['screen']\n    \n        stacktrace = None\n        if 'stackTrace' in value and value['stackTrace']:\n            stacktrace = []\n            try:\n                for frame in value['stackTrace']:\n                    line = self._value_or_default(frame, 'lineNumber', '')\n                    file = self._value_or_default(frame, 'fileName', '<anonymous>')\n                    if line:\n                        file = \"%s:%s\" % (file, line)\n                    meth = self._value_or_default(frame, 'methodName', '<anonymous>')\n                    if 'className' in frame:\n                        meth = \"%s.%s\" % (frame['className'], meth)\n                    msg = \"    at %s (%s)\"\n                    msg = msg % (meth, file)\n                    stacktrace.append(msg)\n            except TypeError:\n                pass\n        if exception_class == ErrorInResponseException:\n            raise exception_class(response, message)\n        elif exception_class == UnexpectedAlertPresentException:\n            alert_text = None\n            if 'data' in value:\n                alert_text = value['data'].get('text')\n            elif 'alert' in value:\n                alert_text = value['alert'].get('text')\n            raise exception_class(message, screen, stacktrace, alert_text)\n>       raise exception_class(message, screen, stacktrace)\nE       selenium.common.exceptions.WebDriverException: Message: unknown error: path is not absolute: ./1allure报告_讲义.pdf\nE         (Session info: chrome=85.0.4183.121)\n\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py:242: WebDriverException",
+    "steps" : [ {
+      "name" : "搜索部门或者人名",
+      "time" : {
+        "start" : 1606560461638,
+        "stop" : 1606560469791,
+        "duration" : 8153
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1606560461638,
+          "stop" : 1606560461778,
+          "duration" : 140
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.XPATH', '//div[@class=\"layui-layer-content\"]/iframe')"
+        } ],
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      }, {
+        "name" : "点击顶部的公司名称，是所有部门或这人员都展示在选择框内供选择",
+        "time" : {
+          "start" : 1606560461778,
+          "stop" : 1606560462334,
+          "duration" : 556
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "26bc1edc02419cb4",
+          "name" : "截图",
+          "source" : "26bc1edc02419cb4.png",
+          "type" : "image/png",
+          "size" : 122108
+        } ],
+        "parameters" : [ ],
+        "attachmentsCount" : 1,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      }, {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1606560462335,
+          "stop" : 1606560462368,
+          "duration" : 33
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.NAME', 'ifmmiddle')"
+        } ],
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      }, {
+        "name" : "选择要发送的部门或者人",
+        "time" : {
+          "start" : 1606560464585,
+          "stop" : 1606560465274,
+          "duration" : 689
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "9db1e290a4c0e2ef",
+          "name" : "截图",
+          "source" : "9db1e290a4c0e2ef.png",
+          "type" : "image/png",
+          "size" : 118225
+        } ],
+        "parameters" : [ ],
+        "attachmentsCount" : 1,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      }, {
+        "name" : "选择要发送的部门或者人",
+        "time" : {
+          "start" : 1606560467435,
+          "stop" : 1606560468399,
+          "duration" : 964
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "980c1c972077a9e9",
+          "name" : "截图",
+          "source" : "980c1c972077a9e9.png",
+          "type" : "image/png",
+          "size" : 119446
+        } ],
+        "parameters" : [ ],
+        "attachmentsCount" : 1,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      } ],
+      "attachments" : [ {
+        "uid" : "298a0f40af64c322",
+        "name" : "截图",
+        "source" : "298a0f40af64c322.png",
+        "type" : "image/png",
+        "size" : 119446
+      }, {
+        "uid" : "2c13dc8c2ed86833",
+        "name" : "截图",
+        "source" : "2c13dc8c2ed86833.png",
+        "type" : "image/png",
+        "size" : 86773
+      } ],
+      "parameters" : [ {
+        "name" : "name",
+        "value" : "['计财科', '办公室']"
+      } ],
+      "attachmentsCount" : 5,
+      "shouldDisplayMessage" : false,
+      "stepsCount" : 5,
+      "hasContent" : true
+    }, {
+      "name" : "搜索部门或者人名",
+      "time" : {
+        "start" : 1606560470118,
+        "stop" : 1606560474931,
+        "duration" : 4813
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1606560470118,
+          "stop" : 1606560470241,
+          "duration" : 123
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.XPATH', '//div[@class=\"layui-layer-content\"]/iframe')"
+        } ],
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      }, {
+        "name" : "点击顶部的公司名称，是所有部门或这人员都展示在选择框内供选择",
+        "time" : {
+          "start" : 1606560470242,
+          "stop" : 1606560470735,
+          "duration" : 493
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "7e08d52bcb9990b9",
+          "name" : "截图",
+          "source" : "7e08d52bcb9990b9.png",
+          "type" : "image/png",
+          "size" : 124372
+        } ],
+        "parameters" : [ ],
+        "attachmentsCount" : 1,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      }, {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1606560470735,
+          "stop" : 1606560470763,
+          "duration" : 28
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.NAME', 'ifmmiddle')"
+        } ],
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      }, {
+        "name" : "选择要发送的部门或者人",
+        "time" : {
+          "start" : 1606560472978,
+          "stop" : 1606560473641,
+          "duration" : 663
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "ab2a3766afdd268b",
+          "name" : "截图",
+          "source" : "ab2a3766afdd268b.png",
+          "type" : "image/png",
+          "size" : 120479
+        } ],
+        "parameters" : [ ],
+        "attachmentsCount" : 1,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      } ],
+      "attachments" : [ {
+        "uid" : "bdb13986a7d4c862",
+        "name" : "截图",
+        "source" : "bdb13986a7d4c862.png",
+        "type" : "image/png",
+        "size" : 120479
+      }, {
+        "uid" : "a8fcef6ac8859460",
+        "name" : "截图",
+        "source" : "a8fcef6ac8859460.png",
+        "type" : "image/png",
+        "size" : 95307
+      } ],
+      "parameters" : [ {
+        "name" : "name",
+        "value" : "'信息中心'"
+      } ],
+      "attachmentsCount" : 4,
+      "shouldDisplayMessage" : false,
+      "stepsCount" : 4,
+      "hasContent" : true
+    }, {
+      "name" : "阅文意见的业务流程",
+      "time" : {
+        "start" : 1606560474987,
+        "stop" : 1606560479545,
+        "duration" : 4558
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "输入阅文意见",
+        "time" : {
+          "start" : 1606560476107,
+          "stop" : 1606560476517,
+          "duration" : 410
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "52912a54e2a0b565",
+          "name" : "截图",
+          "source" : "52912a54e2a0b565.png",
+          "type" : "image/png",
+          "size" : 104150
+        } ],
+        "parameters" : [ {
+          "name" : "text",
+          "value" : "'哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是阅文意见'"
+        } ],
+        "attachmentsCount" : 1,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      }, {
+        "name" : "获取送文单选框的状态",
+        "time" : {
+          "start" : 1606560477517,
+          "stop" : 1606560477882,
+          "duration" : 365
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "46aecf70a92f1717",
+          "name" : "截图",
+          "source" : "46aecf70a92f1717.png",
+          "type" : "image/png",
+          "size" : 104150
+        } ],
+        "parameters" : [ ],
+        "attachmentsCount" : 1,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      }, {
+        "name" : "点击确认按钮",
+        "time" : {
+          "start" : 1606560477882,
+          "stop" : 1606560478349,
+          "duration" : 467
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "79e41f21153c39d5",
+          "name" : "截图",
+          "source" : "79e41f21153c39d5.png",
+          "type" : "image/png",
+          "size" : 132251
+        } ],
+        "parameters" : [ ],
+        "attachmentsCount" : 1,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      }, {
+        "name" : "获取阅文意见签约成功的toast",
+        "time" : {
+          "start" : 1606560478349,
+          "stop" : 1606560479545,
+          "duration" : 1196
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "6066fb05a65732b",
+          "name" : "截图",
+          "source" : "6066fb05a65732b.png",
+          "type" : "image/png",
+          "size" : 110909
+        } ],
+        "parameters" : [ ],
+        "attachmentsCount" : 1,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : true
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "text",
+        "value" : "'哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈这是阅文意见'"
+      } ],
+      "attachmentsCount" : 4,
+      "shouldDisplayMessage" : false,
+      "stepsCount" : 4,
+      "hasContent" : true
+    }, {
+      "name" : "上传文件业务流程",
+      "time" : {
+        "start" : 1606560479545,
+        "stop" : 1606560481252,
+        "duration" : 1707
+      },
+      "status" : "broken",
+      "statusMessage" : "selenium.common.exceptions.WebDriverException: Message: unknown error: path is not absolute: ./1allure报告_讲义.pdf\n  (Session info: chrome=85.0.4183.121)\n\n",
+      "statusTrace" : "  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\allure_commons\\_allure.py\", line 157, in impl\n    return func(*a, **kw)\n  File \"E:\\python_code\\OA_auto\\module\\fujian.py\", line 87, in fileUpload_folw\n    self.add_file(fileName)\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\allure_commons\\_allure.py\", line 157, in impl\n    return func(*a, **kw)\n  File \"E:\\python_code\\OA_auto\\module\\fujian.py\", line 34, in add_file\n    self.action.find_element(self.select_file).send_keys(fileName)\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webelement.py\", line 477, in send_keys\n    self._execute(Command.SEND_KEYS_TO_ELEMENT,\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webelement.py\", line 633, in _execute\n    return self._parent.execute(command, params)\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py\", line 321, in execute\n    self.error_handler.check_response(response)\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py\", line 242, in check_response\n    raise exception_class(message, screen, stacktrace)\n",
+      "steps" : [ {
+        "name" : "切换浏览器窗口到添加附件页面",
+        "time" : {
+          "start" : 1606560479655,
+          "stop" : 1606560479688,
+          "duration" : 33
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "stepsCount" : 0,
+        "hasContent" : false
+      }, {
+        "name" : "添加文件",
+        "time" : {
+          "start" : 1606560481214,
+          "stop" : 1606560481250,
+          "duration" : 36
+        },
+        "status" : "broken",
+        "statusMessage" : "selenium.common.exceptions.WebDriverException: Message: unknown error: path is not absolute: ./1allure报告_讲义.pdf\n  (Session info: chrome=85.0.4183.121)\n\n",
+        "statusTrace" : "  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\allure_commons\\_allure.py\", line 157, in impl\n    return func(*a, **kw)\n  File \"E:\\python_code\\OA_auto\\module\\fujian.py\", line 34, in add_file\n    self.action.find_element(self.select_file).send_keys(fileName)\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webelement.py\", line 477, in send_keys\n    self._execute(Command.SEND_KEYS_TO_ELEMENT,\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webelement.py\", line 633, in _execute\n    return self._parent.execute(command, params)\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py\", line 321, in execute\n    self.error_handler.check_response(response)\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py\", line 242, in check_response\n    raise exception_class(message, screen, stacktrace)\n",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "fileName",
+          "value" : "'./1allure报告_讲义.pdf'"
+        } ],
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : true,
+        "stepsCount" : 0,
+        "hasContent" : true
+      } ],
+      "attachments" : [ {
+        "uid" : "ffcf76e110376c2b",
+        "name" : "截图",
+        "source" : "ffcf76e110376c2b.png",
+        "type" : "image/png",
+        "size" : 26191
+      } ],
+      "parameters" : [ {
+        "name" : "fileName",
+        "value" : "'./1allure报告_讲义.pdf'"
+      } ],
+      "attachmentsCount" : 1,
+      "shouldDisplayMessage" : false,
+      "stepsCount" : 2,
+      "hasContent" : true
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 14,
+    "shouldDisplayMessage" : true,
+    "stepsCount" : 19,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "_UnitTestCase__pytest_class_setup::0",
+    "time" : {
+      "start" : 1606560482557,
+      "stop" : 1606560482557,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "_Class__pytest_setup_class::0",
+    "time" : {
+      "start" : 1606560482559,
+      "stop" : 1606560485147,
+      "duration" : 2588
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "test_script"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_demo01"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-65DR0V4"
+  }, {
+    "name" : "thread",
+    "value" : "20120-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_script"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "6e475ea66ac29f83.json",
+  "parameterValues" : [ ]
+}

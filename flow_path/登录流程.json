@@ -1,10 +1,11 @@
 {
   "path":"",
-  "order": [1,2,3,4],
+  "order": [1,2,3,4,5],
   "action_list": {
     "1": ["input",["By.XPATH",".//input[@id = 'userid']"]],
     "2": ["input",["By.XPATH",".//input[@id = 'pwd']"]],
-    "3": ["click",["By.XPATH","//*[@class='login']/input"]],
-    "4": ["result","当前用户"]
+    "3": ["Verify_code"],
+    "4": ["click",["By.XPATH","//*[@class='login']/input"]],
+    "5": ["result","当前用户"]
 }
 }

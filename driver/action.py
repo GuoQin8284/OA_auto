@@ -24,7 +24,7 @@ class Action ():
             return False
 
     # 查找单个元素
-    def find_element(self,location):
+    def find_element(self,location,timeout=20,poll_frequency=0.3):
         def ananysis_element(ele):
             if ele in ("By.ID","ID") :
                 return By.ID
@@ -49,7 +49,7 @@ class Action ():
         if location:
             # print("location[1]:",location)
             try:
-                self.ele = WebDriverWait(self.driver,20,0.3).until(lambda x: x.find_element(ananysis_element(location[0]),location[1]))
+                self.ele = WebDriverWait(self.driver,timeout,poll_frequency).until(lambda x: x.find_element(ananysis_element(location[0]),location[1]))
                 return self.ele
             except TimeoutException as f :
                 print(r"未找到{}元素".format(location[1]))
@@ -59,7 +59,7 @@ class Action ():
             return False
 
     # 查找一组元素
-    def find_elements(self,location):
+    def find_elements(self,location,timeout=20,poll_frequency=0.3):
         def ananysis_element(ele):
             if ele in ("By.ID","ID") :
                 return By.ID
@@ -84,7 +84,7 @@ class Action ():
         if location:
             # print("location[1]:", location)
             try:
-                self.ele = WebDriverWait(self.driver,20,0.3).until(lambda x: x.find_elements(ananysis_element(location[0]),location[1]))
+                self.ele = WebDriverWait(self.driver,timeout,poll_frequency).until(lambda x: x.find_elements(ananysis_element(location[0]),location[1]))
                 return self.ele
             except TimeoutException as f :
                 print(r"未找到{}元素".format(location[1]))
@@ -127,3 +127,7 @@ class Action ():
 
     def screen_shot(self):
         return self.driver.get_screenshot_as_png()
+
+    # 打开指定的网址
+    def get_url(self,url):
+        self.driver.get(url)

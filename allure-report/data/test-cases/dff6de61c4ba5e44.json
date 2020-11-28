@@ -1,0 +1,118 @@
+{
+  "uid" : "dff6de61c4ba5e44",
+  "name" : "test02_sendText",
+  "fullName" : "test_script.Test_demo01#test02_sendText",
+  "historyId" : "61354a371b5b39232e978c81ea366530",
+  "time" : {
+    "start" : 1606560458571,
+    "stop" : 1606560458571,
+    "duration" : 0
+  },
+  "status" : "broken",
+  "statusMessage" : "TypeError: unsupported callable",
+  "statusTrace" : "func = None\n\n    def getfullargspec(func):\n        \"\"\"Get the names and default values of a callable object's parameters.\n    \n        A tuple of seven things is returned:\n        (args, varargs, varkw, defaults, kwonlyargs, kwonlydefaults, annotations).\n        'args' is a list of the parameter names.\n        'varargs' and 'varkw' are the names of the * and ** parameters or None.\n        'defaults' is an n-tuple of the default values of the last n parameters.\n        'kwonlyargs' is a list of keyword-only parameter names.\n        'kwonlydefaults' is a dictionary mapping names from kwonlyargs to defaults.\n        'annotations' is a dictionary mapping parameter names to annotations.\n    \n        Notable differences from inspect.signature():\n          - the \"self\" parameter is always reported, even for bound methods\n          - wrapper chains defined by __wrapped__ *not* unwrapped automatically\n        \"\"\"\n        try:\n            # Re: `skip_bound_arg=False`\n            #\n            # There is a notable difference in behaviour between getfullargspec\n            # and Signature: the former always returns 'self' parameter for bound\n            # methods, whereas the Signature always shows the actual calling\n            # signature of the passed object.\n            #\n            # To simulate this behaviour, we \"unbind\" bound methods, to trick\n            # inspect.signature to always return their first parameter (\"self\",\n            # usually)\n    \n            # Re: `follow_wrapper_chains=False`\n            #\n            # getfullargspec() historically ignored __wrapped__ attributes,\n            # so we ensure that remains the case in 3.3+\n    \n>           sig = _signature_from_callable(func,\n                                           follow_wrapper_chains=False,\n                                           skip_bound_arg=False,\n                                           sigcls=Signature)\n\nd:\\soft_install\\python3.8.5\\lib\\inspect.py:1123: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nobj = None\n\n    def _signature_from_callable(obj, *,\n                                 follow_wrapper_chains=True,\n                                 skip_bound_arg=True,\n                                 sigcls):\n    \n        \"\"\"Private helper function to get signature for arbitrary\n        callable objects.\n        \"\"\"\n    \n        if not callable(obj):\n>           raise TypeError('{!r} is not a callable object'.format(obj))\nE           TypeError: None is not a callable object\n\nd:\\soft_install\\python3.8.5\\lib\\inspect.py:2216: TypeError\n\nThe above exception was the direct cause of the following exception:\n\nfunc = None, args = (<test_script.Test_demo01 testMethod=test02_sendText>,), kwargs = {}, parameters = {}\n\n    def func_parameters(func, *args, **kwargs):\n        \"\"\"\n        >>> def helper(func):\n        ...     def wrapper(*args, **kwargs):\n        ...         params = func_parameters(func, *args, **kwargs)\n        ...         print(list(params.items()))\n        ...         return func(*args, **kwargs)\n        ...     return wrapper\n    \n        >>> @helper\n        ... def args(a, b):\n        ...     pass\n    \n        >>> args(1, 2)\n        [('a', '1'), ('b', '2')]\n    \n        >>> args(*(1,2))\n        [('a', '1'), ('b', '2')]\n    \n        >>> args(1, b=2)\n        [('a', '1'), ('b', '2')]\n    \n        >>> @helper\n        ... def kwargs(a=1, b=2):\n        ...     pass\n    \n        >>> kwargs()\n        [('a', '1'), ('b', '2')]\n    \n        >>> kwargs(a=3, b=4)\n        [('a', '3'), ('b', '4')]\n    \n        >>> kwargs(b=4, a=3)\n        [('a', '3'), ('b', '4')]\n    \n        >>> kwargs(a=3)\n        [('a', '3'), ('b', '2')]\n    \n        >>> kwargs(b=4)\n        [('a', '1'), ('b', '4')]\n    \n        >>> @helper\n        ... def args_kwargs(a, b, c=3, d=4):\n        ...     pass\n    \n        >>> args_kwargs(1, 2)\n        [('a', '1'), ('b', '2'), ('c', '3'), ('d', '4')]\n    \n        >>> args_kwargs(1, 2, d=5)\n        [('a', '1'), ('b', '2'), ('c', '3'), ('d', '5')]\n    \n        >>> args_kwargs(1, 2, 5, 6)\n        [('a', '1'), ('b', '2'), ('c', '5'), ('d', '6')]\n    \n        >>> @helper\n        ... def varargs(*a):\n        ...     pass\n    \n        >>> varargs()\n        []\n    \n        >>> varargs(1, 2)\n        [('a', '(1, 2)')]\n    \n        >>> @helper\n        ... def keywords(**a):\n        ...     pass\n    \n        >>> keywords()\n        []\n    \n        >>> keywords(a=1, b=2)\n        [('a', '1'), ('b', '2')]\n    \n        >>> @helper\n        ... def args_varargs(a, b, *c):\n        ...     pass\n    \n        >>> args_varargs(1, 2)\n        [('a', '1'), ('b', '2')]\n    \n        >>> args_varargs(1, 2, 2)\n        [('a', '1'), ('b', '2'), ('c', '(2,)')]\n    \n        >>> @helper\n        ... def args_kwargs_varargs(a, b, c=3, **d):\n        ...     pass\n    \n        >>> args_kwargs_varargs(1, 2)\n        [('a', '1'), ('b', '2'), ('c', '3')]\n    \n        >>> args_kwargs_varargs(1, 2, 4, d=5, e=6)\n        [('a', '1'), ('b', '2'), ('c', '4'), ('d', '5'), ('e', '6')]\n    \n        >>> @helper\n        ... def args_kwargs_varargs_keywords(a, b=2, *c, **d):\n        ...     pass\n    \n        >>> args_kwargs_varargs_keywords(1)\n        [('a', '1'), ('b', '2')]\n    \n        >>> args_kwargs_varargs_keywords(1, 2, 4, d=5, e=6)\n        [('a', '1'), ('b', '2'), ('c', '(4,)'), ('d', '5'), ('e', '6')]\n    \n        >>> class Class(object):\n        ...     @staticmethod\n        ...     @helper\n        ...     def static_args(a, b):\n        ...         pass\n        ...\n        ...     @classmethod\n        ...     @helper\n        ...     def method_args(cls, a, b):\n        ...         pass\n        ...\n        ...     @helper\n        ...     def args(self, a, b):\n        ...         pass\n    \n        >>> cls = Class()\n    \n        >>> cls.args(1, 2)\n        [('a', '1'), ('b', '2')]\n    \n        >>> cls.method_args(1, 2)\n        [('a', '1'), ('b', '2')]\n    \n        >>> cls.static_args(1, 2)\n        [('a', '1'), ('b', '2')]\n    \n        \"\"\"\n        parameters = {}\n>       arg_spec = getargspec(func) if six.PY2 else inspect.getfullargspec(func)\n\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\allure_commons\\utils.py:303: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nfunc = None\n\n    def getfullargspec(func):\n        \"\"\"Get the names and default values of a callable object's parameters.\n    \n        A tuple of seven things is returned:\n        (args, varargs, varkw, defaults, kwonlyargs, kwonlydefaults, annotations).\n        'args' is a list of the parameter names.\n        'varargs' and 'varkw' are the names of the * and ** parameters or None.\n        'defaults' is an n-tuple of the default values of the last n parameters.\n        'kwonlyargs' is a list of keyword-only parameter names.\n        'kwonlydefaults' is a dictionary mapping names from kwonlyargs to defaults.\n        'annotations' is a dictionary mapping parameter names to annotations.\n    \n        Notable differences from inspect.signature():\n          - the \"self\" parameter is always reported, even for bound methods\n          - wrapper chains defined by __wrapped__ *not* unwrapped automatically\n        \"\"\"\n        try:\n            # Re: `skip_bound_arg=False`\n            #\n            # There is a notable difference in behaviour between getfullargspec\n            # and Signature: the former always returns 'self' parameter for bound\n            # methods, whereas the Signature always shows the actual calling\n            # signature of the passed object.\n            #\n            # To simulate this behaviour, we \"unbind\" bound methods, to trick\n            # inspect.signature to always return their first parameter (\"self\",\n            # usually)\n    \n            # Re: `follow_wrapper_chains=False`\n            #\n            # getfullargspec() historically ignored __wrapped__ attributes,\n            # so we ensure that remains the case in 3.3+\n    \n            sig = _signature_from_callable(func,\n                                           follow_wrapper_chains=False,\n                                           skip_bound_arg=False,\n                                           sigcls=Signature)\n        except Exception as ex:\n            # Most of the times 'signature' will raise ValueError.\n            # But, it can also raise AttributeError, and, maybe something\n            # else. So to be fully backwards compatible, we catch all\n            # possible exceptions here, and reraise a TypeError.\n>           raise TypeError('unsupported callable') from ex\nE           TypeError: unsupported callable\n\nd:\\soft_install\\python3.8.5\\lib\\inspect.py:1132: TypeError",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "_UnitTestCase__pytest_class_setup",
+    "time" : {
+      "start" : 1606560455964,
+      "stop" : 1606560455964,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "_Class__pytest_setup_class",
+    "time" : {
+      "start" : 1606560451814,
+      "stop" : 1606560455964,
+      "duration" : 4150
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ {
+    "name" : "_UnitTestCase__pytest_class_setup::0",
+    "time" : {
+      "start" : 1606560482557,
+      "stop" : 1606560482557,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  }, {
+    "name" : "_Class__pytest_setup_class::0",
+    "time" : {
+      "start" : 1606560482559,
+      "stop" : 1606560485147,
+      "duration" : 2588
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "stepsCount" : 0,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "test_script"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_demo01"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-65DR0V4"
+  }, {
+    "name" : "thread",
+    "value" : "20120-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_script"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ {
+      "name" : "Test defects",
+      "matchedStatuses" : [ ],
+      "flaky" : false
+    } ],
+    "tags" : [ ]
+  },
+  "source" : "dff6de61c4ba5e44.json",
+  "parameterValues" : [ ]
+}
