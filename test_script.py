@@ -71,7 +71,7 @@ class Test_demo01(TestCase):
     def test03_sendText_save(self, sendData):
         url = get_host_port()+ sendData["url"]
         bt_text = sendData["bt_text"]
-        result = SendTextSave(self.action).save_text_flow(url,bt_text)
-        self.assertIn(bt_text,result)
+        result = SendTextSave(self.action).save_text_flow(url,bt_text)  # 调用发文保存流程模块，并保存返回值
+        self.assertIn(bt_text,result)  # 将返回的结果与标题文字进行对比断言
 
 

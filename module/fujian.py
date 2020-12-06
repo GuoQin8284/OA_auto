@@ -21,6 +21,13 @@ class Fujian():
         self.select_file = "ID","attach1"
         # 上传按钮
         self.upload_btn = "ID","btScfj"
+
+        # 起草附件按钮
+        self.qc_btn = "XPATh", "//img[@alt='起草附件']"
+        # 起草标题输入框
+        self.qc_input_box = "ID","bt"
+
+
         # 附件上传后的列表
         self.file_list = "XPATH","//tr[@align='left']/td[2]"
         # 保存按钮

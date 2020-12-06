@@ -27,6 +27,10 @@ class SelectPerson():
         # 确认按钮
         self.confirm = "By.XPATH","//a[@class='btlink']/img"
 
+        self.person_search_box = "ID","searchtext"  # 人员搜索输入框
+        self.person_search_btn = "XPATH","//*[contains(text(),'搜索')]"  # 人员搜索按钮
+
+
     # 切换iframe到选择框
     @allure.step(title="切换iframe到选择框")
     def Switch_frame(self,ele):
@@ -45,7 +49,7 @@ class SelectPerson():
         allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)
 
     # 搜索部门或者人名，name可以传列表
-    @allure.step(title="搜索部门或者人名")
+    @allure.step(title="搜索部门 ")
     def SearchName(self,name):
         self.Switch_frame(self.select_person)
         self.Click_company()

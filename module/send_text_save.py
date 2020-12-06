@@ -14,14 +14,14 @@ class SendTextSave():
         self.bt = "By.ID","wjbt"
 
     @allure.step(title="发文保存保存流程")
-    def save_text_flow(self,url,bt_text):
-        self.action.get_url(url)
-        self.action.input_text(self.bt,bt_text)
-        self.action.click(self.save_btn)
+    def save_text_flow(self,url,bt_text):  # 这是发文保存的业务流程
+        self.action.get_url(url)  # 获取driver对象
+        self.action.input_text(self.bt,bt_text)  # 输入标题
+        self.action.click(self.save_btn)  # 点击保存按钮
         try:
-            result = self.action.contains_text(bt_text)
-            allure.attach(self.action.screen_shot(),"截图",allure.attachment_type.PNG)
+            result = self.action.contains_text(bt_text)  # 搜索列表中是否包含标题文字，如果包含则将列表中文字返回
+            allure.attach(self.action.screen_shot(),"截图",allure.attachment_type.PNG)  # 截图
             return result
         except:
-            allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)
-            return "未找到定位"
+            allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)  # 如果不包含，则返回False
+            return "未找到元素"
