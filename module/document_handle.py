@@ -2,10 +2,10 @@ import allure
 
 
 class DocumentHandle():
-    def __init__(self,action):
+    def __init__(self,driver):
         self.document_title = "By.XPATH","//td[@align='left']/a"
         self.current_person = "By.XPATH","//div[@class='maincontent']/table/tbody/tr[position()>1]/td[8]"
-        self.action = action
+        self.action = driver
 
     # 获取公文标题
     @allure.step(title="获取公文标题")

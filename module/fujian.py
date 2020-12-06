@@ -3,6 +3,8 @@ import time
 import allure
 from selenium.webdriver.support.select import Select
 
+from config import BASE_TIME
+
 
 class Fujian():
 
@@ -93,14 +95,14 @@ class Fujian():
         allure.attach(self.action.screen_shot(), "截图", allure.attachment_type.PNG)
         self.add_file(fileName)
         self.click_upload()
-        time.sleep(1)
+        time.sleep(BASE_TIME)
         self.accept_alert()
-        time.sleep(1)
+        time.sleep(BASE_TIME)
         self.click_save()
         result_text = self.get_alert_text()
-        time.sleep(1)
+        time.sleep(BASE_TIME)
         self.accept_alert()
-        time.sleep(1)
+        time.sleep(BASE_TIME)
         self.close_window()
         if "保存成功" in result_text:
             return True

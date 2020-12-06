@@ -2,7 +2,7 @@ import json
 from driver.action import Action
 from module.fujian import Fujian
 from module.read_opinion import ReadOpinion
-from module.select_person import SelectPerson
+from module.select_department import SelectDepartment
 from module.send import Send
 
 # 这是程序运行的入口，根据测试用例指定的测试数据，调用解析函数，dirver为浏览器驱动对象，fileName为测试数据路径
@@ -75,9 +75,9 @@ def open_func(driver,action_id,action_ele,args):
 
     # 初始化对象
     action = Action(driver)
-    serchName = SelectPerson(action)
+    serchName = SelectDepartment(driver)
     readOpinion = ReadOpinion(action)
-    send = Send(action)
+    send = Send(driver)
     fujian = Fujian(action)
     verifyCode = Verify_code(action)
 

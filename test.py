@@ -3,10 +3,11 @@ from selenium import webdriver
 
 from script import Test_demo01
 
-# driver = webdriver.Ie()
-# driver = webdriver.Chrome()
-#
-# driver.get("http://127.0.0.1:8092/fwgl/frmfwcld.jsp")
+driver = webdriver.Ie()
+driver = webdriver.Chrome()
+
+driver.get("http://127.0.0.1:8092/fwgl/frmfwcld.jsp")
+driver.switch_to.default_content()
 # driver.find_element_by_name("userid").send_keys("hcadmin")
 # driver.find_element_by_name("pwd").send_keys("123456")
 # driver.find_element_by_id("loginimage").click()

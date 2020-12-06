@@ -118,12 +118,8 @@ class Action ():
         if text1:
             element = "By.XPATH","//*[contains(text(),'{}')]".format(text1)
             print("element:",element)
-            try:
-                text =self.find_element(element).text
-                print("text:",text)
-                return text
-            except Exception:
-                return False
+            ele =self.find_element(element)
+            return ele
 
     def screen_shot(self):
         return self.driver.get_screenshot_as_png()

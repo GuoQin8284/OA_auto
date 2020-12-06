@@ -2,6 +2,8 @@ import time
 
 import allure
 
+from config import BASE_TIME
+
 
 class ReadOpinion():
     def __init__(self,action):
@@ -53,13 +55,13 @@ class ReadOpinion():
     @allure.step(title="阅文意见的业务流程")
     def input_content_flow_path(self,text):
         self.action.driver.switch_to.frame(self.action.find_element(self.all_frame))
-        time.sleep(1)
+        time.sleep(BASE_TIME)
         self.input_content(text)
-        time.sleep(1)
+        time.sleep(BASE_TIME)
         state = self.get_radio_state()
         if state:
             self.click_radio()
-            time.sleep(1)
+            time.sleep(BASE_TIME)
         self.click_confirm()
         toast = self.get_toast()
         if toast == "成功签署意见!":

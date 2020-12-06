@@ -17,7 +17,7 @@ class Driver():
     @classmethod
     def quit_driver(cls):
         if cls._driver and cls._auto_quit is not None:
-            cls._driver.quit()
+            # cls._driver.quit()
             cls._driver = None
 
     @classmethod
