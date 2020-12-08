@@ -1,7 +1,7 @@
 import logging.handlers
 import os
 
-BASE_HOST = "http://192.168.1.7:8092"
+BASE_HOST = "http://127.0.0.1:8092"
 BASE_DIR = os.path.abspath(".")
 BASE_TIME = 1
 

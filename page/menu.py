@@ -20,5 +20,5 @@ class MenuFrame(Action):
     def switch_parent_iframe(self):
         self.driver.switch_to.parent_frame()
 
-    def switch_default_iframe(self):
-        self.driver.switch_to.default
+    def switch_default_content(self):
+        self.driver.switch_to.default_content()

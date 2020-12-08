@@ -1,13 +1,12 @@
 import time
 from selenium import webdriver
 
-from script import Test_demo01
 
-driver = webdriver.Ie()
-driver = webdriver.Chrome()
-
-driver.get("http://127.0.0.1:8092/fwgl/frmfwcld.jsp")
-driver.switch_to.default_content()
+# driver = webdriver.Ie()
+# driver = webdriver.Chrome()
+#
+# driver.get("http://127.0.0.1:8092/fwgl/frmfwcld.jsp")
+# driver.switch_to.default_content()
 # driver.find_element_by_name("userid").send_keys("hcadmin")
 # driver.find_element_by_name("pwd").send_keys("123456")
 # driver.find_element_by_id("loginimage").click()
@@ -27,7 +26,30 @@ driver.switch_to.default_content()
 # driver.find_element_by_xpath("//input[@value='上传']").click()
 
 
-a = ["1","2"]
+# a = ["1"]
+#
+# if type(a) is list:
+#     print(True)
+# else:
+#     print(False)
 
-if type(a) is list:
-    print(True)
+def test_time(func):
+    def wrapper(*args,**kwargs):
+        t1 = time.time()
+        result = func(*args,**kwargs)
+        t2 = time.time()
+        print("{}函数:{}".format(func.__name__,t2-t1))
+        return result
+    return wrapper
+
+@test_time
+def test01():
+    time.sleep(3)
+    test02()
+@test_time
+def test02():
+    time.sleep(2)
+t11 = time.time()
+test01()
+t22 = time.time()
+print("实际用时:{}".format(t22-t11))

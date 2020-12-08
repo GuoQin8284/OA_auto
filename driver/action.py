@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 
+from driver.log_method import log_method
 
 
 class Action ():
@@ -15,6 +16,7 @@ class Action ():
         self.actionchains = ActionChains(self.driver)
 
     # 输入文字
+    @log_method
     def input_text(self,element,text):
         if text and element:
             # print("element:",element)
@@ -24,6 +26,7 @@ class Action ():
             return False
 
     # 查找单个元素
+    @log_method
     def find_element(self,location,timeout=20,poll_frequency=0.3):
         def ananysis_element(ele):
             if ele in ("By.ID","ID") :
@@ -59,6 +62,7 @@ class Action ():
             return False
 
     # 查找一组元素
+    @log_method
     def find_elements(self,location,timeout=20,poll_frequency=0.3):
         def ananysis_element(ele):
             if ele in ("By.ID","ID") :
@@ -93,6 +97,7 @@ class Action ():
             return False
 
     # 点击元素
+    @log_method
     def click(self,element):
         if element:
             self.find_element(element).click()
@@ -100,6 +105,7 @@ class Action ():
             return False
 
     # 双击元素
+    @log_method
     def double_click(self,element):
         if element:
             self.actionchains.double_click(self.find_element(element)).perform()
@@ -107,6 +113,7 @@ class Action ():
             return False
 
     # 清空输入
+    @log_method
     def clean_text(self,element):
         if element:
             self.find_element(element).send_keys(Keys.CONTROL,"a")
@@ -114,6 +121,7 @@ class Action ():
         else:
             return False
     # 根据文本模糊定位
+    @log_method
     def contains_text(self,text1):
         if text1:
             element = "By.XPATH","//*[contains(text(),'{}')]".format(text1)
@@ -121,9 +129,11 @@ class Action ():
             ele =self.find_element(element)
             return ele
 
+    @log_method
     def screen_shot(self):
         return self.driver.get_screenshot_as_png()
 
     # 打开指定的网址
+    @log_method
     def get_url(self,url):
         self.driver.get(url)

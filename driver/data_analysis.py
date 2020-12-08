@@ -7,6 +7,6 @@ def data_analysis(name):
         data = json.load(f)
         data_list = [(x,) for x in data]
         print(data_list)
-        return data
+        return data_list
 
 # data_analysis("send_text01.json")

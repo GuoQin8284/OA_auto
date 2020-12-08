@@ -3,3 +3,4 @@ report
 .idea
 __pycache__
 *.pdf
+log

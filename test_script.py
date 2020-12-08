@@ -72,10 +72,14 @@ class Test_demo01(TestCase):
     #     result = SendTextSave(self.action).save_text_flow(url,bt_text)  # 调用发文保存流程模块，并保存返回值
     #     self.assertIn(bt_text,result)  # 将返回的结果与标题文字进行对比断言
     @parameterized.expand(data_analysis.data_analysis("send_text01.json"))
-    def test04_send_text(self,bt_text,zsdw_name,csdw_name,rec_name):
-    #     bt_text = data["bt_text"]
-    #     zsdw_name = data["zsdw_name"]
-    #     csdw_name = data["csdw_name"]
-    #     rec_name = data["rec_name"]
+    def test04_send_text(self,data):
+        bt_text = data["bt_name"]
+        zsdw_name = data["zsdw_name"]
+        csdw_name = data["csdw_name"]
+        rec_name = data["rec_name"]
+        print("bt_text:",bt_text)
+        print("zsdw_name:",zsdw_name)
+        print("csdw_name:",csdw_name)
+        print("rec_name:",rec_name)
         self.DocumentProxy.send_text_flow(bt_text,zsdw_name,csdw_name,rec_name)
 
