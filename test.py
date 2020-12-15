@@ -33,23 +33,28 @@ from selenium import webdriver
 # else:
 #     print(False)
 
-def test_time(func):
-    def wrapper(*args,**kwargs):
-        t1 = time.time()
-        result = func(*args,**kwargs)
-        t2 = time.time()
-        print("{}函数:{}".format(func.__name__,t2-t1))
-        return result
-    return wrapper
+# def test_time(func):
+#     def wrapper(*args,**kwargs):
+#         t1 = time.time()
+#         result = func(*args,**kwargs)
+#         t2 = time.time()
+#         print("{}函数:{}".format(func.__name__,t2-t1))
+#         return result
+#     return wrapper
+#
+# @test_time
+# def test01():
+#     time.sleep(5)
+#     test02()
+#
+# @test_time
+# def test02():
+#     time.sleep(2)
+# t11 = time.time()
+# test01()
+# t22 = time.time()
+# print("实际用时:{}".format(t22-t11))
 
-@test_time
-def test01():
-    time.sleep(3)
-    test02()
-@test_time
-def test02():
-    time.sleep(2)
-t11 = time.time()
-test01()
-t22 = time.time()
-print("实际用时:{}".format(t22-t11))
+a = "sadf"
+if a:
+    print(True)

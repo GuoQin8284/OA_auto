@@ -1,10 +1,12 @@
 [
 {
-  "fileName": "登录流程.json",
-  "data": {
-    "1": "hcadmin",
-    "2": "123456",
-    "4": "当前用户"
-  }
+"username":"admin",
+  "pwd": "123456",
+  "expect": "当前用户"
+},
+  {
+"username":"admin",
+  "pwd": "1234567",
+    "expect": "用户名或密码不正确"
 }
   ]

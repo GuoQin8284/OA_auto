@@ -29,40 +29,31 @@ class Document(Action):
         self.back = "XPATH", "//img[@title='返回']"  # 返回按钮
 
     # 点击返回按钮
-    @log_method
     def click_back(self):
         self.click(self.back)
     # 点击保存按钮
-    @log_method
     def click_save(self):
         self.click(self.sava_btn)
     # 点击阅文意见按钮
-    @log_method
     def click_readOpinion(self):
         self.click(self.readOpinion)
     # 点击发送按钮
-    @log_method
     def click_send(self):
         self.click(self.send)
     # 输入份数，num表示份数
-    @log_method
     def input_fs(self,num):
         self.input_text(self.fs,num)
     # 双击主送单位
-    @log_method
     def double_zsdw(self):
         self.double_click(self.zsdw)
     # 双击抄送单位
-    @log_method
     def double_csdw(self):
         print("self.csdw:",self.csdw)
         self.double_click(self.csdw)
     # 选择密级等级
-    @log_method
     def select_mj(self,text):
         Select(self.find_element(self.mj)).select_by_visible_text(text)
     # 输入标题
-    @log_method
     def input_bt_text(self,text):
         self.input_text(self.send_bt_box,text)
 
@@ -72,28 +63,44 @@ class DocumentProxy(Document):
         super().__init__(driver)
         self.MenuFrame = MenuFrame(driver)
 
-    @log_method
-    def send_text_flow(self,bt_text,zsdw_name,csdw_name,rec_name):
+    # 进入拟稿页面
+    def into_document(self):
         self.contains_text("公文管理").click()  # 点击公文管理
         time.sleep(BASE_TIME)
         self.MenuFrame.switch_left_iframe()
         self.contains_text("发文管理").click()  # 点击发文管理菜单
         time.sleep(BASE_TIME)
         self.contains_text("发文拟稿").click()  # 点击发文拟稿菜单，进入拟稿页面
-        time.sleep(BASE_TIME)
-        self.MenuFrame.switch_parent_iframe()
-        time.sleep(BASE_TIME)
+
+    # 输入文章标题
+    def input_bt_proxy(self,text):
+        self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
-        self.input_bt_text(bt_text)  # 输入公文标题
+        time.sleep(BASE_TIME)
+        self.input_bt_text(text)  # 输入公文标题
+
+    # 选择主送单位
+    def select_zsdw(self,zsdw_name):
+        self.MenuFrame.switch_default_content()
+        self.MenuFrame.switch_right_iframe()
         self.double_zsdw()  # 双击主送单位输入框
         time.sleep(BASE_TIME)
         self.search_department.SearchName(zsdw_name)  # 调用部门选择方法，选择部门
         time.sleep(BASE_TIME)
+
+
+    # 选择抄送单位
+    def select_csdw(self,csdw_name):
+        self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
         self.double_csdw()  # 双击抄送单位输入框
         time.sleep(BASE_TIME)
         self.search_department.SearchName(csdw_name)  # 调用部门选择方法，选择部门
         time.sleep(BASE_TIME)
+
+    # 发送流程（选择发文人发送）
+    def send_proxy(self,rec_name):
+        self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
         self.click_send()
         time.sleep(BASE_TIME)

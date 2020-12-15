@@ -3,12 +3,14 @@ from unittest.case import TestCase
 
 from parameterized import parameterized
 
+from config import BASE_HOST
 from driver import data_analysis
 from driver.action import Action
 from driver.analysis_function import analysis_data_func
 from driver.setup_driver import Driver
 # 读取测试数据
 from page.Document_process import DocumentProxy
+from page.login_page import LoginProxy
 
 
 def data_read(file):
@@ -29,9 +31,17 @@ class Test_demo01(TestCase):
     def setup_class(cls):
         cls.driver = Driver
         cls.driver.set_auto_quit(1)
-        cls.get_driver = cls.driver.get_driver()
-        cls.action = Action(cls.get_driver)
-        cls.DocumentProxy = DocumentProxy(cls.get_driver)
+
+
+    def setUp(self):
+        self.get_driver = self.driver.get_driver()
+        self.get_driver.get(BASE_HOST)
+        self.action = Action(self.get_driver)
+        self.DocumentProxy = DocumentProxy(self.get_driver)
+        self.login = LoginProxy(self.get_driver)
+
+    def tearDown(self):
+        self.driver.quit_driver()
 
     # @classmethod
     # def teardown_class(cls):
@@ -49,12 +59,22 @@ class Test_demo01(TestCase):
     #     cls.driver.quit_driver()
     #
     # 登录流程测试用例
-    @parameterized.expand((data_read("login.json")))
-    def test01_login(self,loginData):
-        print(loginData)
-        print(type(loginData))
-        text = analysis_data_func(self.get_driver,loginData)
-        self.assertIn("当前用户",text)
+    # @parameterized.expand((data_read("login.json")))
+    # def test01_login(self,loginData):
+    #     print(loginData)
+    #     print(type(loginData))
+    #     text = analysis_data_func(self.get_driver,loginData)
+    #     self.assertIn("当前用户",text)
+    @parameterized.expand(data_read("login.json"))
+    def test01_login(self,data):
+        username = data["username"]
+        pwd = data["pwd"]
+        expect = data["expect"]
+        self.login.Login(username,pwd)
+        result = self.login.get_login_status()
+        print("result",result)
+        self.assertIn(expect,result)
+
 
     # # 发文流程测试用例
     # @parameterized.expand(data_read("send_text.json"))
@@ -71,15 +91,4 @@ class Test_demo01(TestCase):
     #     bt_text = sendData["bt_text"]
     #     result = SendTextSave(self.action).save_text_flow(url,bt_text)  # 调用发文保存流程模块，并保存返回值
     #     self.assertIn(bt_text,result)  # 将返回的结果与标题文字进行对比断言
-    @parameterized.expand(data_analysis.data_analysis("send_text01.json"))
-    def test04_send_text(self,data):
-        bt_text = data["bt_name"]
-        zsdw_name = data["zsdw_name"]
-        csdw_name = data["csdw_name"]
-        rec_name = data["rec_name"]
-        print("bt_text:",bt_text)
-        print("zsdw_name:",zsdw_name)
-        print("csdw_name:",csdw_name)
-        print("rec_name:",rec_name)
-        self.DocumentProxy.send_text_flow(bt_text,zsdw_name,csdw_name,rec_name)
 

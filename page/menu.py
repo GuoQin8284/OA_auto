@@ -1,3 +1,4 @@
+from driver.log_method import log_method
 from driver.action import Action
 
 
@@ -13,12 +14,15 @@ class MenuFrame(Action):
     def switch_left_iframe(self):
         self.driver.switch_to.frame(self.left_iframe)
 
+
     def switch_right_iframe(self):
         print(self.right_iframe)
         self.driver.switch_to.frame(self.right_iframe)
 
+
     def switch_parent_iframe(self):
         self.driver.switch_to.parent_frame()
+
 
     def switch_default_content(self):
         self.driver.switch_to.default_content()
