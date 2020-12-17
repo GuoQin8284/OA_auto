@@ -2,6 +2,7 @@
 import logging
 import time
 
+import allure
 from selenium.webdriver.support.select import Select
 
 from config import BASE_TIME
@@ -32,56 +33,71 @@ class Document(Action):
         self.send = "XPATH", "//img[@title='送文']"  # 发送按钮
         self.back = "XPATH", "//img[@title='返回']"  # 返回按钮
         self.MenuFrame = MenuFrame(driver)
+        self.cldbt = "XPATH","//center/font/font/b"  #处理单标题
 
-    def test(self):
+    # 获取处理单标题
+    @allure.step(title="获取处理单标题")
+    def get_cldbt(self):
         try:
-            self.driver.switch_to.default_content()
-            self.driver.switch_to.frame(self.find_element(("XPATH","//div[@class='layui-layer-content']/iframe")))
-            Action(self.driver).find_element(("XPATH", "//a[@id='btcancel']/img")).click()
-            self.driver.switch_to.default_content()
-        except Exception as f:
-            print(f)
+            return self.find_element(self.cldbt).text
+        except:
+            return ""
 
     # 点击返回按钮
+    @allure.step(title="点击返回按钮")
     def click_back(self):
         self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
         self.click(self.back)
+
     # 点击保存按钮
+    @allure.step(title="点击保存按钮")
     def click_save(self):
         self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
         self.click(self.sava_btn)
+
     # 点击阅文意见按钮
+    @allure.step(title="点击阅文意见按钮")
     def click_readOpinion(self):
         self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
         self.click(self.readOpinion)
+
     # 点击发送按钮
+    @allure.step(title="点击发送按钮")
     def click_send(self):
         self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
         self.click(self.send)
+
     # 输入份数，num表示份数
+    @allure.step(title="输入份数")
     def input_fs(self,num):
         self.input_text(self.fs,num)
+
     # 双击主送单位
+    @allure.step(title="双击主送单位输入框")
     def double_zsdw(self):
         self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
         self.double_click(self.zsdw)
+
     # 双击抄送单位
+    @allure.step(title="双击抄送单位输入框")
     def double_csdw(self):
         self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
         self.double_click(self.csdw)
 
     # 选择密级等级
+    @allure.step(title="选择密级等级")
     def select_mj(self,text):
         self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
         Select(self.find_element(self.mj)).select_by_visible_text(text)
     # 输入标题
+    @allure.step(title="输入发文标题")
     def input_bt_text(self,text):
         self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
@@ -96,6 +112,7 @@ class DocumentProxy(Document):
 
 
     # 进入拟稿页面
+    @allure.step(title="进入拟稿页面")
     def into_document(self):
         self.contains_text("公文管理").click()  # 点击公文管理
         time.sleep(BASE_TIME)
@@ -105,11 +122,13 @@ class DocumentProxy(Document):
         self.contains_text("发文拟稿").click()  # 点击发文拟稿菜单，进入拟稿页面
 
     # 输入文章标题
+    @allure.step(title="输入发文标题")
     def input_bt_proxy(self,text):
         time.sleep(BASE_TIME)
         self.input_bt_text(text)  # 输入公文标题
 
     # 选择主送单位
+    @allure.step(title="选择主送单位")
     def select_zsdw(self,zsdw_name):
         self.double_zsdw()  # 双击主送单位输入框
         time.sleep(BASE_TIME)
@@ -118,6 +137,7 @@ class DocumentProxy(Document):
 
 
     # 选择抄送单位
+    @allure.step(title="选择抄送单位")
     def select_csdw(self,csdw_name):
         self.double_csdw()  # 双击抄送单位输入框
         time.sleep(BASE_TIME)
@@ -125,24 +145,23 @@ class DocumentProxy(Document):
         self.search_department.SearchName(csdw_name)  # 调用部门选择方法，选择部门
 
     # 发送流程（选择发文人发送）
+    @allure.step(title="点击发送按钮，进入发送页面")
     def send_proxy(self,rec_name):
         self.click_send()
         time.sleep(BASE_TIME)
         self.send_flow.send_text_flow(rec_name)
 
     # 保存发文
+    @allure.step(title="保存发文")
     def save_document(self):
         self.click_save()
 
     # 判断保存是否成功
-    def get_cgx_status(self,bt):
+    @allure.step(title="判断保存是否成功")
+    def is_save_success(self,bt):
         get_ngr = self.fwcgx.get_ngr_list()[0]
         get_bt = self.fwcgx.get_wjbt_list()[0]
         cur_user = self.username.get_username()
-        logging.info("get_ngr:{}".format(get_ngr))
-        logging.info("get_bt:{}".format(get_bt))
-        logging.info("cur_user:{}".format(cur_user))
-        logging.info("bt:{}".format(bt))
         if (get_ngr == self.username.get_username()) and (get_bt == bt):
             logging.info("保存成功")
             return True

@@ -1,3 +1,6 @@
+import time
+
+from config import BASE_TIME
 from driver.log_method import log_method
 from driver.action import Action
 
@@ -16,7 +19,6 @@ class MenuFrame(Action):
 
     # 切换iframe到右侧列表
     def switch_right_iframe(self):
-        print(self.__right_iframe)
         self.driver.switch_to.frame(self.__right_iframe)
 
     # 切换iframe退回上一步
@@ -37,12 +39,14 @@ class Alert(Action):
     # 弹出框确认
     def alert_accept(self):
         self.switch_alert().accept()
+        time.sleep(BASE_TIME)
     # 弹出框取消
     def alert_dismiss(self):
         self.switch_alert().dismiss()
+        time.sleep(BASE_TIME)
     # 获取弹出框中的文本
     def get_alert_text(self):
-        self.switch_alert().text()
+        return self.switch_alert().text
     # 输入内容到弹出框中
     def alert_input_text(self,text):
         self.switch_alert().Send_keys(text)

@@ -1,10 +1,9 @@
 import logging.handlers
 import os
 
-BASE_HOST = "http://127.0.0.1:8092"
+BASE_HOST = "http://192.168.1.5:8092"
 BASE_DIR = os.path.abspath(".")
 BASE_TIME = 0.1
-
 def init_log_config():
     # 获取root日志器
     logger=logging.getLogger()

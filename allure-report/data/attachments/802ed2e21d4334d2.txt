@@ -1,4 +1,0 @@
-[32mINFO    [0m root:Document_process.py:61 调用的主送主体：<page.Document_process.DocumentProxy object at 0x000002EDFCA2B0A0>
-[32mINFO    [0m root:Document_process.py:62 双击选择主送部门：('ID', 'zsdw')
-[32mINFO    [0m root:Document_process.py:68 调用的抄送主体：<page.Document_process.DocumentProxy object at 0x000002EDFCA2B0A0>
-[32mINFO    [0m root:Document_process.py:69 双击选择抄送部门：('XPATH', "//textarea[@title='双击选择抄送单位']")

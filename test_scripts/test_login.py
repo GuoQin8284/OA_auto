@@ -18,7 +18,6 @@ def data_read(file):
 
         data = json.load(f)
         data_list = [(x,) for x in data]
-        print(data_list)
         return data_list
 # if __name__ == "__main__":
 #     data_read("send_text_save.json")
@@ -72,7 +71,6 @@ class Test_demo01(TestCase):
         expect = data["expect"]
         self.login.Login(username,pwd)
         result = self.login.get_login_status()
-        print("result",result)
         self.assertIn(expect,result)
 
 

@@ -54,7 +54,7 @@ class Action ():
                 self.ele = WebDriverWait(self.driver,timeout,poll_frequency).until(lambda x: x.find_element(ananysis_element(location[0]),location[1]))
                 return self.ele
             except TimeoutException as f :
-                print(r"未找到{}元素".format(location[1]))
+                # print(r"未找到{}元素".format(location[1]))
                 return False
 
         else:
@@ -89,7 +89,7 @@ class Action ():
                 self.ele = WebDriverWait(self.driver,timeout,poll_frequency).until(lambda x: x.find_elements(ananysis_element(location[0]),location[1]))
                 return self.ele
             except TimeoutException as f :
-                print(r"未找到{}元素".format(location[1]))
+                # print(r"未找到{}元素".format(location[1]))
                 return False
         else:
             return False
@@ -123,10 +123,10 @@ class Action ():
         else:
             return False
     # 根据文本模糊定位
-    def contains_text(self,text1,timeout = 5):
+    def contains_text(self,text1,timeout = 2):
         if text1:
             element = "By.XPATH","//*[contains(text(),'{}')]".format(text1)
-            print("element:",element)
+            # print("element:",element)
             ele =self.find_element(element,timeout)
             return ele
 

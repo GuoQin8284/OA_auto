@@ -26,7 +26,6 @@ class Send(Action):
     def get_message(self):
         message =  self.find_element(self.message).text
         allure.attach(self.screen_shot(),"截图", allure.attachment_type.PNG)
-        print("message:",message)
         return message
     # 点击发送按钮
     @allure.step(title="点击发送按钮")

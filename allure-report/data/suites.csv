@@ -1,5 +1,0 @@
-"Status","Name","Duration in ms","Description"
-"passed","test_scripts.test_login.Test_demo01#test01_login_1","7903",""
-"passed","test_scripts.test_login.Test_demo01#test01_login_0","8170",""
-"broken","test_scripts.test_fwgl.Test_demo01#test01_send_text_0","35347",""
-"broken","test_scripts.test_fwgl.Test_demo01#test02_save","26355",""
