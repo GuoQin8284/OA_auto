@@ -13,7 +13,7 @@ class Action ():
 
     def __init__(self,driver):
         self.driver = driver
-        self.actionchains = ActionChains(self.driver)
+        # self.actionchains = ActionChains(self.driver)
 
     # 输入文字
     def input_text(self,element,text):
@@ -104,8 +104,14 @@ class Action ():
     # 双击元素
     def double_click(self,element):
         if element:
-            print("element:",element)
-            self.actionchains.double_click(self.find_element(element)).perform()
+            # print("element:",element)
+            # ele = self.find_element(element).click()
+            # print("点击第一下")
+            # time.sleep(0.1)
+            # self.find_element(element).click()
+            # print("点击第二下")
+            self.ele = self.find_element(element)
+            ActionChains(self.driver).double_click(self.ele).perform()
         else:
             return False
 

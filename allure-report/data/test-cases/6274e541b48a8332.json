@@ -1,0 +1,405 @@
+{
+  "uid" : "6274e541b48a8332",
+  "name" : "test01_send_text_0",
+  "fullName" : "test_scripts.test_fwgl.Test_demo01#test01_send_text_0",
+  "historyId" : "df4969769b95888b8ae4a68ea33c4bb8",
+  "time" : {
+    "start" : 1608168688998,
+    "stop" : 1608168742373,
+    "duration" : 53375
+  },
+  "status" : "broken",
+  "statusMessage" : "selenium.common.exceptions.InvalidArgumentException: Message: invalid argument: invalid 'id'\n  (Session info: chrome=85.0.4183.121)",
+  "statusTrace" : "a = (<test_scripts.test_fwgl.Test_demo01 testMethod=test01_send_text_0>,)\n\n    @wraps(func)\n    def standalone_func(*a):\n>       return func(*(a + p.args), **p.kwargs)\n\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\parameterized\\parameterized.py:530: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntest_scripts\\test_fwgl.py:59: in test01_send_text\n    self.DocumentProxy.send_proxy(rec_name)  # 发送给指定的接收人\npage\\Document_process.py:127: in send_proxy\n    self.send_flow.send_text_flow(rec_name)\nmodule\\send.py:47: in send_text_flow\n    self.driver.switch_to.frame(self.find_element(self.all_frame))\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\switch_to.py:89: in frame\n    self._driver.execute(Command.SWITCH_TO_FRAME, {'id': frame_reference})\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py:321: in execute\n    self.error_handler.check_response(response)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x000001C920E01970>\nresponse = {'status': 400, 'value': '{\"value\":{\"error\":\"invalid argument\",\"message\":\"invalid argument: invalid \\'id\\'\\\\n  (Sessio...\\n\\\\tRtlGetAppContainerNamedObjectPath [0x77444A77+311]\\\\n\\\\tRtlGetAppContainerNamedObjectPath [0x77444A47+263]\\\\n\"}}'}\n\n    def check_response(self, response):\n        \"\"\"\n        Checks that a JSON response from the WebDriver does not have an error.\n    \n        :Args:\n         - response - The JSON response from the WebDriver server as a dictionary\n           object.\n    \n        :Raises: If the response contains an error message.\n        \"\"\"\n        status = response.get('status', None)\n        if status is None or status == ErrorCode.SUCCESS:\n            return\n        value = None\n        message = response.get(\"message\", \"\")\n        screen = response.get(\"screen\", \"\")\n        stacktrace = None\n        if isinstance(status, int):\n            value_json = response.get('value', None)\n            if value_json and isinstance(value_json, basestring):\n                import json\n                try:\n                    value = json.loads(value_json)\n                    if len(value.keys()) == 1:\n                        value = value['value']\n                    status = value.get('error', None)\n                    if status is None:\n                        status = value[\"status\"]\n                        message = value[\"value\"]\n                        if not isinstance(message, basestring):\n                            value = message\n                            message = message.get('message')\n                    else:\n                        message = value.get('message', None)\n                except ValueError:\n                    pass\n    \n        exception_class = ErrorInResponseException\n        if status in ErrorCode.NO_SUCH_ELEMENT:\n            exception_class = NoSuchElementException\n        elif status in ErrorCode.NO_SUCH_FRAME:\n            exception_class = NoSuchFrameException\n        elif status in ErrorCode.NO_SUCH_WINDOW:\n            exception_class = NoSuchWindowException\n        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:\n            exception_class = StaleElementReferenceException\n        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:\n            exception_class = ElementNotVisibleException\n        elif status in ErrorCode.INVALID_ELEMENT_STATE:\n            exception_class = InvalidElementStateException\n        elif status in ErrorCode.INVALID_SELECTOR \\\n                or status in ErrorCode.INVALID_XPATH_SELECTOR \\\n                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:\n            exception_class = InvalidSelectorException\n        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:\n            exception_class = ElementNotSelectableException\n        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:\n            exception_class = ElementNotInteractableException\n        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:\n            exception_class = InvalidCookieDomainException\n        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:\n            exception_class = UnableToSetCookieException\n        elif status in ErrorCode.TIMEOUT:\n            exception_class = TimeoutException\n        elif status in ErrorCode.SCRIPT_TIMEOUT:\n            exception_class = TimeoutException\n        elif status in ErrorCode.UNKNOWN_ERROR:\n            exception_class = WebDriverException\n        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:\n            exception_class = UnexpectedAlertPresentException\n        elif status in ErrorCode.NO_ALERT_OPEN:\n            exception_class = NoAlertPresentException\n        elif status in ErrorCode.IME_NOT_AVAILABLE:\n            exception_class = ImeNotAvailableException\n        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:\n            exception_class = ImeActivationFailedException\n        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:\n            exception_class = MoveTargetOutOfBoundsException\n        elif status in ErrorCode.JAVASCRIPT_ERROR:\n            exception_class = JavascriptException\n        elif status in ErrorCode.SESSION_NOT_CREATED:\n            exception_class = SessionNotCreatedException\n        elif status in ErrorCode.INVALID_ARGUMENT:\n            exception_class = InvalidArgumentException\n        elif status in ErrorCode.NO_SUCH_COOKIE:\n            exception_class = NoSuchCookieException\n        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:\n            exception_class = ScreenshotException\n        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:\n            exception_class = ElementClickInterceptedException\n        elif status in ErrorCode.INSECURE_CERTIFICATE:\n            exception_class = InsecureCertificateException\n        elif status in ErrorCode.INVALID_COORDINATES:\n            exception_class = InvalidCoordinatesException\n        elif status in ErrorCode.INVALID_SESSION_ID:\n            exception_class = InvalidSessionIdException\n        elif status in ErrorCode.UNKNOWN_METHOD:\n            exception_class = UnknownMethodException\n        else:\n            exception_class = WebDriverException\n        if value == '' or value is None:\n            value = response['value']\n        if isinstance(value, basestring):\n            if exception_class == ErrorInResponseException:\n                raise exception_class(response, value)\n            raise exception_class(value)\n        if message == \"\" and 'message' in value:\n            message = value['message']\n    \n        screen = None\n        if 'screen' in value:\n            screen = value['screen']\n    \n        stacktrace = None\n        if 'stackTrace' in value and value['stackTrace']:\n            stacktrace = []\n            try:\n                for frame in value['stackTrace']:\n                    line = self._value_or_default(frame, 'lineNumber', '')\n                    file = self._value_or_default(frame, 'fileName', '<anonymous>')\n                    if line:\n                        file = \"%s:%s\" % (file, line)\n                    meth = self._value_or_default(frame, 'methodName', '<anonymous>')\n                    if 'className' in frame:\n                        meth = \"%s.%s\" % (frame['className'], meth)\n                    msg = \"    at %s (%s)\"\n                    msg = msg % (meth, file)\n                    stacktrace.append(msg)\n            except TypeError:\n                pass\n        if exception_class == ErrorInResponseException:\n            raise exception_class(response, message)\n        elif exception_class == UnexpectedAlertPresentException:\n            alert_text = None\n            if 'data' in value:\n                alert_text = value['data'].get('text')\n            elif 'alert' in value:\n                alert_text = value['alert'].get('text')\n            raise exception_class(message, screen, stacktrace, alert_text)\n>       raise exception_class(message, screen, stacktrace)\nE       selenium.common.exceptions.InvalidArgumentException: Message: invalid argument: invalid 'id'\nE         (Session info: chrome=85.0.4183.121)\n\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py:242: InvalidArgumentException",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "_Class__pytest_setup_class",
+    "time" : {
+      "start" : 1608168688996,
+      "stop" : 1608168688996,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "_UnitTestCase__pytest_class_setup",
+    "time" : {
+      "start" : 1608168688996,
+      "stop" : 1608168688996,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "broken",
+    "statusMessage" : "selenium.common.exceptions.InvalidArgumentException: Message: invalid argument: invalid 'id'\n  (Session info: chrome=85.0.4183.121)",
+    "statusTrace" : "a = (<test_scripts.test_fwgl.Test_demo01 testMethod=test01_send_text_0>,)\n\n    @wraps(func)\n    def standalone_func(*a):\n>       return func(*(a + p.args), **p.kwargs)\n\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\parameterized\\parameterized.py:530: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntest_scripts\\test_fwgl.py:59: in test01_send_text\n    self.DocumentProxy.send_proxy(rec_name)  # 发送给指定的接收人\npage\\Document_process.py:127: in send_proxy\n    self.send_flow.send_text_flow(rec_name)\nmodule\\send.py:47: in send_text_flow\n    self.driver.switch_to.frame(self.find_element(self.all_frame))\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\switch_to.py:89: in frame\n    self._driver.execute(Command.SWITCH_TO_FRAME, {'id': frame_reference})\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py:321: in execute\n    self.error_handler.check_response(response)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x000001C920E01970>\nresponse = {'status': 400, 'value': '{\"value\":{\"error\":\"invalid argument\",\"message\":\"invalid argument: invalid \\'id\\'\\\\n  (Sessio...\\n\\\\tRtlGetAppContainerNamedObjectPath [0x77444A77+311]\\\\n\\\\tRtlGetAppContainerNamedObjectPath [0x77444A47+263]\\\\n\"}}'}\n\n    def check_response(self, response):\n        \"\"\"\n        Checks that a JSON response from the WebDriver does not have an error.\n    \n        :Args:\n         - response - The JSON response from the WebDriver server as a dictionary\n           object.\n    \n        :Raises: If the response contains an error message.\n        \"\"\"\n        status = response.get('status', None)\n        if status is None or status == ErrorCode.SUCCESS:\n            return\n        value = None\n        message = response.get(\"message\", \"\")\n        screen = response.get(\"screen\", \"\")\n        stacktrace = None\n        if isinstance(status, int):\n            value_json = response.get('value', None)\n            if value_json and isinstance(value_json, basestring):\n                import json\n                try:\n                    value = json.loads(value_json)\n                    if len(value.keys()) == 1:\n                        value = value['value']\n                    status = value.get('error', None)\n                    if status is None:\n                        status = value[\"status\"]\n                        message = value[\"value\"]\n                        if not isinstance(message, basestring):\n                            value = message\n                            message = message.get('message')\n                    else:\n                        message = value.get('message', None)\n                except ValueError:\n                    pass\n    \n        exception_class = ErrorInResponseException\n        if status in ErrorCode.NO_SUCH_ELEMENT:\n            exception_class = NoSuchElementException\n        elif status in ErrorCode.NO_SUCH_FRAME:\n            exception_class = NoSuchFrameException\n        elif status in ErrorCode.NO_SUCH_WINDOW:\n            exception_class = NoSuchWindowException\n        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:\n            exception_class = StaleElementReferenceException\n        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:\n            exception_class = ElementNotVisibleException\n        elif status in ErrorCode.INVALID_ELEMENT_STATE:\n            exception_class = InvalidElementStateException\n        elif status in ErrorCode.INVALID_SELECTOR \\\n                or status in ErrorCode.INVALID_XPATH_SELECTOR \\\n                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:\n            exception_class = InvalidSelectorException\n        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:\n            exception_class = ElementNotSelectableException\n        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:\n            exception_class = ElementNotInteractableException\n        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:\n            exception_class = InvalidCookieDomainException\n        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:\n            exception_class = UnableToSetCookieException\n        elif status in ErrorCode.TIMEOUT:\n            exception_class = TimeoutException\n        elif status in ErrorCode.SCRIPT_TIMEOUT:\n            exception_class = TimeoutException\n        elif status in ErrorCode.UNKNOWN_ERROR:\n            exception_class = WebDriverException\n        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:\n            exception_class = UnexpectedAlertPresentException\n        elif status in ErrorCode.NO_ALERT_OPEN:\n            exception_class = NoAlertPresentException\n        elif status in ErrorCode.IME_NOT_AVAILABLE:\n            exception_class = ImeNotAvailableException\n        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:\n            exception_class = ImeActivationFailedException\n        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:\n            exception_class = MoveTargetOutOfBoundsException\n        elif status in ErrorCode.JAVASCRIPT_ERROR:\n            exception_class = JavascriptException\n        elif status in ErrorCode.SESSION_NOT_CREATED:\n            exception_class = SessionNotCreatedException\n        elif status in ErrorCode.INVALID_ARGUMENT:\n            exception_class = InvalidArgumentException\n        elif status in ErrorCode.NO_SUCH_COOKIE:\n            exception_class = NoSuchCookieException\n        elif status in ErrorCode.UNABLE_TO_CAPTURE_SCREEN:\n            exception_class = ScreenshotException\n        elif status in ErrorCode.ELEMENT_CLICK_INTERCEPTED:\n            exception_class = ElementClickInterceptedException\n        elif status in ErrorCode.INSECURE_CERTIFICATE:\n            exception_class = InsecureCertificateException\n        elif status in ErrorCode.INVALID_COORDINATES:\n            exception_class = InvalidCoordinatesException\n        elif status in ErrorCode.INVALID_SESSION_ID:\n            exception_class = InvalidSessionIdException\n        elif status in ErrorCode.UNKNOWN_METHOD:\n            exception_class = UnknownMethodException\n        else:\n            exception_class = WebDriverException\n        if value == '' or value is None:\n            value = response['value']\n        if isinstance(value, basestring):\n            if exception_class == ErrorInResponseException:\n                raise exception_class(response, value)\n            raise exception_class(value)\n        if message == \"\" and 'message' in value:\n            message = value['message']\n    \n        screen = None\n        if 'screen' in value:\n            screen = value['screen']\n    \n        stacktrace = None\n        if 'stackTrace' in value and value['stackTrace']:\n            stacktrace = []\n            try:\n                for frame in value['stackTrace']:\n                    line = self._value_or_default(frame, 'lineNumber', '')\n                    file = self._value_or_default(frame, 'fileName', '<anonymous>')\n                    if line:\n                        file = \"%s:%s\" % (file, line)\n                    meth = self._value_or_default(frame, 'methodName', '<anonymous>')\n                    if 'className' in frame:\n                        meth = \"%s.%s\" % (frame['className'], meth)\n                    msg = \"    at %s (%s)\"\n                    msg = msg % (meth, file)\n                    stacktrace.append(msg)\n            except TypeError:\n                pass\n        if exception_class == ErrorInResponseException:\n            raise exception_class(response, message)\n        elif exception_class == UnexpectedAlertPresentException:\n            alert_text = None\n            if 'data' in value:\n                alert_text = value['data'].get('text')\n            elif 'alert' in value:\n                alert_text = value['alert'].get('text')\n            raise exception_class(message, screen, stacktrace, alert_text)\n>       raise exception_class(message, screen, stacktrace)\nE       selenium.common.exceptions.InvalidArgumentException: Message: invalid argument: invalid 'id'\nE         (Session info: chrome=85.0.4183.121)\n\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py:242: InvalidArgumentException",
+    "steps" : [ {
+      "name" : "搜索部门 ",
+      "time" : {
+        "start" : 1608168699884,
+        "stop" : 1608168712003,
+        "duration" : 12119
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1608168699887,
+          "stop" : 1608168699918,
+          "duration" : 31
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.XPATH', '//div[@class=\"layui-layer-content\"]/iframe')"
+        } ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 0
+      }, {
+        "name" : "点击顶部的公司名称，是所有部门或这人员都展示在选择框内供选择",
+        "time" : {
+          "start" : 1608168699918,
+          "stop" : 1608168700402,
+          "duration" : 484
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "73a7d23cdbc8b98f",
+          "name" : "截图",
+          "source" : "73a7d23cdbc8b98f.png",
+          "type" : "image/png",
+          "size" : 155545
+        } ],
+        "parameters" : [ ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 1
+      }, {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1608168700403,
+          "stop" : 1608168700435,
+          "duration" : 32
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.NAME', 'ifmmiddle')"
+        } ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 0
+      }, {
+        "name" : "选择要发送的部门",
+        "time" : {
+          "start" : 1608168704636,
+          "stop" : 1608168705313,
+          "duration" : 677
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "1ab29382d8ceaa15",
+          "name" : "截图",
+          "source" : "1ab29382d8ceaa15.png",
+          "type" : "image/png",
+          "size" : 151790
+        } ],
+        "parameters" : [ ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 1
+      }, {
+        "name" : "选择要发送的部门",
+        "time" : {
+          "start" : 1608168709458,
+          "stop" : 1608168710104,
+          "duration" : 646
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "242d2a5e8e248e8d",
+          "name" : "截图",
+          "source" : "242d2a5e8e248e8d.png",
+          "type" : "image/png",
+          "size" : 152889
+        } ],
+        "parameters" : [ ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 1
+      } ],
+      "attachments" : [ {
+        "uid" : "6462e5f172336277",
+        "name" : "截图",
+        "source" : "6462e5f172336277.png",
+        "type" : "image/png",
+        "size" : 152889
+      }, {
+        "uid" : "185c5ea1c5329c2e",
+        "name" : "截图",
+        "source" : "185c5ea1c5329c2e.png",
+        "type" : "image/png",
+        "size" : 154233
+      } ],
+      "parameters" : [ {
+        "name" : "name",
+        "value" : "['办公室', '计财科']"
+      } ],
+      "hasContent" : true,
+      "stepsCount" : 5,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 5
+    }, {
+      "name" : "搜索部门 ",
+      "time" : {
+        "start" : 1608168713357,
+        "stop" : 1608168720507,
+        "duration" : 7150
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1608168713361,
+          "stop" : 1608168713385,
+          "duration" : 24
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.XPATH', '//div[@class=\"layui-layer-content\"]/iframe')"
+        } ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 0
+      }, {
+        "name" : "点击顶部的公司名称，是所有部门或这人员都展示在选择框内供选择",
+        "time" : {
+          "start" : 1608168713385,
+          "stop" : 1608168713822,
+          "duration" : 437
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "7b93961446bef42d",
+          "name" : "截图",
+          "source" : "7b93961446bef42d.png",
+          "type" : "image/png",
+          "size" : 155545
+        } ],
+        "parameters" : [ ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 1
+      }, {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1608168713822,
+          "stop" : 1608168713850,
+          "duration" : 28
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.NAME', 'ifmmiddle')"
+        } ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 0
+      }, {
+        "name" : "选择要发送的部门",
+        "time" : {
+          "start" : 1608168718044,
+          "stop" : 1608168718712,
+          "duration" : 668
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "780faa6f1c5b7e4f",
+          "name" : "截图",
+          "source" : "780faa6f1c5b7e4f.png",
+          "type" : "image/png",
+          "size" : 151603
+        } ],
+        "parameters" : [ ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 1
+      } ],
+      "attachments" : [ {
+        "uid" : "c7e7224a76942aa3",
+        "name" : "截图",
+        "source" : "c7e7224a76942aa3.png",
+        "type" : "image/png",
+        "size" : 151603
+      }, {
+        "uid" : "b9b8f3d912e8f6ed",
+        "name" : "截图",
+        "source" : "b9b8f3d912e8f6ed.png",
+        "type" : "image/png",
+        "size" : 164155
+      } ],
+      "parameters" : [ {
+        "name" : "name",
+        "value" : "['信息中心']"
+      } ],
+      "hasContent" : true,
+      "stepsCount" : 4,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 4
+    }, {
+      "name" : "发文流程",
+      "time" : {
+        "start" : 1608168721611,
+        "stop" : 1608168742351,
+        "duration" : 20740
+      },
+      "status" : "broken",
+      "statusMessage" : "selenium.common.exceptions.InvalidArgumentException: Message: invalid argument: invalid 'id'\n  (Session info: chrome=85.0.4183.121)\n\n",
+      "statusTrace" : "  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\allure_commons\\_allure.py\", line 157, in impl\n    return func(*a, **kw)\n  File \"E:\\python_code\\OA_auto\\module\\send.py\", line 47, in send_text_flow\n    self.driver.switch_to.frame(self.find_element(self.all_frame))\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\switch_to.py\", line 89, in frame\n    self._driver.execute(Command.SWITCH_TO_FRAME, {'id': frame_reference})\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\webdriver.py\", line 321, in execute\n    self.error_handler.check_response(response)\n  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\selenium\\webdriver\\remote\\errorhandler.py\", line 242, in check_response\n    raise exception_class(message, screen, stacktrace)\n",
+      "steps" : [ {
+        "name" : "获取正文标题",
+        "time" : {
+          "start" : 1608168721611,
+          "stop" : 1608168722042,
+          "duration" : 431
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "ce8dfe4caaf9828d",
+          "name" : "截图",
+          "source" : "ce8dfe4caaf9828d.png",
+          "type" : "image/png",
+          "size" : 141343
+        } ],
+        "parameters" : [ ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 1
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "name",
+        "value" : "'王新刚'"
+      } ],
+      "hasContent" : true,
+      "stepsCount" : 1,
+      "shouldDisplayMessage" : true,
+      "attachmentsCount" : 1
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : true,
+    "stepsCount" : 13,
+    "shouldDisplayMessage" : true,
+    "attachmentsCount" : 10
+  },
+  "afterStages" : [ {
+    "name" : "_Class__pytest_setup_class::0",
+    "time" : {
+      "start" : 1608168768433,
+      "stop" : 1608168768433,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "_UnitTestCase__pytest_class_setup::0",
+    "time" : {
+      "start" : 1608168768430,
+      "stop" : 1608168768430,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "test_scripts"
+  }, {
+    "name" : "suite",
+    "value" : "test_fwgl"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_demo01"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-65DR0V4"
+  }, {
+    "name" : "thread",
+    "value" : "14180-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_scripts.test_fwgl"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "6274e541b48a8332.json",
+  "parameterValues" : [ ]
+}

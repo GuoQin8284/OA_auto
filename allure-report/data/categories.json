@@ -4,77 +4,37 @@
   "children" : [ {
     "name" : "Test defects",
     "children" : [ {
-      "name" : "TypeError: unsupported callable",
+      "name" : "selenium.common.exceptions.InvalidArgumentException: Message: invalid argument: 'using' must be a string\n  (Session info: chrome=85.0.4183.121)",
       "children" : [ {
-        "name" : "test01_login",
-        "uid" : "ca616a4de3b557a6",
-        "parentUid" : "06e787427de930bd55277c0c8a77b5bb",
+        "name" : "test01_send_text_0",
+        "uid" : "f191c65fbedb89ab",
+        "parentUid" : "6c4aa98f91b8b290d959ce735d3afc51",
         "status" : "broken",
         "time" : {
-          "start" : 1606560455966,
-          "stop" : 1606560455966,
-          "duration" : 0
+          "start" : 1608175736153,
+          "stop" : 1608175771500,
+          "duration" : 35347
         },
-        "flaky" : false,
-        "parameters" : [ ]
-      }, {
-        "name" : "test02_sendText",
-        "uid" : "dff6de61c4ba5e44",
-        "parentUid" : "06e787427de930bd55277c0c8a77b5bb",
-        "status" : "broken",
-        "time" : {
-          "start" : 1606560458571,
-          "stop" : 1606560458571,
-          "duration" : 0
-        },
-        "flaky" : false,
-        "parameters" : [ ]
-      }, {
-        "name" : "test03_sendText_save",
-        "uid" : "55fa9ed7b647ee1f",
-        "parentUid" : "06e787427de930bd55277c0c8a77b5bb",
-        "status" : "broken",
-        "time" : {
-          "start" : 1606560481305,
-          "stop" : 1606560481305,
-          "duration" : 0
-        },
-        "flaky" : false,
+        "flaky" : true,
         "parameters" : [ ]
       } ],
-      "uid" : "06e787427de930bd55277c0c8a77b5bb"
+      "uid" : "6c4aa98f91b8b290d959ce735d3afc51"
     }, {
-      "name" : "selenium.common.exceptions.WebDriverException: Message: unknown error: path is not absolute: ./1allure报告_讲义.pdf\n  (Session info: chrome=85.0.4183.121)",
+      "name" : "AttributeError: 'bool' object has no attribute 'click'",
       "children" : [ {
-        "name" : "test02_sendText_0",
-        "uid" : "6e475ea66ac29f83",
-        "parentUid" : "ce9a6896c6d18ec3361e04a64e21e32f",
+        "name" : "test02_save",
+        "uid" : "261261b9432fb0bb",
+        "parentUid" : "c5557530099fe98faaa9e5e17a47efc7",
         "status" : "broken",
         "time" : {
-          "start" : 1606560458689,
-          "stop" : 1606560481252,
-          "duration" : 22563
+          "start" : 1608175771607,
+          "stop" : 1608175797962,
+          "duration" : 26355
         },
-        "flaky" : false,
+        "flaky" : true,
         "parameters" : [ ]
       } ],
-      "uid" : "ce9a6896c6d18ec3361e04a64e21e32f"
-    }, {
-      "name" : "AttributeError: module 'allure' has no attribute 'attch'",
-      "children" : [ {
-        "name" : "test03_sendText_save_0",
-        "uid" : "ff0db07850c597de",
-        "parentUid" : "c48f14916aed30643cf297c16650f099",
-        "status" : "broken",
-        "time" : {
-          "start" : 1606560481403,
-          "stop" : 1606560482542,
-          "duration" : 1139
-        },
-        "flaky" : false,
-        "parameters" : [ ]
-      } ],
-      "uid" : "c48f14916aed30643cf297c16650f099"
+      "uid" : "c5557530099fe98faaa9e5e17a47efc7"
     } ],
     "uid" : "bdbf199525818fae7a8651db9eafe741"
   } ]

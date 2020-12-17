@@ -1,15 +1,15 @@
 {
   "total" : 1,
   "items" : [ {
-    "uid" : "c7f54b843c7e0d3f49cfed7b06a34f8e",
-    "name" : "test_script",
+    "uid" : "2d3bdf8e3a77c9f6d9f660e16b26a1ff",
+    "name" : "test_scripts",
     "statistic" : {
       "failed" : 0,
-      "broken" : 5,
+      "broken" : 2,
       "skipped" : 0,
-      "passed" : 1,
+      "passed" : 2,
       "unknown" : 0,
-      "total" : 6
+      "total" : 4
     }
   } ]
 }

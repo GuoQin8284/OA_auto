@@ -1,0 +1,3 @@
+[32mINFO    [0m root:Document_process.py:65 调用的主体：<page.Document_process.DocumentProxy object at 0x0000020182C2C0A0>
+[32mINFO    [0m root:Document_process.py:66 双击选择部门：('XPATH', "//textarea[@title='双击选择抄送单位']")
+[32mINFO    [0m root:Document_process.py:112 选择抄送部门

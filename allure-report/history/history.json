@@ -1,5 +1,5 @@
 {
-  "b4c5c662fc673000659828eb7a50b529" : {
+  "df4969769b95888b8ae4a68ea33c4bb8" : {
     "statistic" : {
       "failed" : 0,
       "broken" : 1,
@@ -9,37 +9,17 @@
       "total" : 1
     },
     "items" : [ {
-      "uid" : "ca616a4de3b557a6",
+      "uid" : "4a680fcd1eb1e70e",
       "status" : "broken",
-      "statusDetails" : "TypeError: unsupported callable",
+      "statusDetails" : "selenium.common.exceptions.InvalidArgumentException: Message: invalid argument: invalid 'id'\n  (Session info: chrome=85.0.4183.121)",
       "time" : {
-        "start" : 1606560455966,
-        "stop" : 1606560455966,
-        "duration" : 0
+        "start" : 1608168688998,
+        "stop" : 1608168742373,
+        "duration" : 53375
       }
     } ]
   },
-  "d7f5880a8046a16167b7bb1b63c5e555" : {
-    "statistic" : {
-      "failed" : 0,
-      "broken" : 1,
-      "skipped" : 0,
-      "passed" : 0,
-      "unknown" : 0,
-      "total" : 1
-    },
-    "items" : [ {
-      "uid" : "ff0db07850c597de",
-      "status" : "broken",
-      "statusDetails" : "AttributeError: module 'allure' has no attribute 'attch'",
-      "time" : {
-        "start" : 1606560481403,
-        "stop" : 1606560482542,
-        "duration" : 1139
-      }
-    } ]
-  },
-  "7d8c3291a23217319301c896fda99219" : {
+  "d3adb128589efe6995222e39cc68ee75" : {
     "statistic" : {
       "failed" : 0,
       "broken" : 0,
@@ -49,16 +29,16 @@
       "total" : 1
     },
     "items" : [ {
-      "uid" : "e3c53ca8360fa02c",
+      "uid" : "9293821dd904ac02",
       "status" : "passed",
       "time" : {
-        "start" : 1606560456145,
-        "stop" : 1606560458567,
-        "duration" : 2422
+        "start" : 1608017729889,
+        "stop" : 1608017737792,
+        "duration" : 7903
       }
     } ]
   },
-  "61354a371b5b39232e978c81ea366530" : {
+  "4678207a8cdd956429737d28e723dc5e" : {
     "statistic" : {
       "failed" : 0,
       "broken" : 1,
@@ -68,53 +48,32 @@
       "total" : 1
     },
     "items" : [ {
-      "uid" : "dff6de61c4ba5e44",
+      "uid" : "493bd2ac6b6d2a67",
       "status" : "broken",
-      "statusDetails" : "TypeError: unsupported callable",
+      "statusDetails" : "AttributeError: 'bool' object has no attribute 'click'",
       "time" : {
-        "start" : 1606560458571,
-        "stop" : 1606560458571,
-        "duration" : 0
+        "start" : 1608168742430,
+        "stop" : 1608168768421,
+        "duration" : 25991
       }
     } ]
   },
-  "03f3ad5b51701d8fe446285cd5626012" : {
+  "f749929135703dcebdc921913044cacb" : {
     "statistic" : {
       "failed" : 0,
-      "broken" : 1,
+      "broken" : 0,
       "skipped" : 0,
-      "passed" : 0,
+      "passed" : 1,
       "unknown" : 0,
       "total" : 1
     },
     "items" : [ {
-      "uid" : "55fa9ed7b647ee1f",
-      "status" : "broken",
-      "statusDetails" : "TypeError: unsupported callable",
+      "uid" : "8f4d1193d14de866",
+      "status" : "passed",
       "time" : {
-        "start" : 1606560481305,
-        "stop" : 1606560481305,
-        "duration" : 0
-      }
-    } ]
-  },
-  "06064d78674a7d18f25988edee59ee67" : {
-    "statistic" : {
-      "failed" : 0,
-      "broken" : 1,
-      "skipped" : 0,
-      "passed" : 0,
-      "unknown" : 0,
-      "total" : 1
-    },
-    "items" : [ {
-      "uid" : "6e475ea66ac29f83",
-      "status" : "broken",
-      "statusDetails" : "selenium.common.exceptions.WebDriverException: Message: unknown error: path is not absolute: ./1allure报告_讲义.pdf\n  (Session info: chrome=85.0.4183.121)",
-      "time" : {
-        "start" : 1606560458689,
-        "stop" : 1606560481252,
-        "duration" : 22563
+        "start" : 1608017721716,
+        "stop" : 1608017729886,
+        "duration" : 8170
       }
     } ]
   }

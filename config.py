@@ -3,7 +3,7 @@ import os
 
 BASE_HOST = "http://127.0.0.1:8092"
 BASE_DIR = os.path.abspath(".")
-BASE_TIME = 1
+BASE_TIME = 0.1
 
 def init_log_config():
     # 获取root日志器

@@ -1,4 +1,6 @@
 import time
+
+import os
 from selenium import webdriver
 
 
@@ -55,6 +57,11 @@ from selenium import webdriver
 # t22 = time.time()
 # print("实际用时:{}".format(t22-t11))
 
-a = "sadf"
-if a:
-    print(True)
+# a = "sadf"
+# if a:
+#     print(True)
+setup_pytest = "pytest"
+allure_report = r"allure generate report -o report/html --clean"
+os.system(setup_pytest)
+os.system(allure_report)
+print("执行完了")

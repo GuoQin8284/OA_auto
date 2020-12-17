@@ -84,8 +84,5 @@ class SelectDepartment(Action):
         allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
         time.sleep(BASE_TIME)
         self.driver.switch_to.parent_frame()
-
         self.find_element(self.confirm).click()
-
         allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
-        self.driver.switch_to.default_content()

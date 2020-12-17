@@ -1,6 +1,7 @@
 import json
 from unittest.case import TestCase
 
+import allure
 from parameterized import parameterized
 
 from config import BASE_HOST
@@ -10,6 +11,7 @@ from driver.analysis_function import analysis_data_func
 from driver.setup_driver import Driver
 # 读取测试数据
 from page.Document_process import DocumentProxy
+from page.fwcgx import CGX_proxy
 from page.login_page import LoginProxy
 
 
@@ -28,35 +30,58 @@ def data_read(file):
 class Test_demo01(TestCase):
     # pytest方式启动
     @classmethod
-    def setup_class(cls):
+    def setUpClass(cls):
         cls.driver = Driver
         cls.driver.set_auto_quit(1)
-
+        cls.get_driver = cls.driver.get_driver()
+        cls.get_driver.get(BASE_HOST)
+        cls.action = Action(cls.get_driver)
+        cls.DocumentProxy = DocumentProxy(cls.get_driver)
+        cls.login = LoginProxy(cls.get_driver)
+        cls.login.Login("admin", "123456")
+        cls.driver.set_auto_quit(1)
+        cls.cgx = CGX_proxy(cls.get_driver)
 
     def setUp(self):
-        self.get_driver = self.driver.get_driver()
-        self.get_driver.get(BASE_HOST)
-        self.action = Action(self.get_driver)
-        self.DocumentProxy = DocumentProxy(self.get_driver)
-        self.login = LoginProxy(self.get_driver)
-        self.login.Login("admin","123456")
+        self.get_driver.refresh()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit_driver()
 
 
+    # 发文流程
 
-    @parameterized.expand(data_analysis.data_analysis("send_text01.json"))
-    def test01_send_text(self,data):
-        bt_text = data["bt_name"]
-        zsdw_name = data["zsdw_name"]
-        csdw_name = data["csdw_name"]
-        rec_name = data["rec_name"]
-        print("bt_text:",bt_text)
-        print("zsdw_name:",zsdw_name)
-        print("csdw_name:",csdw_name)
-        print("rec_name:",rec_name)
-        self.DocumentProxy.into_document()
-        self.DocumentProxy.input_bt_proxy(bt_text)
-        self.DocumentProxy.select_zsdw(zsdw_name)
-        self.DocumentProxy.select_csdw(csdw_name)
-        self.DocumentProxy.send_proxy(rec_name)
+    # @parameterized.expand(data_analysis.data_analysis("send_text01.json"))
+    # def test01_send_text(self,data):
+    #     bt_text = data["bt_name"]
+    #     zsdw_name = data["zsdw_name"]
+    #     csdw_name = data["csdw_name"]
+    #     rec_name = data["rec_name"]
+    #     self.DocumentProxy.into_document()  # 进入发文拟稿页面
+    #     self.DocumentProxy.input_bt_proxy(bt_text)  # 输入发文标题
+    #     self.DocumentProxy.select_zsdw(zsdw_name)  # 选择主动单位
+    #     self.DocumentProxy.select_csdw(csdw_name)  # 选择抄送单位
+    #     self.DocumentProxy.send_proxy(rec_name)  # 发送给指定的接收人
+    #
+    #
+    # # 发文保存流程
+    #
+    # @parameterized.expand(data_analysis.data_analysis("send_text01.json"))
+    # def test02_save(self,data):
+    #     bt_text = data["bt_name"]
+    #     zsdw_name = data["zsdw_name"]
+    #     csdw_name = data["csdw_name"]
+    #     rec_name = data["rec_name"]
+    #     self.DocumentProxy.into_document()  # 进入发文拟稿页面
+    #     self.DocumentProxy.input_bt_proxy(bt_text)  # 输入发文标题
+    #     self.DocumentProxy.select_zsdw(zsdw_name)  # 选择主动单位
+    #     self.DocumentProxy.select_csdw(csdw_name)  # 选择抄送单位
+    #     self.DocumentProxy.save_document()
+    #     assert self.DocumentProxy.get_cgx_status(bt_text)
+
+    def test03_delete_cgx(self):
+        self.cgx.into_fwcgx()
+        self.cgx.delete_doc()
 
 

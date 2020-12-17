@@ -1,10 +1,12 @@
 import time
 
 import allure
+import logging
 
 from config import BASE_TIME
 from driver.action import Action
 from module.document_handle import DocumentHandle
+from page.menu import MenuFrame
 
 
 class Send(Action):
@@ -17,6 +19,7 @@ class Send(Action):
         self.confrim_btn = "By.XPATH","//a[contains(text(),'确定')]"
         self.cancel_btn = "By.XPATH","//a[contains(text(),'取消')]"
         self.wjbt = "By.ID","wjbt"
+        self.MenuFrame = MenuFrame(driver)
 
     # 获取提示消息
     @allure.step(title="获取提示消息")
@@ -44,17 +47,13 @@ class Send(Action):
         wjbt = self.get_wjbt()
         # self.click_send_btn()
         # time.sleep(BASE_TIME)
+        self.MenuFrame.switch_default_content()
         self.driver.switch_to.frame(self.find_element(self.all_frame))
         time.sleep(BASE_TIME)
         if name in self.get_message():
+            logging.info("获取到的提示信息为：{}".format(self.get_message()))
             self.find_element(self.confrim_btn).click()
             allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
         else:
             self.find_element(self.cancel_btn).click()
             allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
-        if (wjbt in self.documentHandle.get_document_titles()[0]) and (name in self.documentHandle.get_current_person()[0]):
-            print("创建成功")
-            return True
-        else:
-            print("创建失败")
-            return False

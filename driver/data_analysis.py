@@ -1,8 +1,10 @@
 import json
 
+from config import BASE_DIR
+
 
 def data_analysis(name):
-    fileName = "./test_data/" + name
+    fileName = BASE_DIR+"/test_data/" + name
     with open(file=fileName,mode="r",encoding="utf-8") as f:
         data = json.load(f)
         data_list = [(x,) for x in data]

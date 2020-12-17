@@ -1,0 +1,333 @@
+{
+  "uid" : "2d55ecbf1088a867",
+  "name" : "test01_send_text_0",
+  "fullName" : "test_scripts.test_fwgl.Test_demo01#test01_send_text_0",
+  "historyId" : "df4969769b95888b8ae4a68ea33c4bb8",
+  "time" : {
+    "start" : 1608018763388,
+    "stop" : 1608018811217,
+    "duration" : 47829
+  },
+  "status" : "broken",
+  "statusMessage" : "AttributeError: 'bool' object has no attribute 'clear'",
+  "statusTrace" : "a = (<test_scripts.test_fwgl.Test_demo01 testMethod=test01_send_text_0>,)\n\n    @wraps(func)\n    def standalone_func(*a):\n>       return func(*(a + p.args), **p.kwargs)\n\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\parameterized\\parameterized.py:530: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntest_scripts\\test_fwgl.py:62: in test01_send_text\n    self.DocumentProxy.select_csdw(csdw_name)\npage\\Document_process.py:98: in select_csdw\n    self.search_department.SearchName(csdw_name)  # 调用部门选择方法，选择部门\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <module.select_department.SelectDepartment object at 0x00000166887D75E0>, name = ['信息中心']\n\n    @allure.step(title=\"搜索部门 \")\n    def SearchName(self,name):\n        self.driver.switch_to.default_content()\n        self.Switch_frame(self.select_department)\n        self.Click_company()\n        self.Switch_frame(self.ifmmiddle)\n        if name:\n            if type(name) is list:\n                for i in name:\n                    time.sleep(BASE_TIME)\n>                   self.find_element(self.searchName).clear()\nE                   AttributeError: 'bool' object has no attribute 'clear'\n\nmodule\\select_department.py:63: AttributeError",
+  "flaky" : false,
+  "beforeStages" : [ {
+    "name" : "_Class__pytest_setup_class",
+    "time" : {
+      "start" : 1608018763387,
+      "stop" : 1608018763387,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "_UnitTestCase__pytest_class_setup",
+    "time" : {
+      "start" : 1608018763387,
+      "stop" : 1608018763387,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "testStage" : {
+    "status" : "broken",
+    "statusMessage" : "AttributeError: 'bool' object has no attribute 'clear'",
+    "statusTrace" : "a = (<test_scripts.test_fwgl.Test_demo01 testMethod=test01_send_text_0>,)\n\n    @wraps(func)\n    def standalone_func(*a):\n>       return func(*(a + p.args), **p.kwargs)\n\nd:\\soft_install\\python3.8.5\\lib\\site-packages\\parameterized\\parameterized.py:530: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \ntest_scripts\\test_fwgl.py:62: in test01_send_text\n    self.DocumentProxy.select_csdw(csdw_name)\npage\\Document_process.py:98: in select_csdw\n    self.search_department.SearchName(csdw_name)  # 调用部门选择方法，选择部门\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <module.select_department.SelectDepartment object at 0x00000166887D75E0>, name = ['信息中心']\n\n    @allure.step(title=\"搜索部门 \")\n    def SearchName(self,name):\n        self.driver.switch_to.default_content()\n        self.Switch_frame(self.select_department)\n        self.Click_company()\n        self.Switch_frame(self.ifmmiddle)\n        if name:\n            if type(name) is list:\n                for i in name:\n                    time.sleep(BASE_TIME)\n>                   self.find_element(self.searchName).clear()\nE                   AttributeError: 'bool' object has no attribute 'clear'\n\nmodule\\select_department.py:63: AttributeError",
+    "steps" : [ {
+      "name" : "搜索部门 ",
+      "time" : {
+        "start" : 1608018774422,
+        "stop" : 1608018786774,
+        "duration" : 12352
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1608018774425,
+          "stop" : 1608018774455,
+          "duration" : 30
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.XPATH', '//div[@class=\"layui-layer-content\"]/iframe')"
+        } ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 0
+      }, {
+        "name" : "点击顶部的公司名称，是所有部门或这人员都展示在选择框内供选择",
+        "time" : {
+          "start" : 1608018774455,
+          "stop" : 1608018774902,
+          "duration" : 447
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "e0af91bc6a055856",
+          "name" : "截图",
+          "source" : "e0af91bc6a055856.png",
+          "type" : "image/png",
+          "size" : 155545
+        } ],
+        "parameters" : [ ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 1
+      }, {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1608018774902,
+          "stop" : 1608018774932,
+          "duration" : 30
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.NAME', 'ifmmiddle')"
+        } ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 0
+      }, {
+        "name" : "选择要发送的部门",
+        "time" : {
+          "start" : 1608018779138,
+          "stop" : 1608018779802,
+          "duration" : 664
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "412c555bf2af36bf",
+          "name" : "截图",
+          "source" : "412c555bf2af36bf.png",
+          "type" : "image/png",
+          "size" : 151790
+        } ],
+        "parameters" : [ ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 1
+      }, {
+        "name" : "选择要发送的部门",
+        "time" : {
+          "start" : 1608018783948,
+          "stop" : 1608018784908,
+          "duration" : 960
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "e92c800f8f9d72ae",
+          "name" : "截图",
+          "source" : "e92c800f8f9d72ae.png",
+          "type" : "image/png",
+          "size" : 152889
+        } ],
+        "parameters" : [ ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 1
+      } ],
+      "attachments" : [ {
+        "uid" : "930210d2a4172bc1",
+        "name" : "截图",
+        "source" : "930210d2a4172bc1.png",
+        "type" : "image/png",
+        "size" : 152889
+      }, {
+        "uid" : "622cb64c5b342dac",
+        "name" : "截图",
+        "source" : "622cb64c5b342dac.png",
+        "type" : "image/png",
+        "size" : 154338
+      } ],
+      "parameters" : [ {
+        "name" : "name",
+        "value" : "['办公室', '计财科']"
+      } ],
+      "hasContent" : true,
+      "stepsCount" : 5,
+      "shouldDisplayMessage" : false,
+      "attachmentsCount" : 5
+    }, {
+      "name" : "搜索部门 ",
+      "time" : {
+        "start" : 1608018789408,
+        "stop" : 1608018811217,
+        "duration" : 21809
+      },
+      "status" : "broken",
+      "statusMessage" : "AttributeError: 'bool' object has no attribute 'clear'\n",
+      "statusTrace" : "  File \"d:\\soft_install\\python3.8.5\\lib\\site-packages\\allure_commons\\_allure.py\", line 157, in impl\n    return func(*a, **kw)\n  File \"E:\\python_code\\OA_auto\\module\\select_department.py\", line 63, in SearchName\n    self.find_element(self.searchName).clear()\n",
+      "steps" : [ {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1608018789411,
+          "stop" : 1608018789436,
+          "duration" : 25
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.XPATH', '//div[@class=\"layui-layer-content\"]/iframe')"
+        } ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 0
+      }, {
+        "name" : "点击顶部的公司名称，是所有部门或这人员都展示在选择框内供选择",
+        "time" : {
+          "start" : 1608018789436,
+          "stop" : 1608018789886,
+          "duration" : 450
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ {
+          "uid" : "1de72cdb331543cd",
+          "name" : "截图",
+          "source" : "1de72cdb331543cd.png",
+          "type" : "image/png",
+          "size" : 158317
+        } ],
+        "parameters" : [ ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 1
+      }, {
+        "name" : "切换iframe到选择框",
+        "time" : {
+          "start" : 1608018789886,
+          "stop" : 1608018789910,
+          "duration" : 24
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ {
+          "name" : "ele",
+          "value" : "('By.NAME', 'ifmmiddle')"
+        } ],
+        "hasContent" : true,
+        "stepsCount" : 0,
+        "shouldDisplayMessage" : false,
+        "attachmentsCount" : 0
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "name",
+        "value" : "['信息中心']"
+      } ],
+      "hasContent" : true,
+      "stepsCount" : 3,
+      "shouldDisplayMessage" : true,
+      "attachmentsCount" : 1
+    } ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : true,
+    "stepsCount" : 10,
+    "shouldDisplayMessage" : true,
+    "attachmentsCount" : 6
+  },
+  "afterStages" : [ {
+    "name" : "_Class__pytest_setup_class::0",
+    "time" : {
+      "start" : 1608018811236,
+      "stop" : 1608018811236,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  }, {
+    "name" : "_UnitTestCase__pytest_class_setup::0",
+    "time" : {
+      "start" : 1608018811234,
+      "stop" : 1608018811234,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "hasContent" : false,
+    "stepsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "attachmentsCount" : 0
+  } ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "test_scripts"
+  }, {
+    "name" : "suite",
+    "value" : "test_fwgl"
+  }, {
+    "name" : "subSuite",
+    "value" : "Test_demo01"
+  }, {
+    "name" : "host",
+    "value" : "DESKTOP-65DR0V4"
+  }, {
+    "name" : "thread",
+    "value" : "22116-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_scripts.test_fwgl"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "2d55ecbf1088a867.json",
+  "parameterValues" : [ ]
+}

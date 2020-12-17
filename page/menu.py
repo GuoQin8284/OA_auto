@@ -6,23 +6,43 @@ class MenuFrame(Action):
 
     def __init__(self,driver):
         super().__init__(driver)
-        self.doc_manager = "公文管理"  # 公文管理元素
-        self.left_iframe = "left"  # 左边菜单iframe
-        self.right_iframe = "rfm"  # 右边内容框iframe
+        self.__doc_manager = "公文管理"  # 公文管理元素
+        self.__left_iframe = "left"  # 左边菜单iframe
+        self.__right_iframe = "rfm"  # 右边内容框iframe
 
-
+    # 切换iframe到左侧列表
     def switch_left_iframe(self):
-        self.driver.switch_to.frame(self.left_iframe)
+        self.driver.switch_to.frame(self.__left_iframe)
 
-
+    # 切换iframe到右侧列表
     def switch_right_iframe(self):
-        print(self.right_iframe)
-        self.driver.switch_to.frame(self.right_iframe)
+        print(self.__right_iframe)
+        self.driver.switch_to.frame(self.__right_iframe)
 
-
+    # 切换iframe退回上一步
     def switch_parent_iframe(self):
         self.driver.switch_to.parent_frame()
 
-
+    # 重置iframe
     def switch_default_content(self):
         self.driver.switch_to.default_content()
+
+class Alert(Action):
+    def __init__(self,driver):
+        super().__init__(driver)
+    # 切换到alert弹窗
+    def switch_alert(self):
+        ele = self.driver.switch_to.alert
+        return ele
+    # 弹出框确认
+    def alert_accept(self):
+        self.switch_alert().accept()
+    # 弹出框取消
+    def alert_dismiss(self):
+        self.switch_alert().dismiss()
+    # 获取弹出框中的文本
+    def get_alert_text(self):
+        self.switch_alert().text()
+    # 输入内容到弹出框中
+    def alert_input_text(self,text):
+        self.switch_alert().Send_keys(text)

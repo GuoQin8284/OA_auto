@@ -8,8 +8,6 @@ from module.send import Send
 # 这是程序运行的入口，根据测试用例指定的测试数据，调用解析函数，dirver为浏览器驱动对象，fileName为测试数据路径
 from module.verify_code import Verify_code
 
-    # 获取host
-from result.result import contains_text
 
 
 def get_host_port():
