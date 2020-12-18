@@ -1,9 +1,11 @@
 import logging.handlers
 import os
 
-BASE_HOST = "http://192.168.1.5:8092"
-BASE_DIR = os.path.abspath(".")
-BASE_TIME = 0.5
+BASE_HOST = "http://192.168.1.5:8092"  # 访问链接
+BASE_DIR = os.path.abspath(".")  # 获取当前文件位置
+BASE_TIME = 0.5  # 基础延迟时间
+
+
 def init_log_config():
     # 获取root日志器
     logger=logging.getLogger()
@@ -13,7 +15,7 @@ def init_log_config():
     # 创建处理器
     sh = logging.StreamHandler()
     log_path = BASE_DIR+"/log/OA.log"
-    fh=logging.handlers.TimedRotatingFileHandler(log_path,when="D",interval=1,backupCount=5,encoding="utf-8")
+    fh=logging.handlers.TimedRotatingFileHandler(log_path, when="D", interval=1, backupCount=5, encoding="utf-8")
     # 创建格式化器  "%(asctime)s %(levelname)s [%(name)s] [%(filename)s(%(funcName)s:%(lineno)d)] - %(message)s"
     fmt = logging.Formatter(fmt="%(asctime)s %(levelname)s [%(name)s] [%(filename)s(%(funcName)s:%(lineno)d)] - %(message)s")
 

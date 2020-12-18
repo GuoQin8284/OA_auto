@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # -*- coding=utf-8 -*-
+import logging
 import time
 
 import allure
@@ -25,7 +26,6 @@ class fwcgxPage(Action):
         self.__delete_btn = "XPATH","//img[@alt='删除']"
         self.__selectAll = "XPATH","//span[@class='qx_first']/input"
         self.__timeout = 2
-
 
     # 获取文件标题列表
     @allure.step(title="获取文件标题列表")
@@ -86,20 +86,22 @@ class fwcgxPage(Action):
 
     # 根据公文索引删除草稿箱
     @allure.step(title="根据公文索引删除草稿箱")
-    def ByDeleteIndex(self,index):
-        if isinstance(index,int):
-            self.ele =  "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>{}]/td[1]".format(index+1)
-            self.click(self.ele)
+    def ByDeleteIndex(self, index):
+        if isinstance(index, int):
+            ele1 = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>{}]/td[1]".format(index+1)
+            self.click(ele1)
             self.click(self.__delete_btn)
             self.__alert.alert_accept()
-        elif isinstance(index,list) and len(index)> 0:
+        elif isinstance(index, list) and len(index) > 0:
             for i in index:
-                self.ele = "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>{}]/td[1]".format(i+1)
-                self.click(self.ele)
+                ele2 = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>{}]/td[1]".format(i+1)
+                self.click(ele2)
+                time.sleep(0.05)
             time.sleep(BASE_TIME)
             self.click(self.__delete_btn)
             time.sleep(BASE_TIME)
             self.__alert.alert_accept()
+
     # 点击全选
     @allure.step(title="点击草稿箱全选按钮")
     def click_selectAll(self):
@@ -129,6 +131,7 @@ class fwcgxPage(Action):
         else:
             return []
 
+
 class CGX_proxy(fwcgxPage):
 
     def __init__(self,driver):
@@ -150,7 +153,11 @@ class CGX_proxy(fwcgxPage):
     def into_doc(self,bt):
         self.__MenuFrame.switch_default_content()
         self.__MenuFrame.switch_right_iframe()
-        self.contains_text(bt).click()
+        try:
+            self.contains_text(bt, timeout=2).click()
+        except AttributeError:
+            logging.info("\'{}\'".format(bt) + "公文不存在!")
+            pass
 
     # 根据发文标题，删除草稿箱中的发文
     @allure.step(title="根据发文标题，删除草稿箱中的发文")

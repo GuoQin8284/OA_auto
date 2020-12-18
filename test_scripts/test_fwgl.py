@@ -1,21 +1,20 @@
 import json
 from unittest.case import TestCase
 
-import allure
 from parameterized import parameterized
 
 from config import BASE_HOST, BASE_DIR
-from driver import data_analysis
 from driver.action import Action
-from driver.analysis_function import analysis_data_func
+from driver.data_analysis import data_analysis
 from driver.setup_driver import Driver
-# 读取测试数据
 from page.Document_process import DocumentProxy
+from page.fw_blz import BLZ_proxy
 from page.fwcgx import CGX_proxy
 from page.login_page import LoginProxy
 from page.menu import Alert
 
 
+# 读取测试数据
 def data_read(file):
     with open(BASE_DIR+"/test_data/{}" .format(file), mode="r", encoding="utf-8") as f:
         data = json.load(f)
@@ -28,6 +27,7 @@ def data_read(file):
 
 
 class Test_demo01(TestCase):
+
     # pytest方式启动
     @classmethod
     def setUpClass(cls):
@@ -42,6 +42,7 @@ class Test_demo01(TestCase):
         cls.driver.set_auto_quit(0)
         cls.cgx = CGX_proxy(cls.get_driver)
         cls.Alert = Alert(cls.get_driver)
+        cls.blz = BLZ_proxy(cls.get_driver)
 
     def setUp(self):
         self.get_driver.refresh()
@@ -50,8 +51,8 @@ class Test_demo01(TestCase):
     def tearDownClass(cls):
         cls.driver.quit_driver()
 
-    # 发文流程
-    # @parameterized.expand(data_analysis.data_analysis("send_text01.json"))
+    # # 发文流程
+    # @parameterized.expand(data_analysis("send_text01.json"))
     # def test01_send_text(self,data):
     #     bt_text = data["bt_name"]
     #     zsdw_name = data["zsdw_name"]
@@ -63,9 +64,8 @@ class Test_demo01(TestCase):
     #     self.DocumentProxy.select_csdw(csdw_name)  # 选择抄送单位
     #     self.DocumentProxy.send_proxy(rec_name)  # 发送给指定的接收人
     #
-    #
     # # 发文保存流程
-    # @parameterized.expand(data_analysis.data_analysis("send_text01.json"))
+    # @parameterized.expand(data_analysis("send_text01.json"))
     # def test02_save(self,data):
     #     bt_text = data["bt_name"]
     #     zsdw_name = data["zsdw_name"]
@@ -78,21 +78,34 @@ class Test_demo01(TestCase):
     #     self.DocumentProxy.save_document() # 保存发文
     #     assert self.DocumentProxy.is_save_success(bt_text)
 
-    # 发文删除
-    def test03_delete_cgx(self):
-        bt = "这是标题，测试保存"
-        self.cgx.into_fwcgx()
-        self.cgx.delete_doc(bt)
-        assert self.cgx.is_delete_success(bt)
+    # 拟稿页面必填项测试
+    def test03_save_none(self):
+        self.DocumentProxy.into_document()  # 进入发文拟稿页面
+        text = self.DocumentProxy.save_document()  # 保存发文
+        self.assertIn("标题不能为空", text)
 
-    # def test04_cgx_intoDoc(self,bt="这是测试01"):
+
+    # # 发文删除
+    # def test04_delete_cgx(self):
+    #     bt = "这是标题，测试保存"
+    #     self.cgx.into_fwcgx()
+    #     self.cgx.delete_doc(bt)
+    #     assert self.cgx.is_delete_success(bt)
+    #
+    # # 从草稿箱打开发文
+    # def test05_cgx_intoDoc(self,bt="这是测试01"):
     #     self.cgx.into_fwcgx()
     #     self.cgx.into_doc(bt)
     #     assert self.DocumentProxy.get_cldbt()
     #
-    # def test05_save_none(self):
-    #     self.DocumentProxy.into_document()  # 进入发文拟稿页面
-    #     self.DocumentProxy.save_document() # 保存发文
-    #     self.assertIn("标题不能为空",self.Alert.get_alert_text())
-
-
+    # # 从办理中页面打开发文
+    # def test06_blz_intoDoc(self,bt="这是测试01"):
+    #     self.blz.into_fwbzl()
+    #     self.blz.into_doc(bt)
+    #     assert self.DocumentProxy.get_cldbt()
+    #
+    # # 从办理中页面删除发文
+    # def test07_blz_deleteDoc(self,bt="这是测试01"):
+    #     self.blz.into_fwbzl()
+    #     self.blz.delete_doc(bt)
+    #     assert self.blz.is_delete_success(bt)

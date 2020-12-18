@@ -1,5 +1,8 @@
 import time
 
+import allure
+from selenium.common.exceptions import NoAlertPresentException, UnexpectedAlertPresentException
+
 from config import BASE_TIME
 from driver.log_method import log_method
 from driver.action import Action
@@ -29,24 +32,43 @@ class MenuFrame(Action):
     def switch_default_content(self):
         self.driver.switch_to.default_content()
 
+
 class Alert(Action):
+
     def __init__(self,driver):
         super().__init__(driver)
+
     # 切换到alert弹窗
     def switch_alert(self):
         ele = self.driver.switch_to.alert
         return ele
+
     # 弹出框确认
     def alert_accept(self):
-        self.switch_alert().accept()
-        time.sleep(BASE_TIME)
+        try:
+            self.switch_alert().accept()
+            time.sleep(BASE_TIME)
+        except NoAlertPresentException:
+            pass
+
     # 弹出框取消
     def alert_dismiss(self):
-        self.switch_alert().dismiss()
-        time.sleep(BASE_TIME)
+        try:
+            self.switch_alert().dismiss()
+            time.sleep(BASE_TIME)
+        except NoAlertPresentException:
+            pass
+
     # 获取弹出框中的文本
     def get_alert_text(self):
-        return self.switch_alert().text
+        try:
+            alert_text = self.switch_alert().text
+            self.alert_accept()
+            allure.attach(self.screen_shot(), "弹框截图", allure.attachment_type.PNG)
+            return alert_text
+        except NoAlertPresentException:
+            return False
+
     # 输入内容到弹出框中
     def alert_input_text(self,text):
         self.switch_alert().Send_keys(text)

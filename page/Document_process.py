@@ -6,20 +6,18 @@ import allure
 from selenium.webdriver.support.select import Select
 
 from config import BASE_TIME
-from driver.log_method import log_method
 from driver.action import Action
 from module.get_current_username import UserName
 from module.select_department import SelectDepartment
 from module.send import Send
-from page.fwcgx import fwcgxPage
-from page.menu import MenuFrame
-
-
+from page.fwcgx import fwcgxPage, CGX_proxy
+from page.menu import MenuFrame, Alert
 
 
 class Document(Action):
     def __init__(self,driver):
         super().__init__(driver)
+        self.Alert = Alert(driver)
         self.search_department = SelectDepartment(driver)
         self.send_flow = Send(driver)
         self.send_bt_box = "ID","wjbt"  # 发文标题输入框
@@ -34,12 +32,15 @@ class Document(Action):
         self.back = "XPATH", "//img[@title='返回']"  # 返回按钮
         self.MenuFrame = MenuFrame(driver)
         self.cldbt = "XPATH","//center/font/font/b"  #处理单标题
+        self.__cgx = CGX_proxy(driver)
 
     # 获取处理单标题
     @allure.step(title="获取处理单标题")
     def get_cldbt(self):
         try:
-            return self.find_element(self.cldbt).text
+            text = self.find_element(self.cldbt).text
+            allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
+            return text
         except:
             return ""
 
@@ -56,6 +57,9 @@ class Document(Action):
         self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
         self.click(self.sava_btn)
+        alert = self.Alert.get_alert_text()
+        if alert:
+            return alert
 
     # 点击阅文意见按钮
     @allure.step(title="点击阅文意见按钮")
@@ -96,6 +100,7 @@ class Document(Action):
         self.MenuFrame.switch_default_content()
         self.MenuFrame.switch_right_iframe()
         Select(self.find_element(self.mj)).select_by_visible_text(text)
+
     # 输入标题
     @allure.step(title="输入发文标题")
     def input_bt_text(self,text):
@@ -105,11 +110,10 @@ class Document(Action):
 
 
 class DocumentProxy(Document):
-    def __init__(self,driver):
+    def __init__(self, driver):
         super().__init__(driver)
         self.fwcgx = fwcgxPage(driver)
         self.username = UserName(driver)
-
 
     # 进入拟稿页面
     @allure.step(title="进入拟稿页面")
@@ -135,7 +139,6 @@ class DocumentProxy(Document):
         # self.input_text(self.zsdw,"zsdw")
         self.search_department.SearchName(zsdw_name)  # 调用部门选择方法，选择部门
 
-
     # 选择抄送单位
     @allure.step(title="选择抄送单位")
     def select_csdw(self,csdw_name):
@@ -154,7 +157,7 @@ class DocumentProxy(Document):
     # 保存发文
     @allure.step(title="保存发文")
     def save_document(self):
-        self.click_save()
+        return self.click_save()
 
     # 判断保存是否成功
     @allure.step(title="判断保存是否成功")

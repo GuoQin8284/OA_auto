@@ -26,7 +26,7 @@ class Action ():
             return False
 
     # 查找单个元素
-    def find_element(self,location,timeout=20,poll_frequency=0.3):
+    def find_element(self, location, timeout=20, poll_frequency=0.3):
         def ananysis_element(ele):
             if ele in ("By.ID","ID") :
                 return By.ID
@@ -61,7 +61,7 @@ class Action ():
             return False
 
     # 查找一组元素
-    def find_elements(self,location,timeout=20,poll_frequency=0.3):
+    def find_elements(self, location, timeout=20, poll_frequency=0.3):
         def ananysis_element(ele):
             if ele in ("By.ID","ID") :
                 return By.ID
@@ -122,14 +122,14 @@ class Action ():
             self.find_element(element).send_keys(Keys.BACKSPACE)
         else:
             return False
+
     # 根据文本模糊定位
-    def contains_text(self,text1,timeout = 2):
+    def contains_text(self, text1, timeout=2):
         if text1:
             element = "By.XPATH","//*[contains(text(),'{}')]".format(text1)
             # print("element:",element)
-            ele =self.find_element(element,timeout)
+            ele = self.find_element(element, timeout)
             return ele
-
 
     def screen_shot(self):
         return self.driver.get_screenshot_as_png()

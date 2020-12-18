@@ -5,9 +5,12 @@ from selenium import webdriver
 
 
 # driver = webdriver.Ie()
-# driver = webdriver.Chrome()
-#
-# driver.get("http://127.0.0.1:8092/fwgl/frmfwcld.jsp")
+from page.menu import Alert
+
+driver = webdriver.Chrome()
+
+driver.get("http:www.baidu.com")
+Alert(driver).get_alert_text()
 # driver.switch_to.default_content()
 # driver.find_element_by_name("userid").send_keys("hcadmin")
 # driver.find_element_by_name("pwd").send_keys("123456")
@@ -60,13 +63,4 @@ from selenium import webdriver
 # a = []
 # if a:
 #     print(True)
-def setup_pytest():
-    pytest = "pytest"
-    allure_report = r"allure generate report/data -o report/html --clean"
-    os.system(pytest)
-    os.system(allure_report)
-    print("执行完了")
-# setup_pytest()
-print("__name__:",__name__)
-if __name__ == "__main__":
-    setup_pytest()
+
