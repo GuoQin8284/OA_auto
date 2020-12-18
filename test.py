@@ -66,6 +66,7 @@ def setup_pytest():
     os.system(pytest)
     os.system(allure_report)
     print("执行完了")
-setup_pytest()
-# if __name__ == "__main__":
-#     setup_pytest()
+# setup_pytest()
+print("__name__:",__name__)
+if __name__ == "__main__":
+    setup_pytest()

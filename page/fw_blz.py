@@ -9,19 +9,22 @@ from driver.action import Action
 from page.menu import Alert, MenuFrame
 
 
-class fwcgxPage(Action):
+class fwblzPage(Action):
 
     def __init__(self,driver):
         super().__init__(driver)
         self.__MenuFrame = MenuFrame(driver)
         self.__alert = Alert(driver)
         self.__rows = "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>1]"
+        self.__ngrq_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[2]"
+        self.__ngdw_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[3]"
         self.__ngr = "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>1]/td[4]"
         self.__wjbt_list = "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>1]/td[5]"
-        self.__ngdw_list = "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>1]/td[3]"
-        self.__ngrq_list = "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>1]/td[2]"
         self.__fwlx_list = "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>1]/td[6]"
         self.__fwwh_list = "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>1]/td[7]"
+        self.__currentHandlePerosn_list = "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>1]/td[8]"
+        self.__HandleState_list = "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>1]/td[9]"
+
         self.__delete_btn = "XPATH","//img[@alt='删除']"
         self.__selectAll = "XPATH","//span[@class='qx_first']/input"
         self.__timeout = 2
@@ -84,8 +87,8 @@ class fwcgxPage(Action):
         except:
             return []
 
-    # 根据公文索引删除草稿箱
-    @allure.step(title="根据公文索引删除草稿箱")
+    # 根据公文索引删除公文
+    @allure.step(title="根据公文索引删除公文")
     def ByDeleteIndex(self,index):
         if isinstance(index,int):
             self.ele =  "XPATH","//div[@class='maincontent']/table/tbody/tr[position()>{}]/td[1]".format(index+1)
@@ -129,7 +132,14 @@ class fwcgxPage(Action):
         else:
             return []
 
-class CGX_proxy(fwcgxPage):
+    def get_CurrentHandlePerson_list(self):
+        self.__MenuFrame.switch_default_content()
+        self.__MenuFrame.switch_right_iframe()
+        eles = self.get_rows_list()
+        if eles:
+            cur_person_list =
+
+class CGX_proxy(fwblzPage):
 
     def __init__(self,driver):
         super().__init__(driver)
