@@ -10,7 +10,7 @@ from driver.action import Action
 
 class MenuFrame(Action):
 
-    def __init__(self,driver):
+    def __init__(self, driver):
         super().__init__(driver)
         self.__doc_manager = "公文管理"  # 公文管理元素
         self.__left_iframe = "left"  # 左边菜单iframe

@@ -5,12 +5,12 @@ from selenium import webdriver
 
 
 # driver = webdriver.Ie()
-from page.menu import Alert
-
-driver = webdriver.Chrome()
-
-driver.get("http:www.baidu.com")
-Alert(driver).get_alert_text()
+# from page.menu import Alert
+#
+# driver = webdriver.Chrome()
+#
+# driver.get("http:www.baidu.com")
+# Alert(driver).get_alert_text()
 # driver.switch_to.default_content()
 # driver.find_element_by_name("userid").send_keys("hcadmin")
 # driver.find_element_by_name("pwd").send_keys("123456")
@@ -63,4 +63,8 @@ Alert(driver).get_alert_text()
 # a = []
 # if a:
 #     print(True)
+
+a = "hhh{}"
+b = "a"
+print(a.format(b))
 

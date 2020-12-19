@@ -1,3 +1,7 @@
 [
-  {"bt_name": "这是测试01","zsdw_name":["办公室","计财科"],"csdw_name":["信息中心"],"rec_name": "王新刚"}
+  {
+    "bt_name": "这是测试01",
+    "zsdw_name":["办公室","计财科"],
+    "csdw_name":["信息中心"],
+    "rec_name": "王新刚"}
 ]

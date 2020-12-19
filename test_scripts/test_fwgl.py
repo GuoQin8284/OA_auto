@@ -15,11 +15,14 @@ from page.menu import Alert
 
 
 # 读取测试数据
+from page.waitForDoc_page import WaitForDoc_proxy
+
+
 def data_read(file):
     with open(BASE_DIR+"/test_data/{}" .format(file), mode="r", encoding="utf-8") as f:
         data = json.load(f)
         data_list = [(x,) for x in data]
-        print(data_list)
+        # print(data_list)
         return data_list
 # if __name__ == "__main__":
 #     data_read("send_text_save.json")
@@ -43,6 +46,7 @@ class Test_demo01(TestCase):
         cls.cgx = CGX_proxy(cls.get_driver)
         cls.Alert = Alert(cls.get_driver)
         cls.blz = BLZ_proxy(cls.get_driver)
+        cls.waitForDoc = WaitForDoc_proxy(cls.get_driver)
 
     def setUp(self):
         self.get_driver.refresh()
@@ -51,32 +55,36 @@ class Test_demo01(TestCase):
     def tearDownClass(cls):
         cls.driver.quit_driver()
 
-    # # 发文流程
-    # @parameterized.expand(data_analysis("send_text01.json"))
-    # def test01_send_text(self,data):
-    #     bt_text = data["bt_name"]
-    #     zsdw_name = data["zsdw_name"]
-    #     csdw_name = data["csdw_name"]
-    #     rec_name = data["rec_name"]
-    #     self.DocumentProxy.into_document()  # 进入发文拟稿页面
-    #     self.DocumentProxy.input_bt_proxy(bt_text)  # 输入发文标题
-    #     self.DocumentProxy.select_zsdw(zsdw_name)  # 选择主动单位
-    #     self.DocumentProxy.select_csdw(csdw_name)  # 选择抄送单位
-    #     self.DocumentProxy.send_proxy(rec_name)  # 发送给指定的接收人
-    #
-    # # 发文保存流程
-    # @parameterized.expand(data_analysis("send_text01.json"))
-    # def test02_save(self,data):
-    #     bt_text = data["bt_name"]
-    #     zsdw_name = data["zsdw_name"]
-    #     csdw_name = data["csdw_name"]
-    #     rec_name = data["rec_name"]
-    #     self.DocumentProxy.into_document()  # 进入发文拟稿页面
-    #     self.DocumentProxy.input_bt_proxy(bt_text)  # 输入发文标题
-    #     self.DocumentProxy.select_zsdw(zsdw_name)  # 选择主动单位
-    #     self.DocumentProxy.select_csdw(csdw_name)  # 选择抄送单位
-    #     self.DocumentProxy.save_document() # 保存发文
-    #     assert self.DocumentProxy.is_save_success(bt_text)
+    # 发文流程
+    @parameterized.expand(data_analysis("send_text01.json"))
+    def test01_send_text(self,data):
+        bt_text = data["bt_name"]
+        zsdw_name = data["zsdw_name"]
+        csdw_name = data["csdw_name"]
+        rec_name = data["rec_name"]
+        self.DocumentProxy.into_document()  # 进入发文拟稿页面
+        self.DocumentProxy.input_bt_proxy(bt_text)  # 输入发文标题
+        self.DocumentProxy.select_zsdw(zsdw_name)  # 选择主动单位
+        self.DocumentProxy.select_csdw(csdw_name)  # 选择抄送单位
+        res_file = self.DocumentProxy.add_fujian("D:\c.jpg")
+        assert res_file
+        res_rop = self.DocumentProxy.sign_readOpinion("请审批")
+        assert res_rop
+        self.DocumentProxy.send_proxy(rec_name)  # 发送给指定的接收人
+
+    # 发文保存流程
+    @parameterized.expand(data_analysis("send_text01.json"))
+    def test02_save(self,data):
+        bt_text = data["bt_name"]
+        zsdw_name = data["zsdw_name"]
+        csdw_name = data["csdw_name"]
+        rec_name = data["rec_name"]
+        self.DocumentProxy.into_document()  # 进入发文拟稿页面
+        self.DocumentProxy.input_bt_proxy(bt_text)  # 输入发文标题
+        self.DocumentProxy.select_zsdw(zsdw_name)  # 选择主动单位
+        self.DocumentProxy.select_csdw(csdw_name)  # 选择抄送单位
+        self.DocumentProxy.save_document() # 保存发文
+        assert self.DocumentProxy.is_save_success(bt_text)
 
     # 拟稿页面必填项测试
     def test03_save_none(self):
@@ -85,27 +93,34 @@ class Test_demo01(TestCase):
         self.assertIn("标题不能为空", text)
 
 
-    # # 发文删除
-    # def test04_delete_cgx(self):
-    #     bt = "这是标题，测试保存"
-    #     self.cgx.into_fwcgx()
-    #     self.cgx.delete_doc(bt)
-    #     assert self.cgx.is_delete_success(bt)
-    #
-    # # 从草稿箱打开发文
-    # def test05_cgx_intoDoc(self,bt="这是测试01"):
-    #     self.cgx.into_fwcgx()
-    #     self.cgx.into_doc(bt)
-    #     assert self.DocumentProxy.get_cldbt()
-    #
-    # # 从办理中页面打开发文
-    # def test06_blz_intoDoc(self,bt="这是测试01"):
-    #     self.blz.into_fwbzl()
-    #     self.blz.into_doc(bt)
-    #     assert self.DocumentProxy.get_cldbt()
-    #
-    # # 从办理中页面删除发文
-    # def test07_blz_deleteDoc(self,bt="这是测试01"):
-    #     self.blz.into_fwbzl()
-    #     self.blz.delete_doc(bt)
-    #     assert self.blz.is_delete_success(bt)
+    # 发文删除
+    def test04_delete_cgx(self):
+        bt = "这是标题，测试保存"
+        self.cgx.into_fwcgx()
+        self.cgx.delete_doc(bt)
+        assert self.cgx.is_delete_success(bt)
+
+    # 从草稿箱打开发文
+    def test05_cgx_intoDoc(self,bt="这是测试01"):
+        self.cgx.into_fwcgx()
+        self.cgx.into_doc(bt)
+        assert self.DocumentProxy.get_cldbt()
+
+    # 从办理中页面打开发文
+    def test06_blz_intoDoc(self,bt="这是测试01"):
+        self.blz.into_fwbzl()
+        self.blz.into_doc(bt)
+        assert self.DocumentProxy.get_cldbt()
+
+    # 从办理中页面删除发文
+    def test07_blz_deleteDoc(self,bt="这是测试01"):
+        self.blz.into_fwbzl()
+        self.blz.delete_doc(bt)
+        assert self.blz.is_delete_success(bt)
+
+    def test08_IntoWaitForDoc(self):
+        self.login.switch_loginUser(username="guanxf", pwd="123456")
+        self.waitForDoc.into_fwWaitDocPage()
+        self.waitForDoc.into_doc(bt="安慰法")
+        result = self.DocumentProxy.sign_readOpinion("同意！")
+        assert result
