@@ -3,7 +3,7 @@ import os
 
 BASE_HOST = "http://192.168.1.5:8092"  # 访问链接
 BASE_DIR = os.path.abspath(".")  # 获取当前文件位置
-BASE_TIME = 0.5  # 基础延迟时间
+BASE_TIME = 0.1  # 基础延迟时间
 
 
 def init_log_config():

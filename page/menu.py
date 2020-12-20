@@ -32,10 +32,14 @@ class MenuFrame(Action):
     def switch_default_content(self):
         self.driver.switch_to.default_content()
 
+    # 切换到制定的iframe
+    def switch_frame(self, frame):
+        self.driver.switch_to.frame(frame)
+
 
 class Alert(Action):
 
-    def __init__(self,driver):
+    def __init__(self, driver):
         super().__init__(driver)
 
     # 切换到alert弹窗

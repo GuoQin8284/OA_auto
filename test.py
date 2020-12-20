@@ -64,7 +64,4 @@ from selenium import webdriver
 # if a:
 #     print(True)
 
-a = "hhh{}"
-b = "a"
-print(a.format(b))
 

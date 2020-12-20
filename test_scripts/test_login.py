@@ -4,12 +4,10 @@ from unittest.case import TestCase
 from parameterized import parameterized
 
 from config import BASE_HOST
-from driver import data_analysis
 from driver.action import Action
-from driver.analysis_function import analysis_data_func
 from driver.setup_driver import Driver
 # 读取测试数据
-from page.Document_process import DocumentProxy
+from page.fwgl.fw_cld import DocumentProxy
 from page.login_page import LoginProxy
 
 

@@ -1,10 +1,8 @@
 # 发文处理单页面
 import logging
 import time
-
 import allure
 from selenium.webdriver.support.select import Select
-
 from config import BASE_TIME
 from driver.action import Action
 from module.fujian import Fujian
@@ -12,8 +10,8 @@ from module.get_current_username import UserName
 from module.read_opinion import ReadOpinion
 from module.select_department import SelectDepartment
 from module.send import Send
-from page.fwcgx import fwcgxPage, CGX_proxy
-from page.menu import MenuFrame, Alert
+from page.fwgl.fw_cgx import CGX_proxy, fwcgxPage
+from page.menu import Alert, MenuFrame
 
 
 class Document(Action):
@@ -31,7 +29,7 @@ class Document(Action):
         self.__send = "XPATH", "//img[@title='送文']"  # 发送按钮
         self.__back = "XPATH", "//img[@title='返回']"  # 返回按钮
         self.__menuFrame = MenuFrame(driver)
-        self.__cldbt = "XPATH","//center/font/font/b"  #处理单标题
+        self.__cldbt = "XPATH", "//center/font/font/b"  # 处理单标题
         self.__cgx = CGX_proxy(driver)
 
     # 获取处理单标题
@@ -123,6 +121,7 @@ class DocumentProxy(Document):
     # 进入拟稿页面
     @allure.step(title="进入拟稿页面")
     def into_document(self):
+        self.__menuFrame.switch_default_content()
         self.contains_text("公文管理").click()  # 点击公文管理
         time.sleep(BASE_TIME)
         self.__menuFrame.switch_left_iframe()

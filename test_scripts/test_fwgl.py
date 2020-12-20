@@ -7,17 +7,15 @@ from config import BASE_HOST, BASE_DIR
 from driver.action import Action
 from driver.data_analysis import data_analysis
 from driver.setup_driver import Driver
-from page.Document_process import DocumentProxy
-from page.fw_blz import BLZ_proxy
-from page.fwcgx import CGX_proxy
+from page.fwgl.fw_cld import DocumentProxy
+from page.fwgl.fw_blz import BLZ_proxy
+from page.fwgl.fw_cgx import CGX_proxy
 from page.login_page import LoginProxy
+from page.fwgl.fw_dbwj import WaitForDoc_proxy
 from page.menu import Alert
 
 
 # 读取测试数据
-from page.waitForDoc_page import WaitForDoc_proxy
-
-
 def data_read(file):
     with open(BASE_DIR+"/test_data/{}" .format(file), mode="r", encoding="utf-8") as f:
         data = json.load(f)
@@ -91,7 +89,6 @@ class Test_demo01(TestCase):
         self.DocumentProxy.into_document()  # 进入发文拟稿页面
         text = self.DocumentProxy.save_document()  # 保存发文
         self.assertIn("标题不能为空", text)
-
 
     # 发文删除
     def test04_delete_cgx(self):

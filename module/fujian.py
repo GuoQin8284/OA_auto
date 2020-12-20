@@ -40,7 +40,7 @@ class Fujian:
     # 添加文件
     @allure.step(title="添加文件")
     def __add_file(self, fileName):
-        self.__action.find_element(self.__select_file).send_keys(fileName)
+        self.__action.find_element(self.__select_file).send_keys(r"{}".format(fileName))
         allure.attach(self.__action.screen_shot(), "截图", allure.attachment_type.PNG)
 
     # 点击上传按钮上传文件

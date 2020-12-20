@@ -4,7 +4,7 @@ from page.menu import MenuFrame
 
 class LoginPage(Action):
 
-    def __init__(self,driver):
+    def __init__(self, driver):
         super().__init__(driver)
         self.menuFrame = MenuFrame(driver)
         self.username_ele = "ID", "userid"
