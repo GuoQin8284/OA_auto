@@ -72,16 +72,14 @@ class LoginProxy(LoginPage):
 
     # 登录状态检测
     def get_login_status(self):
-        self.err = ""
-        self.success = ""
-        self.err = self.get_login_err_toast()
-        self.success = self.get_login_success_toast()
-        print("err:", self.err)
-        print("success:", self.success)
-        if self.success:
-            return self.success
+        err = ""
+        success = ""
+        err = self.get_login_err_toast()
+        success = self.get_login_success_toast()
+        if success:
+            return success
         else:
-            return self.err
+            return err
 
     # 点击退出登录按钮，退出登录
     def Logout(self):

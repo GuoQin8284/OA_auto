@@ -1,7 +1,32 @@
 [
   {
+    "gwlc": "拟稿",
+    "data":{
     "bt_name": "这是测试01",
-    "zsdw_name":["办公室","计财科"],
-    "csdw_name":["信息中心"],
-    "rec_name": "王新刚"}
+    "zsdw_name":["办公室"],
+    "csdw_name":"",
+    "rec_name": "王新刚",
+    "next_gwlc": "部门领导审稿"}},
+  {
+    "gwlc": "部门领导审稿",
+    "data":{
+    "bt_name": "这是测试01",
+    "fwh": "test_001",
+    "readOpinion":["同意！"],
+    "rec_name": "管晓峰",
+    "next_gwlc": "办公室核稿"}},
+  {
+    "gwlc": "办公室核稿",
+    "data":{
+    "bt_name": "这是测试01",
+    "readOpinion":["同意！"],
+    "rec_name": "余常晏",
+    "next_gwlc": "领导签发"
+  }},
+  {
+    "gwlc": "领导签发",
+    "data":{
+    "bt_name": "这是测试01",
+    "readOpinion":["签发"],
+    "rec_name": "管晓峰"}}
 ]

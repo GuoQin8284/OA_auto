@@ -1,9 +1,5 @@
-import time
-
 import allure
 from selenium.webdriver.support.select import Select
-
-from config import BASE_TIME
 from driver.action import Action
 from page.menu import MenuFrame, Alert
 

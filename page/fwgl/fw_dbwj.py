@@ -1,8 +1,6 @@
 import logging
 import time
-
 import allure
-
 from config import BASE_TIME
 from driver.action import Action
 from page.menu import MenuFrame, Alert

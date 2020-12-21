@@ -28,7 +28,8 @@ class SelectDepartment(Action):
         self.__select_ele = "By.XPATH", "//select[@id='objList']/option[contains(text(),'{}')]"
         # 确认按钮
         self.__confirm = "By.XPATH", "//a[@class='btlink']/img"
-
+        # 取消按钮
+        self.__cancel = "ID", "btcancel"
         # self.person_search_box = "ID","searchtext"  # 人员搜索输入框
         # self.person_search_btn = "XPATH","//*[contains(text(),'搜索')]"  # 人员搜索按钮
 
@@ -57,9 +58,9 @@ class SelectDepartment(Action):
     def SearchName(self, name):
         self.driver.switch_to.default_content()
         self.__Switch_frame(self.__select_department)
-        self.__Click_company()
-        self.__Switch_frame(self.__ifmmiddle)
         if name:
+            self.__Click_company()
+            self.__Switch_frame(self.__ifmmiddle)
             if type(name) is list:
                 for i in name:
                     time.sleep(BASE_TIME)
@@ -83,9 +84,10 @@ class SelectDepartment(Action):
 
                 time.sleep(BASE_TIME)
                 self.__Select_department(name)
-
-        allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
-        time.sleep(BASE_TIME)
-        self.driver.switch_to.parent_frame()
-        self.find_element(self.__confirm).click()
-        allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
+            allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
+            time.sleep(BASE_TIME)
+            self.driver.switch_to.parent_frame()
+            self.find_element(self.__confirm).click()
+            allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
+        else:
+            self.click(self.__cancel)

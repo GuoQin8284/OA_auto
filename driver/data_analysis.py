@@ -4,6 +4,7 @@ from config import BASE_DIR
 
 
 def data_analysis(name):
+    print("BASE_DIR:",BASE_DIR)
     fileName = BASE_DIR+"/test_data/" + name
     with open(file=fileName,mode="r",encoding="utf-8") as f:
         data = json.load(f)
@@ -11,4 +12,4 @@ def data_analysis(name):
         print(data_list)
         return data_list
 
-# data_analysis("send_text01.json")
+data_analysis("send_text01.json")

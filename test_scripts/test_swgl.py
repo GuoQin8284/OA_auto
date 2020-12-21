@@ -2,7 +2,7 @@
 import json
 from unittest import TestCase
 
-from config import BASE_HOST, BASE_DIR
+from config import BASE_HOST
 from driver.action import Action
 from driver.setup_driver import Driver
 from page.login_page import LoginProxy
@@ -11,17 +11,6 @@ from page.swgl.sw_blz import SWBLZProxy
 from page.swgl.sw_cgx import SWCGXProxy
 from page.swgl.sw_cld import SWCLDProxy
 from page.swgl.sw_dbwj import SWDBProxy
-
-
-def data_read(file):
-    with open(BASE_DIR+"/test_data/{}" .format(file), mode="r", encoding="utf-8") as f:
-        data = json.load(f)
-        data_list = [(x,) for x in data]
-        # print(data_list)
-        return data_list
-# if __name__ == "__main__":
-#     data_read("send_text_save.json")
-#     data_read("send_text.json")
 
 
 class Test_demo01(TestCase):
@@ -56,7 +45,7 @@ class Test_demo01(TestCase):
                                   "10", "test_007", "2020-12-25", "2020-12-23", "这是收文测试01",
                                   "单位文", "D:\c.jpg")
         self.swcld.sign_readOpinion("同意哈哈哈哈哈哈")
-        self.swcld.add_fujian(r"D:\c.jpg")
+        self.swcld.add_fujian(r"C:\Users\Think\Desktop\水务新增账号信息\1209工程公司账号信息.xlsx")
         self.swcld.save_document()
         self.swcgx.into_doc("这是收文测试01")
         self.swcld.send_proxy("管晓峰")
@@ -71,7 +60,7 @@ class Test_demo01(TestCase):
         print("result:", result)
 
     def test03_create_dbwj(self):
-        self.login.switch_loginUser(username="guanxf", pwd="123456")
+        self.login.switch_loginUser(username="mj", pwd="%Aa123456789")
         self.swdb.into_Swbzl()
         self.swdb.into_doc("这是收文测试01")
         self.swcld.sign_readOpinion("同意。。。。")

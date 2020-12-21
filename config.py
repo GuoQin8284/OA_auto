@@ -1,8 +1,9 @@
 import logging.handlers
 import os
 
-BASE_HOST = "http://192.168.1.5:8092"  # 访问链接
-BASE_DIR = os.path.abspath(".")  # 获取当前文件位置
+BASE_HOST = "http://127.0.0.1:8092"  # 访问链接
+# BASE_DIR = os.path.abspath(".")  # 获取当前文件位置
+BASE_DIR = os.path.dirname(__file__)
 BASE_TIME = 0.1  # 基础延迟时间
 
 

@@ -4,7 +4,6 @@ import allure
 from selenium.common.exceptions import NoAlertPresentException, UnexpectedAlertPresentException
 
 from config import BASE_TIME
-from driver.log_method import log_method
 from driver.action import Action
 
 

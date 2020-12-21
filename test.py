@@ -63,5 +63,8 @@ from selenium import webdriver
 # a = []
 # if a:
 #     print(True)
+a = [{"a":1, "n": 1}]
+c = tuple(a)
+print(c)
 
 

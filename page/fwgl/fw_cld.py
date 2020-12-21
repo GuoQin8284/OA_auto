@@ -30,6 +30,7 @@ class Document(Action):
         self.__back = "XPATH", "//img[@title='返回']"  # 返回按钮
         self.__menuFrame = MenuFrame(driver)
         self.__cldbt = "XPATH", "//center/font/font/b"  # 处理单标题
+        self.__fwwh = "ID", "fwwh"
         self.__cgx = CGX_proxy(driver)
 
     # 获取处理单标题
@@ -106,6 +107,13 @@ class Document(Action):
         self.__menuFrame.switch_right_iframe()
         self.input_text(self.__send_bt_box, text)
 
+    # 输入发文文号
+    @allure.step(title="点击保存按钮")
+    def input_fwwh(self, fwwh):
+        self.__menuFrame.switch_default_content()
+        self.__menuFrame.switch_right_iframe()
+        self.input_text(self.__fwwh, fwwh)
+
 
 class DocumentProxy(Document):
     def __init__(self, driver):
@@ -153,10 +161,10 @@ class DocumentProxy(Document):
 
     # 发送流程（选择发文人发送）
     @allure.step(title="点击发送按钮，进入发送页面")
-    def send_proxy(self, rec_name):
+    def send_proxy(self, rec_name,lcname=None):
         self.click_send()
         time.sleep(BASE_TIME)
-        self.__send_flow.send_text_flow(rec_name)
+        self.__send_flow.send_text_flow(rec_name,lcname)
 
     # 保存发文
     @allure.step(title="保存发文")
@@ -184,3 +192,8 @@ class DocumentProxy(Document):
     # 添加附件
     def add_fujian(self, file):
         return self.__fujian.fileUpload_folw(file)
+
+    # 输入发文文号
+    @allure.step(title="点击保存按钮")
+    def input_fwwh_proxy(self,fwwh):
+        self.input_fwwh(fwwh)
