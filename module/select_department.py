@@ -58,6 +58,7 @@ class SelectDepartment(Action):
     def SearchName(self, name):
         self.driver.switch_to.default_content()
         self.__Switch_frame(self.__select_department)
+        logging.info("部门名称name:{}".format(name))
         if name:
             self.__Click_company()
             self.__Switch_frame(self.__ifmmiddle)
@@ -75,13 +76,10 @@ class SelectDepartment(Action):
             elif type(name) is str:
                 time.sleep(BASE_TIME)
                 self.find_element(self.__searchName).clear()
-
                 time.sleep(BASE_TIME)
                 self.find_element(self.__searchName).send_keys(name)
-
                 time.sleep(BASE_TIME)
                 self.find_element(self.__searchBtn).click()
-
                 time.sleep(BASE_TIME)
                 self.__Select_department(name)
             allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
@@ -89,5 +87,8 @@ class SelectDepartment(Action):
             self.driver.switch_to.parent_frame()
             self.find_element(self.__confirm).click()
             allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
+            time.sleep(BASE_TIME)
         else:
             self.click(self.__cancel)
+            logging.info("部门名称为空，取消弹窗")
+            time.sleep(BASE_TIME)

@@ -7,12 +7,13 @@ from config import BASE_HOST, BASE_DIR
 from driver.action import Action
 from driver.data_analysis import data_analysis
 from driver.setup_driver import Driver
-from page.fwgl.fw_cld import DocumentProxy
+from page.fwgl.fw_cld import FWCLD_Proxy
 from page.fwgl.fw_blz import BLZ_proxy
 from page.fwgl.fw_cgx import CGX_proxy
 from page.login_page import LoginProxy
 from page.fwgl.fw_dbwj import WaitForDoc_proxy
 from page.menu import Alert
+
 
 def lc_data(filename, lcName):
     data_list = data_analysis(filename)
@@ -22,6 +23,7 @@ def lc_data(filename, lcName):
             print("data",data)
             return data
 
+
 class Test_demo01(TestCase):
 
     # pytest方式启动
@@ -29,10 +31,10 @@ class Test_demo01(TestCase):
     def setUpClass(cls):
         cls.driver = Driver
         cls.driver.set_auto_quit(1)
-        cls.get_driver = cls.driver.get_driver()
-        cls.get_driver.get(BASE_HOST)
-        cls.action = Action(cls.get_driver)
-        cls.DocumentProxy = DocumentProxy(cls.get_driver)
+        cls.get_driver = cls.driver.get_driver()  # 获取driver对象
+        cls.get_driver.get(BASE_HOST)  # 打开网页
+        cls.action = Action(cls.get_driver)  # 初始化action类
+        cls.DocumentProxy = FWCLD_Proxy(cls.get_driver)  # 初始化
         cls.login = LoginProxy(cls.get_driver)
         cls.login.Login("hcadmin", "123456")
         cls.driver.set_auto_quit(0)
@@ -49,8 +51,8 @@ class Test_demo01(TestCase):
         cls.driver.quit_driver()
 
     # 发文流程
-    @parameterized.expand(lc_data("send_text01.json", "拟稿"))
-    def test01_send_text(self,data=lc_data("send_text01.json", "拟稿")):
+    def test01_send_text(self):
+        data = lc_data("fwgl_data.json", "拟稿")
         bt_text = data["bt_name"]
         zsdw_name = data["zsdw_name"]
         csdw_name = data["csdw_name"]
@@ -60,51 +62,57 @@ class Test_demo01(TestCase):
         self.DocumentProxy.input_bt_proxy(bt_text)  # 输入发文标题
         self.DocumentProxy.select_zsdw(zsdw_name)  # 选择主动单位
         self.DocumentProxy.select_csdw(csdw_name)  # 选择抄送单位
-        res_file = self.DocumentProxy.add_fujian(r"C:\Users\Think\Desktop\水务新增账号信息\1209工程公司账号信息.xlsx")
+        res_file = self.DocumentProxy.add_fujian(r"D:\report_data2.txt")
         assert res_file
         res_rop = self.DocumentProxy.sign_readOpinion("请审批")
         assert res_rop
-        self.DocumentProxy.send_proxy(rec_name,next_gwlc)  # 发送给指定的接收人
+        self.DocumentProxy.send_proxy(rec_name, next_gwlc)  # 发送给指定的接收人
 
     # 发文保存流程
-    @parameterized.expand(lc_data("send_text01.json", "部门领导审稿"))
-    def test02_fwgl_sign_read(self, data):
+    def test02_fwgl_sign_read(self):
+        data = lc_data("fwgl_data.json", "部门领导审稿")
         next_gwlc = data["next_gwlc"]
         bt_text = data["bt_name"]
         readOpinion = data["readOpinion"]
         rec_name = data["rec_name"]
-        self.login.Logout()
-        self.fwdb.into_fwWaitDocPage()
-        self.fwdb.into_doc(bt_text)
-        self.DocumentProxy.sign_readOpinion(readOpinion)
-        self.DocumentProxy.send_proxy(rec_name,next_gwlc)
-
-    @parameterized.expand(lc_data("send_text01.json", "办公室核稿"))
-    def test03_fwgl_sign_read(self, data):
-        next_gwlc = data["next_gwlc"]
-        bt_text = data["bt_name"]
-        readOpinion = data["readOpinion"]
-        rec_name = data["rec_name"]
-        self.login.Logout()
+        username = data["username"]
+        pwd = data["pwd"]
+        self.login.switch_loginUser(username=username, pwd=pwd)
         self.fwdb.into_fwWaitDocPage()
         self.fwdb.into_doc(bt_text)
         self.DocumentProxy.sign_readOpinion(readOpinion)
         self.DocumentProxy.send_proxy(rec_name, next_gwlc)
 
-    @parameterized.expand(lc_data("send_text01.json", "领导签发"))
-    def test04_fwgl_sign_read(self, data):
+    def test03_fwgl_sign_read(self):
+        data = lc_data("fwgl_data.json", "办公室核稿")
         next_gwlc = data["next_gwlc"]
         bt_text = data["bt_name"]
         readOpinion = data["readOpinion"]
         rec_name = data["rec_name"]
-        self.login.Logout()
+        username = data["username"]
+        pwd = data["pwd"]
+        self.login.switch_loginUser(username=username, pwd=pwd)
         self.fwdb.into_fwWaitDocPage()
         self.fwdb.into_doc(bt_text)
         self.DocumentProxy.sign_readOpinion(readOpinion)
         self.DocumentProxy.send_proxy(rec_name, next_gwlc)
+
+    def test04_fwgl_sign_read(self):
+        data = lc_data("fwgl_data.json", "领导签发")
+        bt_text = data["bt_name"]
+        readOpinion = data["readOpinion"]
+        rec_name = data["rec_name"]
+        username = data["username"]
+        pwd = data["pwd"]
+        self.login.switch_loginUser(username=username, pwd=pwd)
+        self.fwdb.into_fwWaitDocPage()
+        self.fwdb.into_doc(bt_text)
+        self.DocumentProxy.sign_readOpinion(readOpinion)
+        self.DocumentProxy.send_proxy(rec_name)
 
     # 拟稿页面必填项测试
     def test05_save_none(self):
+        self.login.switch_loginUser("hcadmin", "123456")
         self.DocumentProxy.into_document()  # 进入发文拟稿页面
         text = self.DocumentProxy.save_document()  # 保存发文
         self.assertIn("标题不能为空", text)
@@ -133,7 +141,6 @@ class Test_demo01(TestCase):
         self.blz.into_fwbzl()
         self.blz.delete_doc(bt)
         assert self.blz.is_delete_success(bt)
-
 
     def test10_IntoWaitForDoc(self):
         self.login.switch_loginUser(username="mj", pwd="%Aa123456789")

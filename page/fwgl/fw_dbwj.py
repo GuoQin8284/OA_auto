@@ -21,7 +21,7 @@ class WaitForDocPage(Action):
         self.__fwwh_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[7]"
         self.__currentstate = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[8]"
         # self.__HandleState_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[9]"
-        # self.__delete_btn = "XPATH", "//img[@alt='删除']"  # 当前页面无删除按钮
+        # self.__delete_btn = "XPATH", "//img[@alt='删除']"
         self.__selectAll = "XPATH", "//span[@class='qx_first']/input"
         self.__timeout = 2
 
@@ -74,23 +74,6 @@ class WaitForDocPage(Action):
             return eles
         except:
             return []
-
-    # # 根据公文索引删除公文--(待办文件页面无此功能)
-    # @allure.step(title="根据公文索引删除公文")
-    # def ByDeleteIndex(self, index):
-    #     if isinstance(index, int):
-    #         self.ele = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>{}]/td[1]".format(index + 1)
-    #         self.click(self.ele)
-    #         self.click(self.__delete_btn)
-    #         self.__alert.alert_accept()
-    #     elif isinstance(index, list) and len(index) > 0:
-    #         for i in index:
-    #             self.ele = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>{}]/td[1]".format(i + 1)
-    #             self.click(self.ele)
-    #         time.sleep(BASE_TIME)
-    #         self.click(self.__delete_btn)
-    #         time.sleep(BASE_TIME)
-    #         self.__alert.alert_accept()
 
     # 点击全选
     @allure.step(title="点击草稿箱全选按钮")

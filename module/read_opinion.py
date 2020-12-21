@@ -28,12 +28,14 @@ class ReadOpinion():
     def __input_content(self, text):
         self.__action.input_text(self.__content, text)
         allure.attach(self.__action.screen_shot(), "截图", allure.attachment_type.PNG)
+        time.sleep(BASE_TIME)
 
     # 获取送文单选框的状态
     @allure.step(title="获取送文单选框的状态")
     def __get_radio_state(self):
         state = self.__action.find_element(self.__Radio).is_selected()
         allure.attach(self.__action.screen_shot(), "截图", allure.attachment_type.PNG)
+        time.sleep(BASE_TIME)
         return state
 
     # 点击送文单选框
@@ -41,12 +43,14 @@ class ReadOpinion():
     def __click_radio(self):
         self.__action.find_element(self.__Radio).click()
         allure.attach(self.__action.screen_shot(), "截图", allure.attachment_type.PNG)
+        time.sleep(BASE_TIME)
 
     # 点击确认按钮
     @allure.step(title="点击确认按钮")
     def __click_confirm(self):
         self.__action.find_element(self.__confirm).click()
         allure.attach(self.__action.screen_shot(), "截图", allure.attachment_type.PNG)
+        time.sleep(BASE_TIME)
 
     # 获取阅文意见签约成功的toast
     @allure.step(title="获取阅文意见签约成功的toast")
@@ -55,6 +59,7 @@ class ReadOpinion():
         self.__menuFrame.switch_right_iframe()
         toast = self.__action.find_element(self.__toast).text
         allure.attach(self.__action.screen_shot(), "截图", allure.attachment_type.PNG)
+        time.sleep(BASE_TIME)
         return toast
 
     # 输入阅文意见的业务流程
@@ -66,6 +71,7 @@ class ReadOpinion():
         self.__input_content(text)
         time.sleep(BASE_TIME)
         state = self.__get_radio_state()
+        time.sleep(BASE_TIME)
         if state and (auto is False):
             self.__click_radio()
             time.sleep(BASE_TIME)
@@ -74,6 +80,7 @@ class ReadOpinion():
             time.sleep(BASE_TIME)
         self.__click_confirm()
         toast = self.__get_toast()
+        time.sleep(BASE_TIME)
         if toast == "成功签署意见!":
             return True
         else:

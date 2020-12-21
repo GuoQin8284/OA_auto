@@ -10,21 +10,21 @@ from driver.action import Action
 from page.menu import Alert, MenuFrame
 
 
-class fwblzPage(Action):
+class SwybjPage(Action):
 
     def __init__(self, driver):
         super().__init__(driver)
         self.__MenuFrame = MenuFrame(driver)
         self.__alert = Alert(driver)
         self.__rows = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]"
-        self.__ngrq_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[2]"
-        self.__ngdw_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[3]"
-        self.__ngr = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[4]"
-        self.__wjbt_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[5]"
-        self.__fwlx_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[6]"
-        self.__fwwh_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[7]"
-        self.__currentHandlePerosn_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[8]"
-        self.__HandleState_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[9]"
+        self.__select_box = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>{}]/td[1]"  # 选择框
+        self.__swrq_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[2]"  # 收文日期
+        self.__swh_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[3]"  # 收文号
+        self.__lwdw_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[4]"  # 来文单位
+        self.__lwwh_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[5]"  # 来文文号
+        self.__wjbt_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[6]"  # 文件标题
+        self.__zbbm_list = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>1]/td[7]"  # 主办部门
+
         self.__delete_btn = "XPATH", "//img[@alt='删除']"
         self.__selectAll = "XPATH", "//span[@class='qx_first']/input"
         self.__timeout = 2
@@ -37,37 +37,37 @@ class fwblzPage(Action):
             wjbt_list = [x.text.strip() for x in eles]
             return wjbt_list
 
-    # 获取单位列表
-    @allure.step(title="获取单位列表")
-    def get_ngdw_list(self):
-        eles = self.find_elements(self.__ngdw_list, timeout=self.__timeout)
+    # 获取收文日期列表
+    @allure.step(title="获取收文日期列表")
+    def get_swrq_list(self):
+        eles = self.find_elements(self.__swrq_list, timeout=self.__timeout)
         if len(eles) > 0:
-            ngdw_list = [x.text.strip() for x in eles]
-            return ngdw_list
+            swrq_list = [x.text.strip() for x in eles]
+            return swrq_list
 
-    # 获取拟稿日期列表
-    @allure.step(title="获取拟稿日期列表")
-    def get_ngrq_list(self):
-        eles = self.find_elements(self.__ngrq_list, timeout=self.__timeout)
+    # 获取收文号列表
+    @allure.step(title="获取收文号列表")
+    def get_swh_list(self):
+        eles = self.find_elements(self.__swh_list, timeout=self.__timeout)
         if len(eles) > 0:
-            ngrq_list = [x.text.strip() for x in eles]
-            return ngrq_list
+            swh_list = [x.text.strip() for x in eles]
+            return swh_list
 
-    # 获取发文类型列表
-    @allure.step(title="获取发文类型列表")
-    def get_fwlx_list(self):
-        eles = self.find_elements(self.__fwlx_list, timeout=self.__timeout)
+    # 获取来文单位列表
+    @allure.step(title="获取来文单位列表")
+    def get_lwdw_list(self):
+        eles = self.find_elements(self.__lwdw_list, timeout=self.__timeout)
         if len(eles) > 0:
-            fwlx_list = [x.text.strip() for x in eles]
-            return fwlx_list
+            lwdw_list = [x.text.strip() for x in eles]
+            return lwdw_list
 
-    # 获取拟稿人列表
-    @allure.step(title="获取拟稿人列表")
-    def get_ngr_list(self):
-        eles = self.find_elements(self.__ngr,timeout=self.__timeout)
+    # 获取来文文号列表
+    @allure.step(title="获取来文文号列表")
+    def get_lwwh_list(self):
+        eles = self.find_elements(self.__lwwh_list,timeout=self.__timeout)
         if len(eles) > 0:
-            ngr_list = [x.text.strip() for x in eles]
-            return ngr_list
+            lwwh_list = [x.text.strip() for x in eles]
+            return lwwh_list
 
     # 按行的方式获取整行的元素列表，返回的是一个包含所有行元素的列表
     @allure.step(title="按行的方式获取整行的元素列")
@@ -82,14 +82,15 @@ class fwblzPage(Action):
     @allure.step(title="根据公文索引删除公文")
     def ByDeleteIndex(self, index):
         if isinstance(index, int):
-            ele =  "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>{}]/td[1]".format(index+1)
-            self.click(ele)
+            ele1 = self.__select_box[0], self.__select_box[1].format(index + 1)
+            self.click(ele1)
             self.click(self.__delete_btn)
             self.__alert.alert_accept()
         elif isinstance(index, list) and len(index) > 0:
             for i in index:
-                ele = "XPATH", "//div[@class='maincontent']/table/tbody/tr[position()>{}]/td[1]".format(i+1)
-                self.click(ele)
+                ele2 = self.__select_box[0], self.__select_box[1].format(i + 1)
+                self.click(ele2)
+                time.sleep(0.05)
             time.sleep(BASE_TIME)
             self.click(self.__delete_btn)
             time.sleep(BASE_TIME)
@@ -124,50 +125,40 @@ class fwblzPage(Action):
         else:
             return []
 
-    # 获取当前页面当前办理人列表
-    @allure.step(title="获取当前页面当前办理人列表")
-    def get_CurrentHandlePerson_list(self):
+    # 获取主办部门列表
+    @allure.step(title="获取主办部门列表")
+    def get_zbbm_list(self):
         self.__MenuFrame.switch_default_content()
         self.__MenuFrame.switch_right_iframe()
         try:
-            eles = self.find_elements(self.__currentHandlePerosn_list, self.__timeout)
-            person_list = [x.text.strip() for x in eles]
-            return person_list
-        except:
-            return []
-
-    # 获取当前页面发文文号列表
-    @allure.step(title="获取当前页面发文文号列表")
-    def get_Fwwh_list(self):
-        self.__MenuFrame.switch_default_content()
-        self.__MenuFrame.switch_right_iframe()
-        try:
-            eles = self.find_elements(self.__fwwh_list, timeout=self.__timeout)
-            person_list = [x.text.strip() for x in eles]
-            return person_list
+            eles = self.find_elements(self.__zbbm_list, timeout=self.__timeout)
+            zbbm_list = [x.text.strip() for x in eles]
+            return zbbm_list
         except:
             return []
 
 
-class BLZ_proxy(fwblzPage):
+class SWYBJProxy(SwybjPage):
 
     def __init__(self, driver):
         super().__init__(driver)
         self.__MenuFrame = MenuFrame(driver)
 
-    # 进入发文办理中页面
-    @allure.step(title="进入发文办理中页面")
-    def into_fwbzl(self):
+    # 进入收文已办结页面
+    @allure.step(title="进入收文已办结页面")
+    def into_Swbzl(self):
         self.__MenuFrame.switch_default_content()
         self.contains_text("公文管理").click()  # 点击公文管理
         time.sleep(BASE_TIME)
         self.__MenuFrame.switch_left_iframe()
-        self.contains_text("发文管理").click()  # 点击发文管理菜单
+        self.contains_text("收文管理").click()  # 点击收文管理菜单
         time.sleep(BASE_TIME)
-        self.contains_text("办 理 中").click()
+        self.contains_text("查询统计").click()
+        time.sleep(BASE_TIME)
+        self.contains_text("已 终 结").click()
 
-    # 根据发文标题，进入处理单页面
-    @allure.step(title="根据发文标题，进入处理单页面")
+    # 根据收文标题，进入处理单页面
+    @allure.step(title="根据收文标题，进入处理单页面")
     def into_doc(self, bt):
         self.__MenuFrame.switch_default_content()
         self.__MenuFrame.switch_right_iframe()
@@ -177,12 +168,11 @@ class BLZ_proxy(fwblzPage):
             logging.info("\'{}\'".format(bt) + "公文不存在!")
             pass
 
-    # 根据发文标题，删除办理中中的发文
-    @allure.step(title="根据发文标题，删除办理中列表的发文")
+    # 根据收文标题，删除已终结的收文
+    @allure.step(title="根据收文标题，删除已终结列表的收文")
     def delete_doc(self, bt):
         ele_index = self.getByBtIndex(bt)
         self.ByDeleteIndex(ele_index)
-        time.sleep(BASE_TIME)
 
     # 判断删除是否成功
     @allure.step("判断删除是否成功")
@@ -192,22 +182,22 @@ class BLZ_proxy(fwblzPage):
         else:  # 如果返回为为空，表明公文已删除，则返回True
             return True
 
-    # 根据标题获取发文文号
-    @allure.step(title="根据标题获取发文文号")
-    def getByDocFwwh(self, bt):
+    # 根据标题获取收文文号
+    @allure.step(title="根据标题获取收文文号")
+    def getByDocSwwh(self, bt):
         index = self.getByBtIndex(bt)
         if index:
-            fwwg_list = [self.get_Fwwh_list()[x] for x in index]
+            fwwg_list = [self.get_swh_list()[x] for x in index]
             return fwwg_list
         else:
             return []
 
-    # 根据标题获取当前办理人
-    @allure.step(title="根据标题获取当前办理人")
-    def getByDocCurrentPerson(self, bt):
+    # 根据标题获取收文日期
+    @allure.step(title="根据标题获取收文文号")
+    def getByDocSwwh(self, bt):
         index = self.getByBtIndex(bt)
         if index:
-            person_list = [self.get_CurrentHandlePerson_list()[x] for x in index]
-            return person_list
+            fwwg_list = [self.get_swrq_list()[x] for x in index]
+            return fwwg_list
         else:
             return []

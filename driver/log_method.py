@@ -2,7 +2,7 @@ import logging
 
 
 def log_method(func):
-    def wrapper(*args,**kwargs):
+    def wrapper(*args, **kwargs):
         wrapper.__name__ = func.__name__
         global result
         try:

@@ -82,12 +82,19 @@ class Send(Action):
         if name in message:
             logging.info("获取到的提示信息为：{}".format(self.__get_message()))
             self.find_element(self.__popup_confrim_btn).click()
+            time.sleep(BASE_TIME)
             allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
+            time.sleep(BASE_TIME)
         else:
             if "" != message:
                 self.find_element(self.__popup_cancel_btn).click()
+                time.sleep(BASE_TIME)
             self.__select_lcxx(lcname)
+            time.sleep(BASE_TIME)
             self.__search_name(name)
+            time.sleep(BASE_TIME)
             self.__select_person(name)
+            time.sleep(BASE_TIME)
             self.click(self.__confrim_btn)
             allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
+            time.sleep(BASE_TIME)

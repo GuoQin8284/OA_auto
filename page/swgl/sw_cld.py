@@ -13,6 +13,8 @@ from module.read_opinion import ReadOpinion
 from module.select_department import SelectDepartment
 from module.send import Send
 from page.menu import MenuFrame, Alert
+from page.swgl.sw_cgx import SWCGXProxy
+from page.swgl.swgl_yzj import SWYBJProxy
 
 
 class SwcldPage(Action):
@@ -36,8 +38,14 @@ class SwcldPage(Action):
         self.__fujian_btn = "XPATH", "//img[@title='附件']"  # 附件按钮
         self.__cldbt = "XPATH", "//center/font/font/b"  # 处理单标题
         self.__back = "XPATH", "//img[@title='返回']"  # 返回按钮
+        self.__banjie = "XPATh", "//img[@title='办结']"  # 终结按钮
         self.menuFrame = MenuFrame(driver)
         self.alert = Alert(driver)
+
+    #  点击办结
+    def click_bj(self):
+        self.click(self.__banjie)
+        self.alert.alert_accept()
 
     # 获取处理单标题
     @allure.step(title="获取处理单标题")
@@ -63,6 +71,7 @@ class SwcldPage(Action):
         self.menuFrame.switch_right_iframe()
         self.click(self.__save_btn)
         alert = self.alert.get_alert_text()
+        allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
         if alert:
             return alert
 
@@ -86,20 +95,6 @@ class SwcldPage(Action):
         self.menuFrame.switch_default_content()
         self.menuFrame.switch_right_iframe()
         self.input_text(self.__fs, num)
-
-    # # 双击主送单位--当前页面无此功能
-    # @allure.step(title="双击主送单位输入框")
-    # def double_zsdw(self):
-    #     self.menuFrame.switch_default_content()
-    #     self.menuFrame.switch_right_iframe()
-    #     self.double_click(self.__zsdw)
-    #
-    # # 双击抄送单位--当前页面无此功能
-    # @allure.step(title="双击抄送单位输入框")
-    # def double_csdw(self):
-    #     self.__menuFrame.switch_default_content()
-    #     self.__menuFrame.switch_right_iframe()
-    #     self.double_click(self.__csdw)
 
     # 选择紧急程度
     @allure.step(title="选择紧急程度")
@@ -192,6 +187,8 @@ class SWCLDProxy(SwcldPage):
         self.__readOpinion = ReadOpinion(driver)
         self.__send_flow = Send(driver)
         self.__fujian = Fujian(driver)
+        self.__swcgx = SWCGXProxy(driver)
+        self.__swybj = SWYBJProxy(driver)
 
     # 进入收文处理单页面
     @allure.step(title="进入收文处理单页面")
@@ -212,10 +209,10 @@ class SWCLDProxy(SwcldPage):
 
     # 发送流程（选择发文人发送）
     @allure.step(title="点击发送按钮，进入发送页面")
-    def send_proxy(self, rec_name):
+    def send_proxy(self, rec_name, lcname=None):
         self.click_send()
         time.sleep(BASE_TIME)
-        self.__send_flow.send_text_flow(rec_name)
+        self.__send_flow.send_text_flow(rec_name, lcname)
 
     # 保存发文
     @allure.step(title="保存发文")
@@ -225,8 +222,8 @@ class SWCLDProxy(SwcldPage):
     # 判断保存是否成功
     @allure.step(title="判断保存是否成功")
     def is_save_success(self, bt):
-        get_ngr = self.fwcgx.get_ngr_list()[0]
-        get_bt = self.fwcgx.get_wjbt_list()[0]
+        get_ngr = self.__swcgx.get_ngr_list()[0]
+        get_bt = self.__swcgx.get_wjbt_list()[0]
         # cur_user = self.username.get_username()
         if (get_ngr == self.username.get_username()) and (get_bt == bt):
             logging.info("保存成功")
@@ -284,4 +281,18 @@ class SWCLDProxy(SwcldPage):
         if sczw != "":
             # self.sczw(sczw)
             time.sleep(BASE_TIME)
+        allure.attach(self.screen_shot(), "截图", allure.attachment_type.PNG)
+
+    # 点击终结
+    def end(self):
+        self.click_bj()
+
+    # 判断终结是否成功
+    def is_end_success(self, bt):
+        self.__swybj.into_Swbzl()
+        bt_list = self.__swybj.get_wjbt_list()
+        if bt in bt_list:
+            return True
+        else:
+            return False
 

@@ -7,7 +7,7 @@ from config import BASE_HOST
 from driver.action import Action
 from driver.setup_driver import Driver
 # 读取测试数据
-from page.fwgl.fw_cld import DocumentProxy
+from page.fwgl.fw_cld import FWCLD_Proxy
 from page.login_page import LoginProxy
 
 
@@ -34,7 +34,7 @@ class Test_demo01(TestCase):
         self.get_driver = self.driver.get_driver()
         self.get_driver.get(BASE_HOST)
         self.action = Action(self.get_driver)
-        self.DocumentProxy = DocumentProxy(self.get_driver)
+        self.DocumentProxy = FWCLD_Proxy(self.get_driver)
         self.login = LoginProxy(self.get_driver)
 
     def tearDown(self):

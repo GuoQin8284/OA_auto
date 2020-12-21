@@ -5,6 +5,7 @@ from selenium.common.exceptions import NoAlertPresentException, UnexpectedAlertP
 
 from config import BASE_TIME
 from driver.action import Action
+from driver.log_method import log_method
 
 
 class MenuFrame(Action):

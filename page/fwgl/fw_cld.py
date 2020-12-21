@@ -5,6 +5,7 @@ import allure
 from selenium.webdriver.support.select import Select
 from config import BASE_TIME
 from driver.action import Action
+from driver.log_method import log_method
 from module.fujian import Fujian
 from module.get_current_username import UserName
 from module.read_opinion import ReadOpinion
@@ -14,17 +15,17 @@ from page.fwgl.fw_cgx import CGX_proxy, fwcgxPage
 from page.menu import Alert, MenuFrame
 
 
-class Document(Action):
+class FWCLD_Page(Action):
     def __init__(self, driver):
         super().__init__(driver)
         self.__alert = Alert(driver)
-        self.__send_bt_box = "ID","wjbt"  # 发文标题输入框
-        self.__zsdw = "ID","zsdw"  # 主送单位
-        self.__csdw = "XPATH","//textarea[@title='双击选择抄送单位']"  # 抄送单位
-        self.__mj = "ID","mj"  # 密级下拉选择框
-        self.__fs = "ID","fs"  # 份数输入框
-        self.__sava_btn = "XPATH","//img[@title='保存']"  # 保存按钮
-        self.__fujian = "XPATH","//img[@title='附件']"  # 附件按钮
+        self.__send_bt_box = "ID", "wjbt"  # 发文标题输入框
+        self.__zsdw = "ID", "zsdw"  # 主送单位
+        self.__csdw = "XPATH", "//textarea[@title='双击选择抄送单位']"  # 抄送单位
+        self.__mj = "ID", "mj"  # 密级下拉选择框
+        self.__fs = "ID", "fs"  # 份数输入框
+        self.__sava_btn = "XPATH", "//img[@title='保存']"  # 保存按钮
+        self.__fujian = "XPATH", "//img[@title='附件']"  # 附件按钮
         self.__readOpinion = "XPATH", "//img[@title='阅文意见']"  # 阅文意见按钮
         self.__send = "XPATH", "//img[@title='送文']"  # 发送按钮
         self.__back = "XPATH", "//img[@title='返回']"  # 返回按钮
@@ -115,7 +116,7 @@ class Document(Action):
         self.input_text(self.__fwwh, fwwh)
 
 
-class DocumentProxy(Document):
+class FWCLD_Proxy(FWCLD_Page):
     def __init__(self, driver):
         super().__init__(driver)
         self.fwcgx = fwcgxPage(driver)
@@ -140,8 +141,8 @@ class DocumentProxy(Document):
     # 输入文章标题
     @allure.step(title="输入发文标题")
     def input_bt_proxy(self, text):
-        time.sleep(BASE_TIME)
         self.input_bt_text(text)  # 输入公文标题
+        time.sleep(BASE_TIME)
 
     # 选择主送单位
     @allure.step(title="选择主送单位")
@@ -150,6 +151,7 @@ class DocumentProxy(Document):
         time.sleep(BASE_TIME)
         # self.input_text(self.zsdw,"zsdw")
         self.__search_department.SearchName(zsdw_name)  # 调用部门选择方法，选择部门
+        time.sleep(BASE_TIME)
 
     # 选择抄送单位
     @allure.step(title="选择抄送单位")
@@ -158,12 +160,14 @@ class DocumentProxy(Document):
         time.sleep(BASE_TIME)
         # self.input_text(self.csdw,"csdw")
         self.__search_department.SearchName(csdw_name)  # 调用部门选择方法，选择部门
+        time.sleep(BASE_TIME)
 
     # 发送流程（选择发文人发送）
     @allure.step(title="点击发送按钮，进入发送页面")
     def send_proxy(self, rec_name,lcname=None):
-        self.click_send()
+        self.click_send()  # 点击发送按钮
         time.sleep(BASE_TIME)
+        # 调用发送模块，rec_name为接收公文人（必传）,lcname为下一个节点流程的名称（非必传）
         self.__send_flow.send_text_flow(rec_name,lcname)
 
     # 保存发文
@@ -174,10 +178,11 @@ class DocumentProxy(Document):
     # 判断保存是否成功
     @allure.step(title="判断保存是否成功")
     def is_save_success(self, bt):
-        get_ngr = self.fwcgx.get_ngr_list()[0]
-        get_bt = self.fwcgx.get_wjbt_list()[0]
+        get_ngr = self.fwcgx.get_ngr_list()[0]  # 获取拟稿人名称
+        get_bt = self.fwcgx.get_wjbt_list()[0]  # 获取公文标题名称
         # cur_user = self.username.get_username()
         if (get_ngr == self.username.get_username()) and (get_bt == bt):
+            # 如果拟稿人名称和当前用户名称一致，且标题和输入的标题一致，则返回True,否则返回False
             logging.info("保存成功")
             return True
         else:
@@ -190,8 +195,11 @@ class DocumentProxy(Document):
         return self.__readOpinion.signReadOpinion_proxy(readOpinion_text)
 
     # 添加附件
-    def add_fujian(self, file):
-        return self.__fujian.fileUpload_folw(file)
+    def add_fujian(self, file_name):
+        time.sleep(BASE_TIME)
+        logging.info("添加附件")
+        text = self.__fujian.fileUpload_folw(file_name)
+        return text
 
     # 输入发文文号
     @allure.step(title="点击保存按钮")

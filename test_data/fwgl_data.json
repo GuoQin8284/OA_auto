@@ -14,19 +14,25 @@
     "fwh": "test_001",
     "readOpinion":["同意！"],
     "rec_name": "管晓峰",
-    "next_gwlc": "办公室核稿"}},
+    "next_gwlc": "办公室核稿",
+    "username": "wangxg",
+    "pwd": "123456"}},
   {
     "gwlc": "办公室核稿",
     "data":{
     "bt_name": "这是测试01",
     "readOpinion":["同意！"],
     "rec_name": "余常晏",
-    "next_gwlc": "领导签发"
+    "next_gwlc": "领导签发",
+    "username": "guanxf",
+    "pwd": "123456"
   }},
   {
     "gwlc": "领导签发",
     "data":{
     "bt_name": "这是测试01",
     "readOpinion":["签发"],
+    "username": "yucy",
+    "pwd": "123456",
     "rec_name": "管晓峰"}}
 ]

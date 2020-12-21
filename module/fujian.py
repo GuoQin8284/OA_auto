@@ -1,5 +1,10 @@
+import logging
+import time
+
 import allure
 from selenium.webdriver.support.select import Select
+
+from config import BASE_TIME
 from driver.action import Action
 from page.menu import MenuFrame, Alert
 
@@ -13,7 +18,7 @@ class Fujian:
         # 附加按钮，点击进入附件页面
         self.__fj_btn = "XPATH", "//img[@title='附件']"
         # 上传附件按钮
-        self.__pull_fj_btn = "XPATH", "//img[@alt='上传附件']"
+        self.__pull_fj_btn = "XPATH", "//img[@alt='上传处理意见']"
         # 附件标题
         self.__fj_title = "ID", "bt"
         # 附件录入方式
@@ -76,17 +81,33 @@ class Fujian:
     @allure.step(title="上传文件业务流程")
     def fileUpload_folw(self, fileName):
         self.__menuFrame.switch_default_content()
+        logging.info("切换iframe到默认")
         self.__menuFrame.switch_right_iframe()
-        self.__action.find_element(self.__fj_btn).click()
+        logging.info("切换iframe到右侧")
+        self.__action.click(self.__fj_btn)  # 点击附件按钮
+        logging.info("进入上传文件页面")
         self.__switch_window()
-        self.__action.find_element(self.__pull_fj_btn).click()
+        time.sleep(BASE_TIME)
+        self.__action.click(self.__pull_fj_btn)  # 点击上传附件按钮
+        logging.info("点击上传附件按钮")
+        time.sleep(BASE_TIME)
         self.__add_file(fileName)
+        logging.info("选择的文件名称为：{}".format(fileName))
         allure.attach(self.__action.screen_shot(), "截图", allure.attachment_type.PNG)
+        time.sleep(BASE_TIME)
         self.__click_upload()
+        logging.info("点击上传按钮上传附件")
+        time.sleep(BASE_TIME)
         result_text = self.__click_save()
+        logging.info("点击保存按钮，保存附件")
+        time.sleep(BASE_TIME)
         self.__close_window()
+        logging.info("关闭附件上传按钮")
+        time.sleep(BASE_TIME)
         self.__switch_window()
         if "保存成功" in result_text:
+            logging.info("附件添加成功")
             return True
         else:
+            logging.info("附件添加失败")
             return False
