@@ -10,6 +10,8 @@ from page.menu import MenuFrame
 class ReadOpinion():
     def __init__(self, driver):
         self.__menuFrame = MenuFrame(driver)
+        # 阅文意见按钮
+        self.__readOpinion_btn = "XPATH", "//img[@title='阅文意见']"
         # 第一层frame
         self.__all_frame = "By.XPATH", "//div[@class='layui-layer-content']/iframe"
         # 阅文意见输入框
@@ -65,23 +67,30 @@ class ReadOpinion():
     # 输入阅文意见的业务流程
     @allure.step(title="阅文意见的业务流程")
     def signReadOpinion_proxy(self, text, auto=False):
-        self.__menuFrame.switch_default_content()
-        self.__action.driver.switch_to.frame(self.__action.find_element(self.__all_frame))
-        time.sleep(BASE_TIME)
-        self.__input_content(text)
-        time.sleep(BASE_TIME)
-        state = self.__get_radio_state()
-        time.sleep(BASE_TIME)
-        if state and (auto is False):
-            self.__click_radio()
+        if text:
+            self.__menuFrame.switch_default_content()
+            self.__menuFrame.switch_right_iframe()
+            self.__action.click(self.__readOpinion_btn)
             time.sleep(BASE_TIME)
-        elif (state is False) and (auto is True):
-            self.__click_radio()
+            self.__menuFrame.switch_default_content()
+            self.__action.driver.switch_to.frame(self.__action.find_element(self.__all_frame))
             time.sleep(BASE_TIME)
-        self.__click_confirm()
-        toast = self.__get_toast()
-        time.sleep(BASE_TIME)
-        if toast == "成功签署意见!":
-            return True
+            self.__input_content(text)
+            time.sleep(BASE_TIME)
+            state = self.__get_radio_state()
+            time.sleep(BASE_TIME)
+            if state and (auto is False):
+                self.__click_radio()
+                time.sleep(BASE_TIME)
+            elif (state is False) and (auto is True):
+                self.__click_radio()
+                time.sleep(BASE_TIME)
+            self.__click_confirm()
+            toast = self.__get_toast()
+            time.sleep(BASE_TIME)
+            if toast == "成功签署意见!":
+                return True
+            else:
+                return False
         else:
-            return False
+            pass

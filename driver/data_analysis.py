@@ -12,5 +12,12 @@ def data_analysis(name):
         print(data_list)
         return data_list
 
+def lc_data(filename, lcName):
+    data_list = data_analysis(filename)
+    for i in data_list:
+        if i[0]["gwlc"] == lcName:
+            data = i[0]["data"]
+            print("data", data)
+            return data
 
-data_analysis("swgl.json")
+lc_data("swgl_data.json","收文登记")

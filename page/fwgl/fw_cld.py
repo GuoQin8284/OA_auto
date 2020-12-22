@@ -191,7 +191,6 @@ class FWCLD_Proxy(FWCLD_Page):
 
     # 签署阅文意见
     def sign_readOpinion(self, readOpinion_text):
-        self.click_readOpinion()
         return self.__readOpinion.signReadOpinion_proxy(readOpinion_text)
 
     # 添加附件

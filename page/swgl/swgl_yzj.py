@@ -105,6 +105,7 @@ class SwybjPage(Action):
     @allure.step(title="根据标题获取该标题在办理中列表的索引位置")
     def getByBtIndex(self, bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         eles = self.get_rows_list()
         if eles:
@@ -117,6 +118,7 @@ class SwybjPage(Action):
     @allure.step(title="根据标题获取该公文的相关信息")
     def getByBtInfo(self, bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         eles = self.get_rows_list()
         if eles:
@@ -129,6 +131,7 @@ class SwybjPage(Action):
     @allure.step(title="获取主办部门列表")
     def get_zbbm_list(self):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         try:
             eles = self.find_elements(self.__zbbm_list, timeout=self.__timeout)
@@ -161,6 +164,7 @@ class SWYBJProxy(SwybjPage):
     @allure.step(title="根据收文标题，进入处理单页面")
     def into_doc(self, bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         try:
             self.contains_text(bt, timeout=2).click()

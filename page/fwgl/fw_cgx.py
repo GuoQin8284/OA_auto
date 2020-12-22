@@ -112,6 +112,7 @@ class fwcgxPage(Action):
     @allure.step(title="根据标题获取该标题在草稿箱中的索引位置")
     def getByBtIndex(self,bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         eles = self.get_rows_list()
         if eles:
@@ -124,6 +125,7 @@ class fwcgxPage(Action):
     @allure.step(title="根据标题获取该公文的相关信息")
     def getByBtInfo(self,bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         eles = self.get_rows_list()
         if eles:
@@ -154,6 +156,7 @@ class CGX_proxy(fwcgxPage):
     @allure.step(title="根据发文标题，进入处理单页面")
     def into_doc(self,bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         try:
             self.contains_text(bt, timeout=2).click()

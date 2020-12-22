@@ -18,7 +18,7 @@ class Fujian:
         # 附加按钮，点击进入附件页面
         self.__fj_btn = "XPATH", "//img[@title='附件']"
         # 上传附件按钮
-        self.__pull_fj_btn = "XPATH", "//img[@alt='上传处理意见']"
+        self.__pull_fj_btn = "XPATH", "//img[@alt='上传附件']"
         # 附件标题
         self.__fj_title = "ID", "bt"
         # 附件录入方式
@@ -81,8 +81,10 @@ class Fujian:
     @allure.step(title="上传文件业务流程")
     def fileUpload_folw(self, fileName):
         self.__menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         logging.info("切换iframe到默认")
         self.__menuFrame.switch_right_iframe()
+        time.sleep(BASE_TIME)
         logging.info("切换iframe到右侧")
         self.__action.click(self.__fj_btn)  # 点击附件按钮
         logging.info("进入上传文件页面")

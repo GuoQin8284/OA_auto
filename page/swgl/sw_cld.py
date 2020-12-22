@@ -38,12 +38,14 @@ class SwcldPage(Action):
         self.__fujian_btn = "XPATH", "//img[@title='附件']"  # 附件按钮
         self.__cldbt = "XPATH", "//center/font/font/b"  # 处理单标题
         self.__back = "XPATH", "//img[@title='返回']"  # 返回按钮
-        self.__banjie = "XPATh", "//img[@title='办结']"  # 终结按钮
+        self.__banjie = "XPATH", "//img[@title='办结']"  # 终结按钮
         self.menuFrame = MenuFrame(driver)
         self.alert = Alert(driver)
 
     #  点击办结
     def click_bj(self):
+        self.menuFrame.switch_default_content()
+        self.menuFrame.switch_right_iframe()
         self.click(self.__banjie)
         self.alert.alert_accept()
 
@@ -61,6 +63,7 @@ class SwcldPage(Action):
     @allure.step(title="点击返回按钮")
     def click_back(self):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         self.click(self.__back)
 
@@ -68,6 +71,7 @@ class SwcldPage(Action):
     @allure.step(title="点击保存按钮")
     def click_save(self):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         self.click(self.__save_btn)
         alert = self.alert.get_alert_text()
@@ -79,6 +83,7 @@ class SwcldPage(Action):
     @allure.step(title="点击阅文意见按钮")
     def click_readOpinion(self):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         self.click(self.__readOpinion_btn)
 
@@ -86,6 +91,7 @@ class SwcldPage(Action):
     @allure.step(title="点击发送按钮")
     def click_send(self):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         self.click(self.__send_btn)
 
@@ -93,6 +99,7 @@ class SwcldPage(Action):
     @allure.step(title="输入份数")
     def input_fs(self, num):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         self.input_text(self.__fs, num)
 
@@ -100,12 +107,14 @@ class SwcldPage(Action):
     @allure.step(title="选择紧急程度")
     def select_jjcd(self, text):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         Select(self.find_element(self.__jjcd)).select_by_visible_text(text)
 
     # 输入收文日期
     def input_swrq(self,text):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         self.input_text(self.__swrq, text)
 
@@ -113,18 +122,21 @@ class SwcldPage(Action):
     @allure.step(title="输入发文标题")
     def input_bt_text(self, text):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         self.input_text(self.__wjbt, text)
 
     # 选择收文号
     def select_swh(self, swh):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         Select(self.find_element(self.__swh)).select_by_visible_text(swh)
 
     # 双击来文单位
     def doubleClick_lwdw(self):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         ActionChains(self.driver).double_click(self.find_element(self.__lwdw)).perform()
 
@@ -150,30 +162,35 @@ class SwcldPage(Action):
     # 输入来文编号
     def input_lwbg(self, gwbh):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         self.input_text(self.__gwbh, gwbh)
 
     # 输入办理时限
     def input_blsx(self, blsx):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         self.input_text(self.__blsx, blsx)
 
     # 输入催办时限
     def input_cbsx(self, cbsx):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         self.input_text(self.__cbsx, cbsx)
 
     # 选择收文类型
     def select_swlx(self, swlx):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         Select(self.find_element(self.__swlx)).select_by_visible_text(swlx)
 
     # 上传正文
     def sczw(self, filename):
         self.menuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.menuFrame.switch_right_iframe()
         self.find_element(self.__ckzw).send_keys(filename)
         self.click(self.__zwsc_btn)
@@ -234,7 +251,6 @@ class SWCLDProxy(SwcldPage):
 
     # 签署阅文意见
     def sign_readOpinion(self, readOpinion_text):
-        self.click_readOpinion()
         return self.__readOpinion.signReadOpinion_proxy(readOpinion_text)
 
     # 添加附件

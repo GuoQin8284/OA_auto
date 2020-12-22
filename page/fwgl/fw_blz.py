@@ -104,6 +104,7 @@ class fwblzPage(Action):
     @allure.step(title="根据标题获取该标题在办理中列表的索引位置")
     def getByBtIndex(self, bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         eles = self.get_rows_list()
         if eles:
@@ -116,6 +117,7 @@ class fwblzPage(Action):
     @allure.step(title="根据标题获取该公文的相关信息")
     def getByBtInfo(self, bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         eles = self.get_rows_list()
         if eles:
@@ -128,6 +130,7 @@ class fwblzPage(Action):
     @allure.step(title="获取当前页面当前办理人列表")
     def get_CurrentHandlePerson_list(self):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         try:
             eles = self.find_elements(self.__currentHandlePerosn_list, self.__timeout)
@@ -140,6 +143,7 @@ class fwblzPage(Action):
     @allure.step(title="获取当前页面发文文号列表")
     def get_Fwwh_list(self):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         try:
             eles = self.find_elements(self.__fwwh_list, timeout=self.__timeout)
@@ -170,6 +174,7 @@ class BLZ_proxy(fwblzPage):
     @allure.step(title="根据发文标题，进入处理单页面")
     def into_doc(self, bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         try:
             self.contains_text(bt, timeout=2).click()

@@ -106,6 +106,7 @@ class SwdbPage(Action):
     @allure.step(title="根据标题获取该标题在办理中列表的索引位置")
     def getByBtIndex(self, bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         eles = self.get_rows_list()
         if eles:
@@ -118,6 +119,7 @@ class SwdbPage(Action):
     @allure.step(title="根据标题获取该公文的相关信息")
     def getByBtInfo(self, bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         eles = self.get_rows_list()
         if eles:
@@ -130,6 +132,7 @@ class SwdbPage(Action):
     @allure.step(title="获取当前页面当前办理人列表")
     def get_CurrentHandlePerson_list(self):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         try:
             eles = self.find_elements(self.__currentHandlePerosn_list, self.__timeout)
@@ -142,6 +145,7 @@ class SwdbPage(Action):
     @allure.step(title="获取主办部门列表")
     def get_zbbm_list(self):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         try:
             eles = self.find_elements(self.__zbbm_list, timeout=self.__timeout)
@@ -154,6 +158,7 @@ class SwdbPage(Action):
     @allure.step(title="获取办理时限列表")
     def get_blsx_list(self):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         try:
             eles = self.find_elements(self.__blsx_list, timeout=self.__timeout)
@@ -171,7 +176,7 @@ class SWDBProxy(SwdbPage):
 
     # 进入收文待办页面
     @allure.step(title="进入收文待办页面")
-    def into_Swbzl(self):
+    def into_Swdb(self):
         self.__MenuFrame.switch_default_content()
         self.contains_text("公文管理").click()  # 点击公文管理
         time.sleep(BASE_TIME)
@@ -184,6 +189,7 @@ class SWDBProxy(SwdbPage):
     @allure.step(title="根据收文标题，进入处理单页面")
     def into_doc(self, bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         try:
             self.contains_text(bt, timeout=2).click()

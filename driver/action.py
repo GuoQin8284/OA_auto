@@ -103,7 +103,7 @@ class Action:
     def contains_text(self, text1, timeout=2):
         if text1:
             element = "By.XPATH", "//*[contains(text(),'{}')]".format(text1)
-            # print("element:",element)
+            print("element:",element)
             ele = self.find_element(element, timeout)
             return ele
 

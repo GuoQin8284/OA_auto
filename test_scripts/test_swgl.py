@@ -80,57 +80,60 @@ class Test_demo01(TestCase):
 
     def test02_swgl_lc02(self):
         data = lc_data(filename="swgl_data.json", lcName="部门文书接收")
-        username = "用户名"
-        pwd = "密码"
+        username = data["用户名"]
+        pwd = data["密码"]
         gwbt = data["公文标题"]
         ywyj = data["阅文意见"]
         rec_name = data["接收人"]
         next_lcmc = data["下一个节点"]
         self.login.switch_loginUser(username=username, pwd=pwd)
+        self.swdb.into_Swdb()
         self.swdb.into_doc(gwbt)
         self.swcld.sign_readOpinion(ywyj)  # 签署阅文意见
         self.swcld.send_proxy(rec_name=rec_name, lcname=next_lcmc)  # 发送给指定的人
 
     def test03_swgl_lc03(self):
         data = lc_data(filename="swgl_data.json", lcName="部门内办理")
-        username = "用户名"
-        pwd = "密码"
+        username = data["用户名"]
+        pwd = data["密码"]
         gwbt = data["公文标题"]
         ywyj = data["阅文意见"]
         rec_name = data["接收人"]
         next_lcmc = data["下一个节点"]
         self.login.switch_loginUser(username=username, pwd=pwd)
-        self.swdb.into_doc(gwbt)
+        self.swdb.into_Swdb()  # 进入收文待办
+        self.swdb.into_doc(gwbt)  # 根据标题进入公文处理单页面
         self.swcld.sign_readOpinion(ywyj)  # 签署阅文意见
         self.swcld.send_proxy(rec_name=rec_name, lcname=next_lcmc)  # 发送给指定的人
 
     def test04_swgl_lc04(self):
         data = lc_data(filename="swgl_data.json", lcName="部门领导审核")
-        username = "用户名"
-        pwd = "密码"
+        username = data["用户名"]
+        pwd = data["密码"]
         gwbt = data["公文标题"]
         ywyj = data["阅文意见"]
         rec_name = data["接收人"]
         next_lcmc = data["下一个节点"]
         self.login.switch_loginUser(username=username, pwd=pwd)
+        self.swdb.into_Swdb()
         self.swdb.into_doc(gwbt)
         self.swcld.sign_readOpinion(ywyj)  # 签署阅文意见
         self.swcld.send_proxy(rec_name=rec_name, lcname=next_lcmc)  # 发送给指定的人
 
     def test05_swgl_lc05(self):
         data = lc_data(filename="swgl_data.json", lcName="办结")
-        username = "用户名"
-        pwd = "密码"
+        username = data["用户名"]
+        pwd = data["密码"]
         gwbt = data["公文标题"]
         ywyj = data["阅文意见"]
         rec_name = data["接收人"]
         next_lcmc = data["下一个节点"]
         self.login.switch_loginUser(username=username, pwd=pwd)
+        self.swdb.into_Swdb()
         self.swdb.into_doc(gwbt)
         self.swcld.sign_readOpinion(ywyj)  # 签署阅文意见
         self.swcld.end()
         assert self.swcld.is_end_success(gwbt)
-        # self.swcld.send_proxy(rec_name=rec_name, lcname=next_lcmc)  # 发送给指定的人
 
     # def test02_delete_cgx(self):
     #     self.swcgx.into_swcgx()
@@ -146,4 +149,8 @@ class Test_demo01(TestCase):
     #     self.swdb.into_Swbzl()
     #     self.swdb.into_doc("这是收文测试01")
     #     self.swcld.sign_readOpinion("同意。。。。")
+
+    # def test_bj(self):
+    #     self.swcld.into_swcld()
+    #     self.swcld.click_bj()
 

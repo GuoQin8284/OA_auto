@@ -150,6 +150,7 @@ class WaitForDoc_proxy(WaitForDocPage):
     @allure.step(title="根据发文标题，进入处理单页面")
     def into_doc(self, bt):
         self.__MenuFrame.switch_default_content()
+        time.sleep(BASE_TIME)
         self.__MenuFrame.switch_right_iframe()
         try:
             self.contains_text(bt, timeout=2).click()

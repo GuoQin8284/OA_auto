@@ -72,8 +72,6 @@ class LoginProxy(LoginPage):
 
     # 登录状态检测
     def get_login_status(self):
-        err = ""
-        success = ""
         err = self.get_login_err_toast()
         success = self.get_login_success_toast()
         if success:
