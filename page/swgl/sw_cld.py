@@ -265,6 +265,7 @@ class SWCLDProxy(SwcldPage):
     # 填写处理单
     def input_swgl_info(self, swh="", lwdw=("", ""), swrq="", jjcd="", fs="",gwbh="",blsx="",cbsx="",gwbt="",swlx="",sczw=""):
         if swh != "":
+            time.sleep(BASE_TIME)
             self.select_swh(swh)
             time.sleep(BASE_TIME)
         if "" not in lwdw:
@@ -307,8 +308,11 @@ class SWCLDProxy(SwcldPage):
     def is_end_success(self, bt):
         self.__swybj.into_Swbzl()
         bt_list = self.__swybj.get_wjbt_list()
-        if bt in bt_list:
-            return True
+        if bt_list:
+            if bt in bt_list:
+                return True
+            else:
+                return False
         else:
             return False
 

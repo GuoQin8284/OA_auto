@@ -1,5 +1,6 @@
 import time
 
+import logging
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -46,34 +47,40 @@ class Action:
             return False
 
     # 查找单个元素
-    def find_element(self, location, timeout=3, poll_frequency=0.1):
+    def find_element(self, location, timeout=5, poll_frequency=0.1):
         if location:
             # print("location[1]:",location)
             try:
                 ele = WebDriverWait(self.driver, timeout, poll_frequency).until(lambda x: x.find_element(self.__ananysis_element(location[0]), location[1]))
                 return ele
             except TimeoutException:
+                print(r"未找到{}元素".format(location[1]))
                 return False
+                # raise ErrorClass.NoSuchElement(location)
         else:
             return False
 
     # 查找一组元素
-    def find_elements(self, location, timeout=3, poll_frequency=0.1):
+    def find_elements(self, location, timeout=5, poll_frequency=0.1):
         if location:
             # print("location[1]:", location)
             try:
                 ele = WebDriverWait(self.driver, timeout, poll_frequency).until(lambda x: x.find_elements(self.__ananysis_element(location[0]), location[1]))
                 return ele
             except TimeoutException:
-                # print(r"未找到{}元素".format(location[1]))
-                return False
+                print(r"未找到{}元素".format(location[1]))
+                return []
+                # raise ErrorClass.NoSuchElement(location)
         else:
-            return False
+            return []
 
     # 点击元素
     def click(self, element):
         if element:
-            self.find_element(element).click()
+            try:
+                self.find_element(element).click()
+            except:
+               logging.info("以‘{}’方法在当前和页面未找到‘{}’元素".format(element[0],element[1]))
         else:
             return False
 

@@ -29,6 +29,7 @@ class Test_demo01(TestCase):
     # pytest方式启动
     @classmethod
     def setUpClass(cls):
+
         cls.driver = Driver
         cls.driver.set_auto_quit(1)
         cls.get_driver = cls.driver.get_driver()  # 获取driver对象
@@ -46,9 +47,9 @@ class Test_demo01(TestCase):
     def setUp(self):
         self.get_driver.refresh()
 
-    # @classmethod
-    # def tearDownClass(cls):
-    #     cls.driver.quit_driver()
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit_driver()
 
     # 发文流程测试-拟稿
     def test01_sendDoc01(self):
@@ -133,14 +134,15 @@ class Test_demo01(TestCase):
     #     assert self.DocumentProxy.get_cldbt()
 
     # 从办理中页面打开发文
-    def test08_blz_intoDoc(self,bt="这是测试01"):
+    def test08_blz_intoDoc(self,bt="这是测试0111231222"):
         self.blz.into_fwbzl()
         self.blz.into_doc(bt)
         assert self.DocumentProxy.get_cldbt()
 
-    # 从办理中页面删除发文
-    def test09_blz_deleteDoc(self,bt="这是测试01"):
-        self.blz.into_fwbzl()
-        self.blz.delete_doc(bt)
-        assert self.blz.is_delete_success(bt)
+    # # 从办理中页面删除发文
+    # def test09_blz_deleteDoc(self,bt="这是测试01435235"):
+    #     self.login.switch_loginUser("hcadmin", "123456")
+    #     self.blz.into_fwbzl()
+    #     self.blz.delete_doc(bt)
+    #     assert self.blz.is_delete_success(bt)
 
