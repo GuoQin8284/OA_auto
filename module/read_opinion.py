@@ -69,8 +69,8 @@ class ReadOpinion():
     def signReadOpinion_proxy(self, text, auto=False):
         if text:
             self.__menuFrame.switch_default_content()
-            self.__menuFrame.switch_right_iframe()
-            self.__action.click(self.__readOpinion_btn)
+            self.__menuFrame.switch_right_iframe() # 切换iframe
+            self.__action.click(self.__readOpinion_btn)  # 点击
             time.sleep(BASE_TIME)
             self.__menuFrame.switch_default_content()
             self.__action.driver.switch_to.frame(self.__action.find_element(self.__all_frame))

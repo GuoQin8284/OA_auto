@@ -14,7 +14,7 @@ from page.login_page import LoginProxy
 from page.fwgl.fw_dbwj import WaitForDoc_proxy
 from page.menu import Alert
 
-
+# 测试数据解析函数
 def lc_data(filename, lcName):
     data_list = data_analysis(filename)
     for i in data_list:
@@ -45,11 +45,11 @@ class Test_demo01(TestCase):
         cls.fwdb = WaitForDoc_proxy(cls.get_driver)
 
     def setUp(self):
-        self.get_driver.refresh()
+        self.get_driver.refresh() # 每次跑完一个测试用例都刷新一下页面，回到初始状态
 
     @classmethod
     def tearDownClass(cls):
-        cls.driver.quit_driver()
+        cls.driver.quit_driver() # 测试用例跑完之后关闭浏览器
 
     # 发文流程测试-拟稿
     def test01_sendDoc01(self):
@@ -139,10 +139,10 @@ class Test_demo01(TestCase):
         self.blz.into_doc(bt)
         assert self.DocumentProxy.get_cldbt()
 
-    # # 从办理中页面删除发文
-    # def test09_blz_deleteDoc(self,bt="这是测试01435235"):
-    #     self.login.switch_loginUser("hcadmin", "123456")
-    #     self.blz.into_fwbzl()
-    #     self.blz.delete_doc(bt)
-    #     assert self.blz.is_delete_success(bt)
+    # 从办理中页面删除发文
+    def test09_blz_deleteDoc(self,bt="这是测试01435235"):
+        self.login.switch_loginUser("hcadmin", "123456")
+        self.blz.into_fwbzl()
+        self.blz.delete_doc(bt)
+        assert self.blz.is_delete_success(bt)
 
