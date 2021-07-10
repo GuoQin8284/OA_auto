@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.flowable.org/processdef">
+  <process id="process_937h6sar" name="合同管理" ssmk="htsp" sslb="htsp">
+    <startEvent id="startNode1" name="开始">
+      <outgoing>Flow_1umanbw</outgoing>
+    </startEvent>
+    <userTask id="Activity_1x108t9" name="合同申请">
+      <incoming>Flow_1umanbw</incoming>
+      <outgoing>Flow_1w81aib</outgoing>
+    </userTask>
+    <userTask id="Activity_0clv8ra" name="合同审批">
+      <incoming>Flow_1w81aib</incoming>
+      <outgoing>Flow_09zqjap</outgoing>
+    </userTask>
+    <endEvent id="Event_1vxae2e">
+      <incoming>Flow_09zqjap</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_1umanbw" sourceRef="startNode1" targetRef="Activity_1x108t9" />
+    <sequenceFlow id="Flow_1w81aib" sourceRef="Activity_1x108t9" targetRef="Activity_0clv8ra" />
+    <sequenceFlow id="Flow_09zqjap" sourceRef="Activity_0clv8ra" targetRef="Event_1vxae2e" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_flow">
+    <bpmndi:BPMNPlane id="BPMNPlane_flow" bpmnElement="process_937h6sar">
+      <bpmndi:BPMNEdge id="Flow_09zqjap_di" bpmnElement="Flow_09zqjap">
+        <di:waypoint x="660" y="215" />
+        <di:waypoint x="812" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1w81aib_di" bpmnElement="Flow_1w81aib">
+        <di:waypoint x="440" y="215" />
+        <di:waypoint x="560" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1umanbw_di" bpmnElement="Flow_1umanbw">
+        <di:waypoint x="270" y="215" />
+        <di:waypoint x="340" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_startNode1" bpmnElement="startNode1" bioc:stroke="">
+        <omgdc:Bounds x="240" y="200" width="30" height="30" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="243" y="237" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ledvuh_di" bpmnElement="Activity_1x108t9">
+        <omgdc:Bounds x="340" y="175" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1m8qlui_di" bpmnElement="Activity_0clv8ra">
+        <omgdc:Bounds x="560" y="175" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1vxae2e_di" bpmnElement="Event_1vxae2e">
+        <omgdc:Bounds x="812" y="197" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

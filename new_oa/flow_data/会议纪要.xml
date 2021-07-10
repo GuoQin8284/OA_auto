@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.flowable.org/processdef">
+  <process id="process_e8ufa17e" name="会议纪要" ssmk="hyjy" sslb="hyjy">
+    <startEvent id="startNode1" name="开始">
+      <outgoing>Flow_0s1cch7</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_0s1cch7" sourceRef="startNode1" targetRef="Activity_1g2y0cc" />
+    <userTask id="Activity_1g2y0cc" name="会议纪要录入">
+      <incoming>Flow_0s1cch7</incoming>
+      <outgoing>Flow_0liprwt</outgoing>
+    </userTask>
+    <sequenceFlow id="Flow_0liprwt" sourceRef="Activity_1g2y0cc" targetRef="Activity_1l4dedj" />
+    <userTask id="Activity_1l4dedj" name="审核">
+      <incoming>Flow_0liprwt</incoming>
+      <outgoing>Flow_0y00s1i</outgoing>
+    </userTask>
+    <sequenceFlow id="Flow_0y00s1i" sourceRef="Activity_1l4dedj" targetRef="Activity_051b89n" />
+    <endEvent id="Event_1yoz3gm">
+      <incoming>Flow_1frsbf1</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_1frsbf1" sourceRef="Activity_051b89n" targetRef="Event_1yoz3gm" />
+    <userTask id="Activity_051b89n" name="回录入人">
+      <incoming>Flow_0y00s1i</incoming>
+      <outgoing>Flow_1frsbf1</outgoing>
+    </userTask>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_flow">
+    <bpmndi:BPMNPlane id="BPMNPlane_flow" bpmnElement="process_e8ufa17e">
+      <bpmndi:BPMNEdge id="Flow_0liprwt_di" bpmnElement="Flow_0liprwt">
+        <di:waypoint x="70" y="330" />
+        <di:waypoint x="170" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0s1cch7_di" bpmnElement="Flow_0s1cch7">
+        <di:waypoint x="20" y="65" />
+        <di:waypoint x="20" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0y00s1i_di" bpmnElement="Flow_0y00s1i">
+        <di:waypoint x="270" y="330" />
+        <di:waypoint x="380" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1frsbf1_di" bpmnElement="Flow_1frsbf1">
+        <di:waypoint x="430" y="290" />
+        <di:waypoint x="430" y="239" />
+        <di:waypoint x="420" y="239" />
+        <di:waypoint x="420" y="188" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1bcv1uq_di" bpmnElement="Activity_1g2y0cc">
+        <omgdc:Bounds x="-30" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_startNode1" bpmnElement="startNode1" bioc:stroke="">
+        <omgdc:Bounds x="5" y="35" width="30" height="30" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="9" y="11" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ur1eju_di" bpmnElement="Activity_1l4dedj">
+        <omgdc:Bounds x="170" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1yoz3gm_di" bpmnElement="Event_1yoz3gm">
+        <omgdc:Bounds x="402" y="152" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1t7y62l_di" bpmnElement="Activity_051b89n">
+        <omgdc:Bounds x="380" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

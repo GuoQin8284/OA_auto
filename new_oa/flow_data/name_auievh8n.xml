@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.flowable.org/processdef">
+  <process id="process_1i26mnpv" name="name_auievh8n" ssmk="hygl" sslb="hyssq">
+    <startEvent id="startNode1" name="开始">
+      <outgoing>Flow_0gmrcc2</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_0gmrcc2" sourceRef="startNode1" targetRef="Activity_1edmmob" />
+    <sequenceFlow id="Flow_1xzc9s6" sourceRef="Activity_1edmmob" targetRef="Activity_1b4981a" />
+    <userTask id="Activity_1edmmob" name="会议室申请">
+      <incoming>Flow_0gmrcc2</incoming>
+      <outgoing>Flow_1xzc9s6</outgoing>
+    </userTask>
+    <userTask id="Activity_1b4981a" name="会议室审批">
+      <incoming>Flow_1xzc9s6</incoming>
+      <outgoing>Flow_17bcm6l</outgoing>
+    </userTask>
+    <userTask id="Activity_1l5mmzp" name="会议室登记">
+      <incoming>Flow_17bcm6l</incoming>
+    </userTask>
+    <sequenceFlow id="Flow_17bcm6l" sourceRef="Activity_1b4981a" targetRef="Activity_1l5mmzp" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_flow">
+    <bpmndi:BPMNPlane id="BPMNPlane_flow" bpmnElement="process_1i26mnpv">
+      <bpmndi:BPMNEdge id="Flow_1xzc9s6_di" bpmnElement="Flow_1xzc9s6">
+        <di:waypoint x="380" y="255" />
+        <di:waypoint x="380" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gmrcc2_di" bpmnElement="Flow_0gmrcc2">
+        <di:waypoint x="270" y="215" />
+        <di:waypoint x="330" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17bcm6l_di" bpmnElement="Flow_17bcm6l">
+        <di:waypoint x="430" y="330" />
+        <di:waypoint x="530" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_startNode1" bpmnElement="startNode1" bioc:stroke="">
+        <omgdc:Bounds x="240" y="200" width="30" height="30" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="243" y="237" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_10hnkgw_di" bpmnElement="Activity_1edmmob">
+        <omgdc:Bounds x="330" y="175" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ipy3x2_di" bpmnElement="Activity_1b4981a">
+        <omgdc:Bounds x="330" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13omph2_di" bpmnElement="Activity_1l5mmzp">
+        <omgdc:Bounds x="530" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

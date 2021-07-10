@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:flowable="http://flowable.org/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.flowable.org/processdef">
+  <process id="process_j2oao6nl" name="会议室申请流程" ssmk="hyssq" flowable:processCategory="oa" xh="10" sslb="hyssq">
+    <startEvent id="startNode1" name="开始">
+      <outgoing>Flow_07c2brl</outgoing>
+    </startEvent>
+    <endEvent id="Event_04qty2d">
+      <incoming>Flow_09hixwg</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_07c2brl" sourceRef="startNode1" targetRef="Activity_1vswso3" />
+    <sequenceFlow id="Flow_1nnyzpp" sourceRef="Activity_1vswso3" targetRef="Activity_0c6a6lu" />
+    <sequenceFlow id="Flow_03s364w" sourceRef="Activity_0c6a6lu" targetRef="Activity_14dd18o" />
+    <sequenceFlow id="Flow_09hixwg" sourceRef="Activity_14dd18o" targetRef="Event_04qty2d" />
+    <sequenceFlow id="Flow_1kk07k5" sourceRef="Activity_0c6a6lu" targetRef="Activity_1vswso3" />
+    <sequenceFlow id="Flow_1t3l151" sourceRef="Activity_14dd18o" targetRef="Activity_0c6a6lu" />
+    <userTask id="Activity_1vswso3" name="会议登记">
+      <incoming>Flow_07c2brl</incoming>
+      <incoming>Flow_1kk07k5</incoming>
+      <outgoing>Flow_1nnyzpp</outgoing>
+    </userTask>
+    <userTask id="Activity_0c6a6lu" name="主任审批">
+      <incoming>Flow_1nnyzpp</incoming>
+      <incoming>Flow_1t3l151</incoming>
+      <outgoing>Flow_03s364w</outgoing>
+      <outgoing>Flow_1kk07k5</outgoing>
+    </userTask>
+    <userTask id="Activity_14dd18o" name="回拟稿人">
+      <incoming>Flow_03s364w</incoming>
+      <outgoing>Flow_09hixwg</outgoing>
+      <outgoing>Flow_1t3l151</outgoing>
+    </userTask>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_flow">
+    <bpmndi:BPMNPlane id="BPMNPlane_flow" bpmnElement="process_j2oao6nl">
+      <bpmndi:BPMNEdge id="Flow_1t3l151_di" bpmnElement="Flow_1t3l151">
+        <di:waypoint x="550" y="140" />
+        <di:waypoint x="410" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kk07k5_di" bpmnElement="Flow_1kk07k5">
+        <di:waypoint x="310" y="140" />
+        <di:waypoint x="190" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09hixwg_di" bpmnElement="Flow_09hixwg">
+        <di:waypoint x="650" y="140" />
+        <di:waypoint x="782" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03s364w_di" bpmnElement="Flow_03s364w">
+        <di:waypoint x="410" y="140" />
+        <di:waypoint x="550" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1nnyzpp_di" bpmnElement="Flow_1nnyzpp">
+        <di:waypoint x="190" y="140" />
+        <di:waypoint x="310" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07c2brl_di" bpmnElement="Flow_07c2brl">
+        <di:waypoint x="-5" y="140" />
+        <di:waypoint x="90" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_startNode1" bpmnElement="startNode1" bioc:stroke="">
+        <omgdc:Bounds x="-35" y="125" width="30" height="30" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="-33" y="162" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_04qty2d_di" bpmnElement="Event_04qty2d">
+        <omgdc:Bounds x="782" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jwl3q5_di" bpmnElement="Activity_1vswso3">
+        <omgdc:Bounds x="90" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0cw86ic_di" bpmnElement="Activity_0c6a6lu">
+        <omgdc:Bounds x="310" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0zadfm0_di" bpmnElement="Activity_14dd18o">
+        <omgdc:Bounds x="550" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

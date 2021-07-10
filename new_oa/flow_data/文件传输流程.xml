@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.flowable.org/processdef">
+  <process id="process_a0686jjn" name="文件传输流程" ssmk="wjcs">
+    <startEvent id="startNode1" name="开始">
+      <outgoing>Flow_09vwilr</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_09vwilr" sourceRef="startNode1" targetRef="Activity_1bp6z9b" />
+    <sequenceFlow id="Flow_0uon1f8" sourceRef="Activity_1bp6z9b" targetRef="Activity_1uxxwje" />
+    <sequenceFlow id="Flow_1n3sg3b" sourceRef="Activity_1uxxwje" targetRef="Activity_1hqpwrf" />
+    <sequenceFlow id="Flow_0qxvtmy" sourceRef="Activity_1hqpwrf" targetRef="Activity_0kg07x0" />
+    <userTask id="Activity_1bp6z9b" name="111">
+      <incoming>Flow_09vwilr</incoming>
+      <outgoing>Flow_0uon1f8</outgoing>
+    </userTask>
+    <userTask id="Activity_1uxxwje" name="222">
+      <incoming>Flow_0uon1f8</incoming>
+      <outgoing>Flow_1n3sg3b</outgoing>
+    </userTask>
+    <userTask id="Activity_1hqpwrf" name="333">
+      <incoming>Flow_1n3sg3b</incoming>
+      <outgoing>Flow_0qxvtmy</outgoing>
+    </userTask>
+    <userTask id="Activity_0kg07x0" name="444">
+      <incoming>Flow_0qxvtmy</incoming>
+      <outgoing>Flow_0idl9n2</outgoing>
+    </userTask>
+    <endEvent id="Event_1bu2cad">
+      <incoming>Flow_0idl9n2</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_0idl9n2" sourceRef="Activity_0kg07x0" targetRef="Event_1bu2cad" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_flow">
+    <bpmndi:BPMNPlane id="BPMNPlane_flow" bpmnElement="process_a0686jjn">
+      <bpmndi:BPMNEdge id="Flow_0idl9n2_di" bpmnElement="Flow_0idl9n2">
+        <di:waypoint x="870" y="215" />
+        <di:waypoint x="922" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qxvtmy_di" bpmnElement="Flow_0qxvtmy">
+        <di:waypoint x="720" y="215" />
+        <di:waypoint x="770" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1n3sg3b_di" bpmnElement="Flow_1n3sg3b">
+        <di:waypoint x="570" y="215" />
+        <di:waypoint x="620" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0uon1f8_di" bpmnElement="Flow_0uon1f8">
+        <di:waypoint x="420" y="215" />
+        <di:waypoint x="470" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09vwilr_di" bpmnElement="Flow_09vwilr">
+        <di:waypoint x="270" y="215" />
+        <di:waypoint x="320" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_startNode1" bpmnElement="startNode1" bioc:stroke="">
+        <omgdc:Bounds x="240" y="200" width="30" height="30" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="242" y="237" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1haphkz_di" bpmnElement="Activity_1bp6z9b">
+        <omgdc:Bounds x="320" y="175" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pj22as_di" bpmnElement="Activity_1uxxwje">
+        <omgdc:Bounds x="470" y="175" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wh98o5_di" bpmnElement="Activity_1hqpwrf">
+        <omgdc:Bounds x="620" y="175" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0s1diug_di" bpmnElement="Activity_0kg07x0">
+        <omgdc:Bounds x="770" y="175" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1bu2cad_di" bpmnElement="Event_1bu2cad">
+        <omgdc:Bounds x="922" y="197" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

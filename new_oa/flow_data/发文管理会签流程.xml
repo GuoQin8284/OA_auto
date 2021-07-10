@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.flowable.org/processdef">
+  <process id="process_ro35ekd9" name="发文管理会签流程" ssmk="fwgl" sslb="hqd">
+    <userTask id="Activity_0c2hhg3" name="拟稿">
+      <incoming>Flow_1r184v4</incoming>
+      <incoming>Flow_1q7lbya</incoming>
+      <outgoing>Flow_1mutuzm</outgoing>
+    </userTask>
+    <userTask id="Activity_0wenyb7" name="部门领导审核 ">
+      <incoming>Flow_1mutuzm</incoming>
+      <incoming>Flow_10frlcr</incoming>
+      <outgoing>Flow_1yp6s40</outgoing>
+      <outgoing>Flow_0p0c05g</outgoing>
+    </userTask>
+    <sequenceFlow id="Flow_1mutuzm" sourceRef="Activity_0c2hhg3" targetRef="Activity_0wenyb7" />
+    <sequenceFlow id="Flow_1yp6s40" sourceRef="Activity_0wenyb7" targetRef="Activity_1pvl8eg" color="#FF0000" />
+    <userTask id="Activity_1pvl8eg" name="分管领导审核">
+      <incoming>Flow_1yp6s40</incoming>
+      <outgoing>Flow_1kdsz6x</outgoing>
+      <outgoing>Flow_0nlf78p</outgoing>
+    </userTask>
+    <sequenceFlow id="Flow_1kdsz6x" sourceRef="Activity_1pvl8eg" targetRef="Activity_1o3vprz" />
+    <sequenceFlow id="Flow_0gi7qtp" sourceRef="Activity_1o3vprz" targetRef="Activity_0pfwg3p" />
+    <sequenceFlow id="Flow_1r184v4" targetRef="Activity_0c2hhg3" />
+    <sequenceFlow id="Flow_0p0c05g" sourceRef="Activity_0wenyb7" targetRef="Activity_1j8fj6q" />
+    <userTask id="Activity_1j8fj6q" name="回拟稿人">
+      <incoming>Flow_0p0c05g</incoming>
+      <outgoing>Flow_10frlcr</outgoing>
+    </userTask>
+    <userTask id="Activity_1iyy9fd" name="回送文人">
+      <incoming>Flow_0nlf78p</incoming>
+      <outgoing>Flow_0p0lk7b</outgoing>
+    </userTask>
+    <sequenceFlow id="Flow_0nlf78p" sourceRef="Activity_1pvl8eg" targetRef="Activity_1iyy9fd" />
+    <sequenceFlow id="Flow_10frlcr" sourceRef="Activity_1j8fj6q" targetRef="Activity_0wenyb7" />
+    <sequenceFlow id="Flow_0p0lk7b" sourceRef="Activity_1iyy9fd" targetRef="Activity_0pfwg3p" />
+    <sequenceFlow id="Flow_15pqbvn" sourceRef="Activity_0pfwg3p" targetRef="Activity_13r88p7" />
+    <sequenceFlow id="Flow_1l0d9lk" sourceRef="Activity_13r88p7" />
+    <startEvent id="Event_1odvm1e">
+      <outgoing>Flow_1q7lbya</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_1q7lbya" sourceRef="Event_1odvm1e" targetRef="Activity_0c2hhg3" />
+    <endEvent id="Event_16y2jgh">
+      <incoming>Flow_1mlcf1c</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_1mlcf1c" sourceRef="Activity_13r88p7" targetRef="Event_16y2jgh" />
+    <userTask id="Activity_1o3vprz" name="主要领导签发">
+      <incoming>Flow_1kdsz6x</incoming>
+      <outgoing>Flow_0gi7qtp</outgoing>
+    </userTask>
+    <userTask id="Activity_0pfwg3p" name="给号制版">
+      <incoming>Flow_0gi7qtp</incoming>
+      <incoming>Flow_0p0lk7b</incoming>
+      <outgoing>Flow_15pqbvn</outgoing>
+    </userTask>
+    <userTask id="Activity_13r88p7" name="文书盖章">
+      <incoming>Flow_15pqbvn</incoming>
+      <outgoing>Flow_1mlcf1c</outgoing>
+    </userTask>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_flow">
+    <bpmndi:BPMNPlane id="BPMNPlane_flow" bpmnElement="process_ro35ekd9">
+      <bpmndi:BPMNEdge id="Flow_1mlcf1c_di" bpmnElement="Flow_1mlcf1c">
+        <di:waypoint x="440" y="270" />
+        <di:waypoint x="542" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q7lbya_di" bpmnElement="Flow_1q7lbya">
+        <di:waypoint x="-512" y="130" />
+        <di:waypoint x="-400" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15pqbvn_di" bpmnElement="Flow_15pqbvn">
+        <di:waypoint x="270" y="270" />
+        <di:waypoint x="340" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0p0lk7b_di" bpmnElement="Flow_0p0lk7b">
+        <di:waypoint x="70" y="270" />
+        <di:waypoint x="170" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10frlcr_di" bpmnElement="Flow_10frlcr">
+        <di:waypoint x="-170" y="230" />
+        <di:waypoint x="-170" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nlf78p_di" bpmnElement="Flow_0nlf78p">
+        <di:waypoint x="20" y="170" />
+        <di:waypoint x="20" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0p0c05g_di" bpmnElement="Flow_0p0c05g">
+        <di:waypoint x="-170" y="170" />
+        <di:waypoint x="-170" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gi7qtp_di" bpmnElement="Flow_0gi7qtp">
+        <di:waypoint x="220" y="170" />
+        <di:waypoint x="220" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kdsz6x_di" bpmnElement="Flow_1kdsz6x">
+        <di:waypoint x="70" y="130" />
+        <di:waypoint x="170" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yp6s40_di" bpmnElement="Flow_1yp6s40" bioc:stroke="#FF0000" bioc:fill="#FF0000">
+        <di:waypoint x="-120" y="130" />
+        <di:waypoint x="-30" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mutuzm_di" bpmnElement="Flow_1mutuzm">
+        <di:waypoint x="-300" y="130" />
+        <di:waypoint x="-220" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_16unvdt_di" bpmnElement="Activity_0c2hhg3">
+        <omgdc:Bounds x="-400" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1br4rgg_di" bpmnElement="Activity_0wenyb7">
+        <omgdc:Bounds x="-220" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wcjbya_di" bpmnElement="Activity_1pvl8eg">
+        <omgdc:Bounds x="-30" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1r3564o_di" bpmnElement="Activity_1j8fj6q">
+        <omgdc:Bounds x="-220" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0s4raty_di" bpmnElement="Activity_1iyy9fd">
+        <omgdc:Bounds x="-30" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1odvm1e_di" bpmnElement="Event_1odvm1e">
+        <omgdc:Bounds x="-548" y="112" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_16y2jgh_di" bpmnElement="Event_16y2jgh">
+        <omgdc:Bounds x="542" y="252" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00lzjzj_di" bpmnElement="Activity_1o3vprz">
+        <omgdc:Bounds x="170" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1uh6zp9_di" bpmnElement="Activity_0pfwg3p">
+        <omgdc:Bounds x="170" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_15ddbaq_di" bpmnElement="Activity_13r88p7">
+        <omgdc:Bounds x="340" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
